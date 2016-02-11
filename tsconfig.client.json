@@ -9,13 +9,6 @@
         "client/typings/**/*.d.ts"
     ],
     "files": [
-        "client/app/account/account.ts",
-        "client/app/account/login/login.controller.ts",
-        "client/app/account/settings/settings.controller.ts",
-        "client/app/account/signup/signup.controller.ts",
-        "client/app/admin/admin.controller.ts",
-        "client/app/admin/admin.module.ts",
-        "client/app/admin/admin.router.ts",
         "client/app/app.ts",
         "client/app/main/main.controller.ts",
         "client/app/main/main.ts",

@@ -1,8 +1,6 @@
 'use strict';
 
 angular.module('quarcUiPartnerApp', [
-  'quarcUiPartnerApp.auth',
-  'quarcUiPartnerApp.admin',
   'quarcUiPartnerApp.constants',
   'ngCookies',
   'ngResource',
