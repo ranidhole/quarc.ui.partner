@@ -10,14 +10,15 @@
 'use strict';
 
 import _ from 'lodash';
-
-
+import config from '../../config/environment';
+import request from 'request';
+console.log(config);
 export function login(req, res){
   const options = {
     url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}`,
     auth: {
-      user: config.HIRE_CLIENT,
-      pass: config.HIRE_SECRET,
+      user: config.OAUTH_CLIENT_ID,
+      pass: config.OAUTH_CLIENT_SECRET,
     },
     form: {
       grant_type: 'authorization_code',
@@ -25,8 +26,9 @@ export function login(req, res){
       code: req.body.code,
     },
   };
-
+  console.log(options)
   request.post(options, function handleRes(err, apires, body) {
+    console.log("ddd",err, apires.statusCode, body)
     if (err) return res.status(500).send(err);
     return res.status(apires.statusCode).send(body);
   });
@@ -36,8 +38,8 @@ export function refresh(req, res){
   const options = {
     url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}`,
     auth: {
-      user: config.HIRE_CLIENT,
-      pass: config.HIRE_SECRET,
+      user: config.OAUTH_CLIENT_ID,
+      pass: config.OAUTH_CLIENT_SECRET,
     },
     form: {
       grant_type: 'refresh_token',
@@ -55,8 +57,8 @@ export function logout(req, res){
   const options = {
     url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}/${req.body.access_token}`,
     auth: {
-      user: config.HIRE_CLIENT,
-      pass: config.HIRE_SECRET,
+      user: config.OAUTH_CLIENT_ID,
+      pass: config.OAUTH_CLIENT_SECRET,
     },
   };
 

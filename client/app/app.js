@@ -18,6 +18,8 @@ angular
     'redirect_uri=http://hire.quezx.dev/access/oauth&state=yo',
     partnerLogin: '//accounts.quezx.dev/authorise?client_id=partnerquezx&response_type=code&' +
     'redirect_uri=http://partner.quezx.dev/access/oauth&state=yo',
+    manageLogin: '//accounts.quezx.dev/authorise?client_id=managequezx&response_type=code&' +
+    'redirect_uri=http://manage.quezx.dev/access/oauth&state=yo',
   })
 
 
@@ -30,7 +32,7 @@ angular.module('uiGenApp', [
   'chart.js',
   'restangular'
 ])
-  .constant('APP_CONFIG',{QUARC_API_URL:location.origin+'/api'})
+  .constant('APP_CONFIG',{QUARC_API_URL: 'https://api.cloud.quezx.com/api'})
   .constant('ENUMS', {
     STATES: ['Tasks', 'Shortlisted', 'Feedback', 'Rejected', 'All']
   })
