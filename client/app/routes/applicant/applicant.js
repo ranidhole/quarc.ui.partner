@@ -6,11 +6,12 @@ angular.module('uiGenApp')
       .state('applicant', {
         abstract: true,
         url: '/applicant',
-        templateUrl: '<div ui-view class="fade-in-right-big smooth"></div>',
-        controller: 'ApplicantCtrl'
+        template: '<div ui-view class="fade-in-right-big smooth"></div>',
       })
       .state('applicant.view', {
         url: '/{applicantId}',
         templateUrl: 'app/routes/applicant/view/view.html',
+        controller: 'ApplicantViewController',
+        controllerAs: 'Applicant'
       });
   });

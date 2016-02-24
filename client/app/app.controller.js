@@ -81,9 +81,9 @@ angular.module('uiGenApp')
     vm.downloadApplicant = function downloadApplicant(ids) {
       // ApplicantIds is array contatining applicant id to download cvs
       const modalInstance = $uibModal.open({
-        templateUrl: 'html/modal.download.cv.html',
-        controller: 'DownloadCVController',
-        controllerAs: 'DownloadCV',
+        templateUrl: 'app/directives/download-resume/download-resume.html',
+        controller: 'DownloadResumeController',
+        controllerAs: 'DownloadResume',
         size: 'sm',
         resolve: {
           ApplicantIds: function ApplicantIds() {
@@ -100,7 +100,7 @@ angular.module('uiGenApp')
     vm.addFollower = function addFollower(follower, applicantId) {
       // ApplicantIds is array contatining applicant id to download cvs
       const modalInstance = $uibModal.open({
-        templateUrl: 'html/modal.add.follower.html',
+        templateUrl: 'app/directives/download-resume/download-resume.html',
         controller: 'AddFollowerController',
         controllerAs: 'AddFollower',
         size: 'md',
@@ -123,14 +123,14 @@ angular.module('uiGenApp')
     vm.changeState = function changeState(applicant, stateId) {
       // ApplicantIds is array contatining applicant id to download cvs
       const modalInstance = $uibModal.open({
-        templateUrl: 'html/modal.change.state.html',
+        templateUrl: 'app/directives/change-state/change-state.html',
         controller: 'ChangeStateController',
         controllerAs: 'ChangeState',
         bindToController: 'true',
         size: 'md',
         resolve: {
           applicant: applicant,
-          state_id: stateId,
+          stateId: stateId,
         },
       });
 
