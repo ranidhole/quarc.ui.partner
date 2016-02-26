@@ -47,7 +47,11 @@
           <a href="" ui-toggle-class="off-screen" data-target=".app-aside" class="off-screen-toggle hide"></a>
           <div class="app-content-body">
             <div class="hbox">
+
               <div ng-if="App.showNavJobs()" class="col w">
+                <!--<div class="wrapper b-b bg">-->
+                  <!--<a ui-sref="app.mail.compose" class="btn btn-sm btn-danger w-xs font-bold" href="#/app/mail/compose">Manage JD</a>-->
+                <!--</div>-->
                 <navigation-jobs></navigation-jobs>
               </div>
               <div ui-view class="col"></div>
@@ -97,7 +101,7 @@
       <script src="app/app.js"></script>
       <!-- injector:js -->
       <script src="components/util/util.module.js"></script>
-      <script src="app/routes/applicants/applicants.controller.js"></script>
+      <script src="app/routes/calendar/calendar.controller.js"></script>
       <script src="app/core/qui.components/before.bottom.js"></script>
       <script src="app/core/qui.components/scroll.to.bottom.js"></script>
       <script src="app/core/qui.core/app.js"></script>
@@ -118,13 +122,11 @@
       <script src="app/routes/access/access.controller.js"></script>
       <script src="app/routes/access/access.js"></script>
       <script src="app/routes/access/oauth/oauth.controller.js"></script>
-      <script src="app/routes/applicant/applicant.controller.js"></script>
-      <script src="app/routes/applicant/applicant.js"></script>
-      <script src="app/routes/applicant/comment/comment.controller.js"></script>
-      <script src="app/routes/applicant/view/view.controller.js"></script>
-      <script src="app/app.controller.js"></script>
+      <script src="app/routes/applicants/applicants.controller.js"></script>
       <script src="app/routes/applicants/applicants.js"></script>
-      <script src="app/routes/calendar/calendar.controller.js"></script>
+      <script src="app/routes/applicants/comment/comment.controller.js"></script>
+      <script src="app/routes/applicants/view/view.controller.js"></script>
+      <script src="app/app.controller.js"></script>
       <script src="app/routes/calendar/calendar.js"></script>
       <script src="app/routes/dashboard/dashboard.controller.js"></script>
       <script src="app/routes/dashboard/dashboard.js"></script>
@@ -135,6 +137,7 @@
       <script src="app/routes/jobs/jobs.controller.js"></script>
       <script src="app/routes/jobs/jobs.js"></script>
       <script src="app/routes/jobs/list/list.controller.js"></script>
+      <script src="app/routes/jobs/manage-jd/manage-jd.controller.js"></script>
       <script src="app/routes/jobs/manage/manage.controller.js"></script>
       <script src="app/routes/jobs/new/new.controller.js"></script>
       <script src="components/aside/aside.controller.js"></script>

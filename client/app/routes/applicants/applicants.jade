@@ -15,7 +15,7 @@
     tbody
       tr.bg-white(ng-repeat='applicant in Applicant.applicants')
         td
-          a(ui-sref='applicant.view({applicantId: applicant.id })') {{applicant.name}}
+          a(ui-sref='applicants-view({applicantId: applicant.id })') {{applicant.name}}
         td
           a(ng-bind="applicant.client_name")
         td

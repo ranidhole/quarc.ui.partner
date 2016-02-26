@@ -23,7 +23,7 @@
               label.i-checks.m-b-none
                 input(type='checkbox' ng-model='applicant.checked')
                 i
-              a(ui-sref='applicant.view({applicantId: applicant.id})')
+              a(ui-sref='applicants-view({applicantId: applicant.id})')
                 strong.text-primary-lt  {{applicant.name}}
 
               .btn-group.pull-right.m-t-n-xs(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)

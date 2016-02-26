@@ -3,7 +3,7 @@ div( style='position: relative;')
   .w(style='position: fixed; z-index: 2;')
     .wrapper-xs
       .input-group
-        a.input-group-addon.bg-primary(uib-tooltip='Upload New JD' tooltip-placement='right' ui-sref='jobs.new')
+        a.input-group-addon.bg-danger(uib-tooltip='Manage Jobs' tooltip-placement='right' ui-sref='jobs.manage-jd' href="#/jobs/manage-jd")
           i.text-white.fa.fa-upload
         input.form-control.wrapper-xs(type='text' placeholder='Search Position' ng-model='navigationJobs.searchText.role')
   .w.m-t-xl.nav-job

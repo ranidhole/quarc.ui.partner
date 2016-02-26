@@ -40,7 +40,7 @@ angular.module('uiGenApp')
     vm.Applicants = {
       select: function gotoApplicant($item) {
         vm.Applicants.searchText = '';
-        $state.go('applicant.view', { applicantId: $item.id });
+        $state.go('applicants-view', { applicantId: $item.id });
       },
 
       get: function searchApplicants(searchText) {

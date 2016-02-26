@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('uiGenApp')
-  .controller('ApplicantsCtrl', function ($scope, QuarcService, Restangular, $stateParams) {
+  .controller('ApplicantsCtrl', function ($scope, QuarcService, Restangular, $stateParams, $location) {
     const Page  = QuarcService.Page;
     const ENUMS  = QuarcService.ENUMS;
 
     const vm = this;
     vm.buckets =  ENUMS.STATES;
+
+    $stateParams.bucket = $stateParams.bucket || $location.search().bucket
 
     // Set default bucket to ALL
     if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';

@@ -99,7 +99,7 @@ angular.module('uiGenApp', [
   .config(function($urlRouterProvider, $locationProvider,RestangularProvider,APP_CONFIG) {
     RestangularProvider.setBaseUrl(APP_CONFIG.QUARC_API_URL);
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/applicants');
 
     $locationProvider.html5Mode(true);
   });

@@ -20,8 +20,13 @@ angular.module('uiGenApp')
         controllerAs: 'Jobs',
       })
       .state('jobs.manage', {
-        url: '/manage/{bucket}/{jobId}',
+        url: '/manage/:jobId?bucket',
         templateUrl: 'app/routes/jobs/manage/manage.html',
+        authenticate: true
+      })
+      .state('jobs.manage-jd', {
+        url: '/manage-jd',
+        templateUrl: 'app/routes/jobs/manage-jd/manage-jd.html',
         authenticate: true
       });
   });
