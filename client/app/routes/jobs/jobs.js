@@ -28,6 +28,12 @@ angular.module('uiGenApp')
         url: '/manage-jd',
         templateUrl: 'app/routes/jobs/manage-jd/manage-jd.html',
         authenticate: true
+      })
+      .state('jobs.view', {
+        url: '/:jobId',
+        templateUrl: 'app/routes/jobs/view/view.html',
+        controller: 'JobViewController',
+        controllerAs: 'JobView'
       });
   });
 

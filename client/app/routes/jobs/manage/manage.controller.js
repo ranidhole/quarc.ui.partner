@@ -1,10 +1,9 @@
 angular.module('uiGenApp')
-  .controller('JobsManageController', function JobsManageCtrl(QuarcService, Restangular, $stateParams, $filter, moment) {
+  .controller('JobsManageController', function JobsManageCtrl(QCONFIG,QuarcService, Restangular, $stateParams, $filter, moment) {
     const Page = QuarcService.Page;
-    const ENUMS  = QuarcService.ENUMS;
 
     const vm = this;
-      vm.buckets = ENUMS.STATES;
+      vm.buckets = QCONFIG.APPLICANT_STATES;
 
       // Set default bucket to ALL
       if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';

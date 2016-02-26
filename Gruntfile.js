@@ -63,7 +63,7 @@ module.exports = function (grunt) {
       },
       ngconstant: {
         files: ['<%= yeoman.server %>/config/environment/shared.js'],
-        tasks: ['ngconstant']
+        tasks: ['ngconstant:app','ngconstant:serve']
       },
       injectJS: {
         files: [
@@ -318,18 +318,45 @@ module.exports = function (grunt) {
     // `server/config/environment/shared.js`
     ngconstant: {
       options: {
-        name: 'uiGenApp.constants',
-        dest: '<%= yeoman.client %>/app/app.constant.js',
         deps: [],
         wrap: true,
-        configPath: '<%= yeoman.server %>/config/environment/shared'
+        configPath: '<%= yeoman.server %>/config/environment/'
       },
       app: {
+        options: {
+          name: 'uiGenApp.constants',
+          dest: '<%= yeoman.client %>/app/app.constant.js',
+        },
         constants: function() {
           return {
-            appConfig: require('./' + grunt.config.get('ngconstant.options.configPath'))
+            QCONFIG: require('./' + grunt.config.get('ngconstant.options.configPath') + 'shared')
           };
         }
+      },
+      serve :{
+        options: {
+          name: 'uiGenApp.config',
+          dest: '<%= yeoman.client %>/app/urls.constant.js',
+        },
+        constants: function() {
+          return {
+            URLS: require('./' + grunt.config.get('ngconstant.options.configPath') + 'angular/development'),
+            ENV: 'development'
+          };
+        }
+      },
+      dist :{
+        options: {
+          name: 'uiGenApp.config',
+          dest: '<%= yeoman.client %>/app/urls.constant.js',
+        },
+        constants: function() {
+          return {
+            URLS: require('./' + grunt.config.get('ngconstant.options.configPath') + 'angular/production'),
+            ENV: 'production'
+          };
+        }
+
       }
     },
 
@@ -433,7 +460,7 @@ module.exports = function (grunt) {
     concurrent: {
       pre: [
         'injector:sass',
-        'ngconstant'
+        'ngconstant:app'
       ],
       server: [
         'newer:babel:client',
@@ -713,6 +740,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
+      'ngconstant:serve',
       'concurrent:pre',
       'concurrent:server',
       'injector',
@@ -828,6 +856,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:dist',
     'concurrent:pre',
     'concurrent:dist',
     'injector',

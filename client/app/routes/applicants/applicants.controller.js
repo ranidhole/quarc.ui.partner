@@ -1,12 +1,11 @@
 'use strict';
 
 angular.module('uiGenApp')
-  .controller('ApplicantsCtrl', function ($scope, QuarcService, Restangular, $stateParams, $location) {
+  .controller('ApplicantsCtrl', function (QCONFIG,$scope, QuarcService, Restangular, $stateParams, $location) {
     const Page  = QuarcService.Page;
-    const ENUMS  = QuarcService.ENUMS;
 
     const vm = this;
-    vm.buckets =  ENUMS.STATES;
+    vm.buckets =  QCONFIG.APPLICANT_STATES;
 
     $stateParams.bucket = $stateParams.bucket || $location.search().bucket
 

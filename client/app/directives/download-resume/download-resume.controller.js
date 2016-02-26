@@ -1,5 +1,5 @@
 angular.module('uiGenApp')
-  .controller('DownloadResumeController', function DownloadResumeCtrl($uibModalInstance, ApplicantIds, APP_CONFIG, $window, Session) {
+  .controller('DownloadResumeController', function DownloadResumeCtrl($uibModalInstance, ApplicantIds, URLS, $window, Session) {
       const vm = this;
       vm.concat = 'true'; // download cv type default to with CTC
 
@@ -7,12 +7,12 @@ angular.module('uiGenApp')
       const token = Session.getAccessToken();
       if (ApplicantIds.length === 1) {
         vm.downloadUrl =
-          `${APP_CONFIG.QUARC_API_URL}/applicants/${ApplicantIds[0]}/downloadResume?access_token=${token}`;
+          `${URLS.QUARC_API}/applicants/${ApplicantIds[0]}/downloadResume?access_token=${token}`;
       }
 
       if (ApplicantIds.length > 1) {
         vm.downloadUrl =
-          `${APP_CONFIG.QUARC_API_URL}/applicants/bulkResumeDownload?access_token=${token}&ids=${ApplicantIds.join(',')}`;
+          `${URLS.QUARC_API}/applicants/bulkResumeDownload?access_token=${token}&ids=${ApplicantIds.join(',')}`;
       }
 
       vm.ok = function ok() {

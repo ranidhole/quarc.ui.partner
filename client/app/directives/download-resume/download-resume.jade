@@ -10,6 +10,6 @@
   .radio: label.i-checks
     input(type='radio' ng-model='DownloadResume.concat' value='false')
     i
-    |  Download CV without CTC {{DownloadResume}}
+    |  Download CV without CTC
 .modal-footer
   a.btn.btn-primary(ng-click='DownloadResume.ok()' ng-href='{{DownloadResume.downloadUrl}}&concat={{DownloadResume.concat}}' target='_blank') Download

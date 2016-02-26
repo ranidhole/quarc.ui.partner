@@ -3,7 +3,7 @@
 
 angular.module('uiGenApp.constants', [])
 
-.constant('appConfig', {userRoles:['guest','user','admin']})
+.constant('QCONFIG', {ENV:'development',APPLICANT_STATES:['Tasks','Shortlisted','Feedback','Rejected','All']})
 
 ;
 })(angular);

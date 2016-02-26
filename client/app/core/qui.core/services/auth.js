@@ -1,11 +1,7 @@
 angular.module('qui.core')
   // Depending on constant: AUTH_EVENTS
-  .factory('Auth', [
-    '$http',
-    '$q',
-    'Session',
-    'APP',
-    function Auth($http, $q, Session, APP) {
+  .factory('Auth',
+    function Auth($http, $q, Session, URLS) {
       const authService = {};
       let refreshingToken = false;
 
@@ -83,13 +79,13 @@ angular.module('qui.core')
       authService.setSessionData = function gInfo() {
         return $q.all([
           $http
-            .get(APP.apiServer + '/api/users/me')
+            .get(URLS.QUARC_API + '/users/me')
             .then(function userinfoSuccess(response) {
               return Session.create('userinfo', response.data);
             }),
 
           $http
-            .get(APP.apiServer + '/api/users/states')
+            .get(URLS.QUARC_API + '/users/states')
             .then(function statesSuccess(response) {
               return Session.create('states', response.data);
             }),
@@ -97,5 +93,4 @@ angular.module('qui.core')
       };
 
       return authService;
-    },
-  ]);
+    });

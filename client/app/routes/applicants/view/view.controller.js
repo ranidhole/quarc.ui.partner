@@ -1,5 +1,5 @@
 angular.module('uiGenApp')
-  .controller('ApplicantViewController', function ApplicantViewCtrl(QuarcService, Restangular, $stateParams, APP_CONFIG, $sce, Page, Session) {
+  .controller('ApplicantViewController', function ApplicantViewCtrl(QuarcService, Restangular, $stateParams, URLS, $sce, Page, Session) {
       //Page = QuarcService.Page;
       //Session = QuarcService.Session;
 
@@ -9,7 +9,7 @@ angular.module('uiGenApp')
         return $sce.trustAsResourceUrl(src);
       };
 
-      vm.resumeSrc = `${APP_CONFIG.QUARC_API_URL}/applicants/${$stateParams.applicantId}/getResume?access_token=${Session.getAccessToken()}`;
+      vm.resumeSrc = `${URLS.QUARC_API_URL}/applicants/${$stateParams.applicantId}/getResume?access_token=${Session.getAccessToken()}`;
       vm.loadApplicant = function loadApplicant() {
         vm.ui = { loading: true };
         Restangular

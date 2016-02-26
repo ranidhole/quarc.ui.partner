@@ -3,7 +3,7 @@ div(ng-controller='JobViewController as Job')
     .m-l-md.font-thin.h3
       | Positions /
       a(ui-sref='jobs.manage({jobId: Job.data.id})')  {{Job.data.role}} /
-      a(ui-sref='job.view({jobId: Job.data.id})')  View JD
+      a(ui-sref='jobs.view({jobId: Job.data.id})')  View JD
   .col-md-9.clearfix
     //- Job top cover container
     .col-sm-12.dker.no-padder
