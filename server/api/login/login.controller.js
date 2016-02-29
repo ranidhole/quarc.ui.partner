@@ -28,7 +28,6 @@ export function login(req, res){
   };
   console.log(options)
   request.post(options, function handleRes(err, apires, body) {
-    console.log("ddd",err, apires.statusCode, body)
     if (err) return res.status(500).send(err);
     return res.status(apires.statusCode).send(body);
   });

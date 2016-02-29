@@ -9,7 +9,7 @@ angular.module('uiGenApp')
         return $sce.trustAsResourceUrl(src);
       };
 
-      vm.resumeSrc = `${URLS.QUARC_API_URL}/applicants/${$stateParams.applicantId}/getResume?access_token=${Session.getAccessToken()}`;
+      vm.resumeSrc = `${URLS.QUARC_API}/applicants/${$stateParams.applicantId}/getResume?access_token=${Session.getAccessToken()}`;
       vm.loadApplicant = function loadApplicant() {
         vm.ui = { loading: true };
         Restangular

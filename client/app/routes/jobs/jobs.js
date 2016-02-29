@@ -16,11 +16,11 @@ angular.module('uiGenApp')
       .state('jobs.list', {
         url: '/',
         templateUrl: 'app/routes/jobs/list/list.html',
-        controller: 'JobsCtrl',
-        controllerAs: 'Jobs',
+        controller: 'JobsListCtrl',
+        controllerAs: 'JobsList',
       })
       .state('jobs.manage', {
-        url: '/manage/:jobId?bucket',
+        url: '/:jobId/manage?bucket',
         templateUrl: 'app/routes/jobs/manage/manage.html',
         authenticate: true
       })

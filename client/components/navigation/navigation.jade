@@ -2,7 +2,7 @@
 ul.nav
   li.hidden-folded.padder.m-t.m-b-sm.text-muted.text-xs
     span Navigation
-  li(ui-sref-active='active'): a(ui-sref='dashboard')
+  li.hide(ui-sref-active='active'): a(ui-sref='dashboard')
     i.fa.fa-dashboard.icon.text-primary-dker
     span.font-bold Dashboard
   //li(ui-sref-active='active'): a(ui-sref='jobs.list')
@@ -12,13 +12,13 @@ ul.nav
   li(ui-sref-active='active'): a(ui-sref='applicants({bucket: "All"})')
     i.fa.fa-users.icon.text-info-dker
     span.font-bold Candidates
-  li(ui-sref-active='active'): a(ui-sref='interviews')
+  li.hide(ui-sref-active='active'): a(ui-sref='interviews')
     i.fa.fa-comments.icon.text-default-dker
     span.font-bold Interviews
-  li(ui-sref-active='active'): a(ui-sref='payment')
+  li.hide(ui-sref-active='active'): a(ui-sref='payment')
     i.fa.fa-bar-chart.icon.text-danger-lter
     span.font-bold Statistics
-  li(ui-sref-active='active'): a(ui-sref='payment')
+  li.hide(ui-sref-active='active'): a(ui-sref='payment')
     i.fa.fa-credit-card.icon.text-success-lter
     span.font-bold Payment
 

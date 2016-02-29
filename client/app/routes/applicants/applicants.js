@@ -18,7 +18,7 @@ angular.module('uiGenApp')
 
       .state('applicants-view', {
         url: '/applicants/:applicantId',
-        templateUrl: 'app/routes/applicant/view/view.html',
+        templateUrl: 'app/routes/applicants/view/view.html',
         controller: 'ApplicantViewController',
         controllerAs: 'Applicant'
       });
