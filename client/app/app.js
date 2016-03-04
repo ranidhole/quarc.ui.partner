@@ -21,7 +21,9 @@ angular.module('uiGenApp', [
   'ui.bootstrap',
   'mwl.calendar',
   'chart.js',
-  'restangular'
+  'restangular',
+  'ngFileUpload',
+  'angular-loading-bar'
 ])
 
   .config(function($urlRouterProvider, $locationProvider,RestangularProvider,URLS) {

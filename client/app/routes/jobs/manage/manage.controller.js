@@ -1,80 +1,70 @@
 angular.module('uiGenApp')
-  .controller('JobsManageController', function JobsManageCtrl(QCONFIG,QuarcService, Restangular, $stateParams, $filter, moment) {
+  .controller('JobsManageController', function JobsManageCtrl(QCONFIG, QuarcService, Restangular, $stateParams, $filter, moment,currentJob ) {
     const Page = QuarcService.Page;
 
     const vm = this;
-      vm.buckets = QCONFIG.APPLICANT_STATES;
+    vm.buckets = QCONFIG.APPLICANT_STATES;
 
-      // Set default bucket to ALL
-      if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';
-      vm.applicants = []; // collection of applicants
-      vm.job = {}; // Job applied by applicant initialized
-      vm.ui = { lazyLoad: true, loading: false }; // ui states
-      vm.params = {
-        offset: 0, limit: 15,
-        fl: 'applicant_score,created_on,edu_degree,exp_designation,exp_employer,exp_location,exp_salary,id,name,state_id,state_name,total_exp',
-      }; // GET query params
-      vm.loadApplicants = function loadApplicants() {
-        if (!vm.ui.lazyLoad) return; // if no more jobs to get
-        vm.ui = { lazyLoad: false, loading: true };
+    vm.job = currentJob;
+    Page.setTitle(`${vm.job.role} - ${$stateParams.bucket} Applicants`); // set page title
 
-        if ($stateParams.bucket === 'Interview') {
-          // Customization for Interview tab
-          vm.params.interview_time = [
-            moment().startOf('day').toISOString(),
-            moment().startOf('day').add(1, 'months').toISOString(),
-          ].join(',');
-          vm.params.fl += ',interview_time,interview_type';
-        } else {
-          vm.params.state_id = $stateParams.bucket.replace(' ', '_').toUpperCase();
-        }
+    // Set default bucket to ALL
+    if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';
+    vm.applicants = []; // collection of applicants
+    vm.ui = {lazyLoad: true, loading: false}; // ui states
+    vm.params = {
+      offset: 0, limit: 15,
+      fl: 'applicant_score,created_on,edu_degree,exp_designation,exp_employer,exp_location,exp_salary,id,name,state_id,state_name,total_exp',
+    }; // GET query params
+    vm.loadApplicants = function loadApplicants() {
+      if (!vm.ui.lazyLoad) return; // if no more jobs to get
+      vm.ui = {lazyLoad: false, loading: true};
 
-        Restangular
-          .one('jobs',$stateParams.jobId)
-          .all('applicants')
-          .getList()
-          .then(function applicantsList(result) {
-            angular.forEach(result, function iterateApplicants(applicant) {
-              vm.applicants.push(applicant);
-            });
+      if ($stateParams.bucket === 'Interview') {
+        // Customization for Interview tab
+        vm.params.interview_time = [
+          moment().startOf('day').toISOString(),
+          moment().startOf('day').add(1, 'months').toISOString(),
+        ].join(',');
+        vm.params.fl += ',interview_time,interview_type';
+      } else {
+        vm.params.state_id = $stateParams.bucket.replace(' ', '_').toUpperCase();
+      }
 
-            // data has been loaded
-            vm.ui.loading = false;
-
-            // check for returned results count and set lazy loadLoad false if less
-            vm.ui.lazyLoad = angular.equals(result.length, vm.params.limit) ? true : false;
-
-            // increment offset for next loading of results
-            vm.params.offset = vm.params.offset + vm.params.limit;
+      Restangular
+        .one('jobs', $stateParams.jobId)
+        .all('applicants')
+        .getList()
+        .then(function applicantsList(result) {
+          angular.forEach(result, function iterateApplicants(applicant) {
+            vm.applicants.push(applicant);
           });
-      };
 
-      vm.loadApplicants(); // get applicants
+          // data has been loaded
+          vm.ui.loading = false;
 
-      vm.loadJob = function loadJob() {
-        Restangular
-          .one('jobs',$stateParams.jobId)
-          .get({ fl: 'id,role' })
-          .then(function getJob(response) {
-            vm.job = response;
-            Page.setTitle(`${vm.job.role} - ${$stateParams.bucket} Applicants`); // set page title
-          });
-      };
+          // check for returned results count and set lazy loadLoad false if less
+          vm.ui.lazyLoad = angular.equals(result.length, vm.params.limit) ? true : false;
 
-      vm.loadJob(); // get job details
-
-      // returns array containing resultkey of search result
-      vm.getApplicants = function getApplicant(criteria = {}, returnkey = 'id') {
-        return $filter('filter')(vm.applicants, criteria)
-          .map(function checkedApplicant(applicant) {
-            return applicant[returnkey];
-          });
-      };
-
-      // sets value
-      vm.setChecked = function setChecked(state) {
-        angular.forEach(vm.applicants, function checked(value, key) {
-          vm.applicants[key].checked = state;
+          // increment offset for next loading of results
+          vm.params.offset = vm.params.offset + vm.params.limit;
         });
-      };
-    });
+    };
+
+    vm.loadApplicants(); // get applicants
+
+    // returns array containing resultkey of search result
+    vm.getApplicants = function getApplicant(criteria = {}, returnkey = 'id') {
+      return $filter('filter')(vm.applicants, criteria)
+        .map(function checkedApplicant(applicant) {
+          return applicant[returnkey];
+        });
+    };
+
+    // sets value
+    vm.setChecked = function setChecked(state) {
+      angular.forEach(vm.applicants, function checked(value, key) {
+        vm.applicants[key].checked = state;
+      });
+    };
+  });

@@ -30,6 +30,8 @@ module.exports = function(config) {
       'client/bower_components/angular-chart.js/dist/angular-chart.js',
       'client/bower_components/lodash/lodash.js',
       'client/bower_components/restangular/dist/restangular.js',
+      'client/bower_components/ng-file-upload/ng-file-upload.js',
+      'client/bower_components/angular-loading-bar/build/loading-bar.js',
       'client/bower_components/ui-select/dist/select.js',
       'client/bower_components/angular-sanitize/angular-sanitize.js',
       // endbower

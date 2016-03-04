@@ -16,6 +16,7 @@
       <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
       <link rel="stylesheet" href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css" />
       <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+      <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -95,6 +96,8 @@
       <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
       <script src="bower_components/lodash/lodash.js"></script>
       <script src="bower_components/restangular/dist/restangular.js"></script>
+      <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+      <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
@@ -116,9 +119,11 @@
       <script src="app/directives/change-state/change-state.controller.js"></script>
       <script src="app/directives/download-resume/download-resume.controller.js"></script>
       <script src="app/directives/logout/logout.controller.js"></script>
+      <script src="app/directives/text-inputs/text-inputs.directive.js"></script>
       <script src="app/event.js"></script>
       <script src="app/factories/QuarcService/QuarcService.service.js"></script>
       <script src="app/factories/applicantsFactory/applicantsFactory.service.js"></script>
+      <script src="app/filters/common/common.fitler.js"></script>
       <script src="app/routes/access/access.controller.js"></script>
       <script src="app/routes/access/access.js"></script>
       <script src="app/routes/access/oauth/oauth.controller.js"></script>
@@ -130,6 +135,7 @@
       <script src="app/routes/calendar/calendar.js"></script>
       <script src="app/routes/dashboard/dashboard.controller.js"></script>
       <script src="app/routes/dashboard/dashboard.js"></script>
+      <script src="app/routes/jobs/applicants/new/new.controller.js"></script>
       <script src="app/routes/jobs/comment/comment.controller.js"></script>
       <script src="app/routes/jobs/jobs.controller.js"></script>
       <script src="app/routes/jobs/jobs.js"></script>

@@ -24,7 +24,7 @@
           .col.thumb-xs: .h6.font-bold.pull-right CVs
         div
           .hbox.wrapper-sm.b-b(ng-repeat='pipe in Dashboard.pipeline | orderBy:"-count"')
-            .col: a(ui-sref='jobs.manage({jobId: pipe.id, bucket:"Pending Feedback"})') {{pipe.role}}
+            .col: a(ui-sref='jobs-manage({jobId: pipe.id, bucket:"Pending Feedback"})') {{pipe.role}}
             .col.thumb-xs
               span.pull-right {{pipe.count}}
 .col-sm-8.no-padder

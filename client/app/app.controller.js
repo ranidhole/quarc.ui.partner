@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('uiGenApp')
-  .controller('AppController', function (QuarcService, $window, $uibModal, $state, $rootScope) {
+  .controller('AppController', function (QuarcService, $window, $uibModal, $state, $rootScope, Restangular) {
     const Page = QuarcService.Page;
     const Session = QuarcService.Session;
     const User = QuarcService.User;
@@ -44,12 +44,11 @@ angular.module('uiGenApp')
       },
 
       get: function searchApplicants(searchText) {
-        return Applicants
-          .get({ start: 0, rows: 15, fl: 'id,name', q: searchText })
+        return Restangular
+          .all('search')
+          .getList({ type:'applicants', q: searchText, offset: 0, limit: 15, fl: 'id,name'})
           .then(function gotApplicants(response) {
-            return response.map(function iterate(value) {
-              return value;
-            });
+            return response;
           });
       },
 
@@ -75,7 +74,7 @@ angular.module('uiGenApp')
     vm.userinfo = User.userinfo;
     vm.states = User.states;
     vm.showNavJobs = function showNavJobs() {
-      return $state.is('applicants') || $state.is('jobs.manage');
+      return $state.is('applicants') || $state.is('jobs-view') || $state.is('jobs-manage') || $state.is('jobs-applicants-new');
     };
 
     vm.downloadApplicant = function downloadApplicant(ids) {

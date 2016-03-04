@@ -47,7 +47,7 @@ angular.module('uiGenApp')
         angular.forEach(result, function iterateApplicants(applicant) {
           vm.applicants.push({
             title: `
-                <a href="${$state.href('jobs.manage', { jobId: applicant._root_.id }) }" target="_blank">
+                <a href="${$state.href('jobs-manage', { jobId: applicant._root_.id }) }" target="_blank">
                   <span class="text-${vm.colors[applicant.interview_type]}-lter">${applicant._root_.role}</span>
                 </a> –
                 <a href="${$state.href('applicants-view', { applicantId: applicant.id })}" target="_blank">

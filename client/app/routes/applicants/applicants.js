@@ -1,3 +1,9 @@
+/**
+ * LIST    /applicants             ->  ApplicantsCtrl
+ * NEW     /applicants/new         ->  ApplicantNewController
+ * VIEW    /applicants/:id         ->  ApplicantViewController
+ */
+
 'use strict';
 
 angular.module('uiGenApp')
@@ -9,13 +15,6 @@ angular.module('uiGenApp')
         controller: 'ApplicantsCtrl',
         controllerAs: 'Applicant'
       })
-      //.state('applicants-id', {
-      //  url: '/applicants/:bucket',
-      //  templateUrl: 'app/routes/applicants/applicants.html',
-      //  controller: 'ApplicantsCtrl',
-      //  controllerAs: 'Applicant'
-      //})
-
       .state('applicants-view', {
         url: '/applicants/:applicantId',
         templateUrl: 'app/routes/applicants/view/view.html',

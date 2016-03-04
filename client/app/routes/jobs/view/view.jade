@@ -1,127 +1,262 @@
-div
-  .wrapper-xs.bg-light.b-b
-    .m-l-md.font-thin.h3
-      | Positions /
-      a(ui-sref='jobs.manage({jobId: JobView.data.id})')  {{JobView.data.role}} /
-      a(ui-sref='jobs.view({jobId: JobView.data.id})')  View JD
-  .col-md-9.clearfix
-    //- Job top cover container
-    .col-sm-12.dker.no-padder
-      .col-sm-7.no-padder.clearfix.m-t-xs
-        .hbox
-          .col.thumb-xl.text-center.bg-light.dker.wrapper-lg
-            i.fa.fa-briefcase.fa-4x.wrapper-xs.text-white
-          .col.bg-white.wrapper-xs
-            .hbox
-              .col.h3 &nbsp; {{JobView.data.client_name}}
-            .hbox
-              .col.h4
-                | &nbsp;{{JobView.data.role}}
-                i.btn.fa.fa-download(ng-click='App.downloadJob([JobView.data.id])')
-            .hbox
-              .col
-                .hox.h5.m-t-xs.text-muted
-                  .col.v-middle
-                    i.fa.fa-lg.fa-inr
-                  .col.v-middle  &nbsp; {{JobView.data.min_sal}}–{{JobView.data.max_sal}} Lakhs
-                .hbox.h5.m-t-xs.text-muted
-                  .col.v-middle(style='width:20px;'): i.fa.fa-lg.fa-map-marker
-                  .col.v-middle  &nbsp; {{JobView.data.job_location}}
-              .col
-                .pull-right
-                  .hbox.h5.m-t-xs.text-muted
-                    .col.v-middle Total Applicants
-                    .col.fa-2x &nbsp;{{JobView.data.total_applicants}}
-                  .hbox.h5.m-t-xs.text-muted
-                    .col.v-middle Priority
-                    .col.v-middle: .btn.btn-success.rounded {{JobView.data.job_status}}
-      .col-sm-5.clearfix.no-padder.m-t-xs
-        .panel.panel-primary.m-l-xs.bg-white.no-border
-          .panel-heading
-          .panel-body.wrapper-xs
-            .hbox
-              .col.thumb-lg.clearfix
-                .pull-right Experience: &nbsp;
-              .col  {{JobView.data.min_exp}}–{{JobView.data.max_exp}} Years
-            .hbox.padder-v(ng-if='JobView.data.degrees.length>=0')
-              .col.thumb-lg.clearfix
-                .pull-right Qualifications: &nbsp;
-              .col
-                .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='degree in JobView.data.degrees' style='padding: 2px;' ng-if='JobView.showAllDegree || $index < 3') {{degree}}
-                a.pull-left(ng-if='JobView.data.degrees.length>=3' ng-click='JobView.showAllDegree = !JobView.showAllDegree')
-                  span.font-bold.text-info-dker(ng-if='JobView.showAllDegree') – Less
-                  span.font-bold.text-info-dker(ng-if='!JobView.showAllDegree') + More
+div(ng-controller='JobViewController as Job')
+  .wrapper-xs.bg-light.b-b(style='position: fixed;width: 100%;background: #fff; z-index: 3;')
+    ul.nav.nav-pills.nav-sm
+      li: label.i-checks.m-t-xs.m-b-none.m-l-lg
+        i.m-r-none(ng-if='Applicant.applicants.length > 0')
+      li(ng-repeat='bucket in JobView.buckets' ui-sref-active="active")
+        a(ui-sref='jobs-manage({bucket: bucket, jobId: JobView.data.id })') {{bucket}}
 
-    //- Job Responsibility
-    .col-sm-12.no-padder.m-t-xs(ng-if='JobView.data.responsibility')
-      .panel.panel-primary.no-border.m-n
-        .panel-heading Duties and Responsibility
-        .panel-body.bg-light.dker(ng-bind-html="JobView.responsibility")
+  .wrapper-xs.bg-light.b-b(style='position: fixed; right: 0;background: #fff; z-index: 3;')
+    ul.nav.nav-pills.nav-sm: li(ui-sref-active="active")
+      a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='jobs-view({jobId: JobView.data.id})') View JD
 
-    //- Job Details
-    .col-sm-12.bg-white.m-t-xs
-      div
-        .h5.text-black-dker.font-bold.m-t-xs About Us
-        .h4.text-info-dker {{JobView.data.client_name}}
-        p.text-muted {{JobView.data._root_.description}}
-        p.text-muted(ng-if='JobView.data._root_.website') Website: {{JobView.data._root_.website}}
-        p.text-muted
-          a(ng-href='{{JobView.data._root_.apple_store_link}}'): i.fa-lg.fa.fa-apple.wrapper-xs
-          a(ng-href='{{JobView.data._root_.playstore_link}}'): i.fa-lg.fa.fa-android.wrapper-xs
-          a(ng-href='{{JobView.data._root_.windiows_store_link}}'): i.fa-lg.fa.fa-windows.wrapper-xs
-      .line.line-dashed.b-b.line-lg.pull-in
-      .h5.font-bold.m-t-xs.m-b-xs Skills
-      .h6.clearfix
-        .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='skill in JobView.data.skills' style='padding: 2px;' ng-if='JobView.showAllSkill || $index < 6') {{skill}}
-        a.pull-left(ng-if='JobView.data.skills.length>6' ng-click='JobView.showAllSkill = !JobView.showAllSkill')
-          span.font-bold.text-info-dker(ng-if='JobView.showAllSkill') – Less
-          span.font-bold.text-info-dker(ng-if='!JobView.showAllSkill') + More
-      .line.line-dashed.b-b.line-lg.pull-in
+  .hbox.hbox-auto-sm.hbox-auto-xs
+    .col.col-.clearfix.wrapper-xs
 
-      .h5.font-bold.m-t-xs.m-b-xs Working Days
-      .h5.clearfix {{JobView.data.days_per_week}} Days a Week ({{JobView.data.start_work_time}} to {{JobView.data.end_work_time}})
-      .line.line-dashed.b-b.line-lg.pull-in
+      //- Job top cover container
+      .m-t-xl.clearfix
+        .pull-left.w-sm.bg-light.dker
+          img.w-full(src='{{JobView.data._root_.logo}}')
+        .bg-white-only.clearfix: .wrapper-xs.clear
+          strong.wrapper-xs.h3 {{JobView.data.client_name}}
 
-    //- Job Information
-    .col-sm-12.no-padder.m-t-xs
-      .panel.panel-primary.no-border.m-n
-        .panel-heading Information
+          //- Job status label
+          .pull-right
+            .label.wrapper-xs.bg-danger.lt(ng-if='JobView.data.job_status === "Closed"')
+              span.padder.h5 Closed
+            .label.wrapper-xs.bg-success.dker(ng-if='!(JobView.data.job_status === "Closed")')
+              span.padder.h5 Open
+
+          .wrapper-xs.h4 {{JobView.data.role}}
+          .pull-left.text-muted
+            .h4.wrapper-xs
+              i.fa.fa-lg.fa-inr.text-dark-lter
+              | &nbsp; {{JobView.data.min_sal}}–{{JobView.data.max_sal}} Lakhs
+            .h4.wrapper-xs
+              i.fa.fa-lg.fa-map-marker.text-danger-lt
+              | &nbsp; {{JobView.data.job_location}}
+
+      .panel.bg-white-only.b-t.h5: .panel-body.wrapper-sm
+        .hbox(ng-if='JobView.data.min_exp && JobView.data.max_exp')
+          .col.thumb-lg.clearfix: strong.pull-right Experience: &nbsp;
+          .col  {{JobView.data.min_exp}} – {{JobView.data.max_exp}} Years
+
+        .m-t-xs
+        .hbox(ng-if='JobView.data.degrees')
+          .col.thumb-lg.clearfix: strong.pull-right Qualifications: &nbsp;
+          .col: span {{JobView.data.degrees.join(', ')}}
+
+      //- Job Responsibility
+      .col-sm-12.no-padder.m-t-xs(ng-if='JobView.data.responsibility')
+        .panel.no-border.m-n
+          .w-full.wrapper-xs.bg-primary.lt: strong.m-l-xs Duties and Responsibility
+          .panel-body.bg-light.dk(ng-bind-html="JobView.responsibility" style='word-break: break-all;')
+
+      //- Job Details
+      .col-sm-12.bg-white-only.m-t-xs.wrapper-md
+        div
+          .h5.text-black-dker.font-bold.m-t-xs About Us
+          .h4.text-info-dker.m-t-xs
+            | {{JobView.data.client_name}}
+            i.text-muted(ng-if='JobView.data._root_.min_emp && JobView.data._root_.max_emp')
+              | &nbsp; ({{JobView.data._root_.min_emp}} - {{JobView.data._root_.max_emp}} Employee)
+          .m-t-xs
+          p.text-muted {{JobView.data._root_.description}}
+          p.text-muted(ng-if='JobView.data._root_.website') Website: {{JobView.data._root_.website}}
+          p.text-muted
+            a(ng-href='{{JobView.data._root_.apple_store_link}}'): i.fa-lg.fa.fa-apple.wrapper-xs
+            a(ng-href='{{JobView.data._root_.playstore_link}}'): i.fa-lg.fa.fa-android.wrapper-xs
+            a(ng-href='{{JobView.data._root_.windiows_store_link}}'): i.fa-lg.fa.fa-windows.wrapper-xs
+
+        .h4.m-t-xs.m-b-xs(ng-if='JobView.data.skills') Skills
+        .h6.clearfix
+          .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='skill in JobView.data.skills' style='padding: 2px;' ng-if='JobView.showAllSkill || $index < 6') {{skill}}
+          a.pull-left(ng-if='JobView.data.skills.length>6' ng-click='JobView.showAllSkill = !JobView.showAllSkill')
+            span.font-bold.text-info-dker(ng-if='JobView.showAllSkill') – Less
+            span.font-bold.text-info-dker(ng-if='!JobView.showAllSkill') + More
+
+
+        .h4.m-t-xs.m-b-xs Working Days
+        .h5.text-muted.clearfix {{JobView.data.days_per_week}} Days a Week ({{JobView.data.start_work_time}} to {{JobView.data.end_work_time}})
+        .m-b-xs
+
+      //- Job Information
+      .m-t-xs: .panel.no-border.m-n
+        .w-full.wrapper-xs.bg-primary.lt: strong.m-l-xs Information
         .panel-body
-          .h4.text-info-dker Sourcing
+          .h4 Sourcing
           .wrapper-xs
             .h5 Vacancy :
               span.text-muted  &nbsp; {{JobView.data.vacancy}}
-            .clearfix.m-t-xs
-              span.h5.pull-left Target Educational Institutions: &nbsp;
-              span.h6.pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='institute in JobView.data.institutes' style='padding: 2px;' ng-if='JobView.showAllInstitute || $index < 6')  {{institute}}
-            .clearfix.m-t-xs
-              span.h5.pull-left Target Industries: &nbsp;
-              span.h6.pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='industry in JobView.data.industries' style='padding: 2px;' ng-if='JobView.showAllIndustry || $index < 6')  {{industry}}
-            .clearfix.m-t-xs
-              span.h5.pull-left Target Companies: &nbsp;
-              span.h6.pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='employer in JobView.data.employers' style='padding: 2px;' ng-if='JobView.showAllEmployer || $index < 6')  {{employer}}
+            ul.padder
+              li(ng-if='JobView.data.institutes')
+                span.h5 Target Educational Institutions: &nbsp;
+                span.h5.text-muted {{JobView.data.institutes.join(', ')}}
+                span.h5.text-muted {{JobView.data.institutes.join(', ')}}
+                span.h5.text-muted {{JobView.data.institutes.join(', ')}}
+                span.h5.text-muted {{JobView.data.institutes.join(', ')}}
+                span.h5.text-muted {{JobView.data.institutes.join(', ')}}
+                span.h5.text-muted {{JobView.data.institutes.join(', ')}}
+              li(ng-if='JobView.data.industries')
+                span.h5 Target Industries: &nbsp;
+                span.h5.text-muted {{JobView.data.industries.join(', ')}}
+              li(ng-if='JobView.data.employers')
+                span.h5 Target Companies: &nbsp;
+                span.h5.text-muted {{JobView.data.employers.join(', ')}}
 
-          .h4.text-info-dker Interview Address
-          .h5.text-muted(ng-bind-html="JobView.interview_addr")
+          .m-t-xs(ng-if='JobView.interview_addr')
+            .h4.m-b-xs Interview Address
+            .h5.text-muted(ng-bind-html="JobView.interview_addr")
 
-  .col-md-3.nav-comment.no-padder.m-t-xs(ng-controller='JobCommentsController as Comments')
-    .col-xs-12(style='position: relative; height: 100%; width: 104%; top: 0; bottom: 50px; overflow-x: hidden; overflow-y: scroll; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
-      .col
-        .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_at"')
-          .col.text-center.thumb-sm
-            .fa-stack.fa-2x.text-primary
+          .m-t-xs(ng-if='JobView.interview_place_direction')
+            .h4.m-b-xs Interview Place Direction
+            .h5.text-muted(ng-bind-html="JobView.interview_place_direction")
+
+    .col.w-lg: .w-lg.nav-comment.m-t-xl(ng-controller='JobCommentsController as Comments')
+      div(style='position: relative; height: 100%; width: 102%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
+        ul.list-group.no-bg.pull-in
+          li.list-group-item(ng-repeat='comment in Comments.data | orderBy: "created_at"')
+            a.pull-left.thumb-sm.m-r-md(href=''): .fa-stack.fa-2x.text-primary
               i.fa.fa-circle.fa-stack-2x
               span.fa.fa-stack-1x.h3.fa-inverse {{comment.user.name[0].toUpperCase()}}
-          .col.clearfix
-            .col-xs-12
+
+            .clear
               .text-info-dker {{comment.user.name}}
               p {{comment.body}}
               .text-muted.pull-right(title='{{comment.created_at | date: "medium"}}') {{comment.created_at | date: 'd MMM, h:mm a'}}
-        .hbox(style='height: 40px;')
-    form.form.form-validation.col-xs-12.wrapper-xs.bg-white(style='position: relative; height: 50px; width: 100%; bottom: 40px; background-color: #fff;' ng-submit='Comments.insert()' name='commentForm')
-      .input-group
-        input.form-control(type='text' name='comment' placeholder='enter to comment' required ng-model='Comments.post.comment')
-        span.input-group-btn
-          button.btn.btn-default(type='sumbit' ng-disabled='commentForm.$invalid')
-            i.fa.fa-paper-plane
+        div(style='height: 20px;')
+      form.form.form-validation.col-xs-12.wrapper-xs.bg-white(style='position: relative; height: 50px; width: 100%; bottom: 40px; background-color: #fff;' ng-submit='Comments.insert()' name='commentForm')
+        .input-group
+          input.form-control(type='text' name='comment' placeholder='enter to comment' required ng-model='Comments.post.comment')
+          span.input-group-btn
+            button.btn.btn-default(type='sumbit' ng-disabled='commentForm.$invalid')
+              i.fa.fa-paper-plane
 
+
+//div
+//  .wrapper-xs.bg-light.b-b
+//    .m-l-md.font-thin.h3
+//      | Positions /
+//      a(ui-sref='jobs.manage({jobId: JobView.data.id})')  {{JobView.data.role}} /
+//      a(ui-sref='jobs-view({jobId: JobView.data.id})')  View JD
+//  .col-md-9.clearfix
+//    //- Job top cover container
+//    .col-sm-12.dker.no-padder
+//      .col-sm-7.no-padder.clearfix.m-t-xs
+//        .hbox
+//          .col.thumb-xl.text-center.bg-light.dker.wrapper-lg
+//            i.fa.fa-briefcase.fa-4x.wrapper-xs.text-white
+//          .col.bg-white.wrapper-xs
+//            .hbox
+//              .col.h3 &nbsp; {{JobView.data.client_name}}
+//            .hbox
+//              .col.h4
+//                | &nbsp;{{JobView.data.role}}
+//                i.btn.fa.fa-download(ng-click='App.downloadJob([JobView.data.id])')
+//            .hbox
+//              .col
+//                .hox.h5.m-t-xs.text-muted
+//                  .col.v-middle
+//                    i.fa.fa-lg.fa-inr
+//                  .col.v-middle  &nbsp; {{JobView.data.min_sal}}–{{JobView.data.max_sal}} Lakhs
+//                .hbox.h5.m-t-xs.text-muted
+//                  .col.v-middle(style='width:20px;'): i.fa.fa-lg.fa-map-marker
+//                  .col.v-middle  &nbsp; {{JobView.data.job_location}}
+//              .col
+//                .pull-right
+//                  .hbox.h5.m-t-xs.text-muted
+//                    .col.v-middle Total Applicants
+//                    .col.fa-2x &nbsp;{{JobView.data.total_applicants}}
+//                  .hbox.h5.m-t-xs.text-muted
+//                    .col.v-middle Priority
+//                    .col.v-middle: .btn.btn-success.rounded {{JobView.data.job_status}}
+//      .col-sm-5.clearfix.no-padder.m-t-xs
+//        .panel.panel-primary.m-l-xs.bg-white.no-border
+//          .panel-heading
+//          .panel-body.wrapper-xs
+//            .hbox
+//              .col.thumb-lg.clearfix
+//                .pull-right Experience: &nbsp;
+//              .col  {{JobView.data.min_exp}}–{{JobView.data.max_exp}} Years
+//            .hbox.padder-v(ng-if='JobView.data.degrees.length>=0')
+//              .col.thumb-lg.clearfix
+//                .pull-right Qualifications: &nbsp;
+//              .col
+//                .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='degree in JobView.data.degrees' style='padding: 2px;' ng-if='JobView.showAllDegree || $index < 3') {{degree}}
+//                a.pull-left(ng-if='JobView.data.degrees.length>=3' ng-click='JobView.showAllDegree = !JobView.showAllDegree')
+//                  span.font-bold.text-info-dker(ng-if='JobView.showAllDegree') – Less
+//                  span.font-bold.text-info-dker(ng-if='!JobView.showAllDegree') + More
+//
+//    //- Job Responsibility
+//    .col-sm-12.no-padder.m-t-xs(ng-if='JobView.data.responsibility')
+//      .panel.panel-primary.no-border.m-n
+//        .panel-heading Duties and Responsibility
+//        .panel-body.bg-light.dker(ng-bind-html="JobView.responsibility")
+//
+//    //- Job Details
+//    .col-sm-12.bg-white.m-t-xs
+//      div
+//        .h5.text-black-dker.font-bold.m-t-xs About Us
+//        .h4.text-info-dker {{JobView.data.client_name}}
+//        p.text-muted {{JobView.data._root_.description}}
+//        p.text-muted(ng-if='JobView.data._root_.website') Website: {{JobView.data._root_.website}}
+//        p.text-muted
+//          a(ng-href='{{JobView.data._root_.apple_store_link}}'): i.fa-lg.fa.fa-apple.wrapper-xs
+//          a(ng-href='{{JobView.data._root_.playstore_link}}'): i.fa-lg.fa.fa-android.wrapper-xs
+//          a(ng-href='{{JobView.data._root_.windiows_store_link}}'): i.fa-lg.fa.fa-windows.wrapper-xs
+//      .line.line-dashed.b-b.line-lg.pull-in
+//      .h5.font-bold.m-t-xs.m-b-xs Skills
+//      .h6.clearfix
+//        .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='skill in JobView.data.skills' style='padding: 2px;' ng-if='JobView.showAllSkill || $index < 6') {{skill}}
+//        a.pull-left(ng-if='JobView.data.skills.length>6' ng-click='JobView.showAllSkill = !JobView.showAllSkill')
+//          span.font-bold.text-info-dker(ng-if='JobView.showAllSkill') – Less
+//          span.font-bold.text-info-dker(ng-if='!JobView.showAllSkill') + More
+//      .line.line-dashed.b-b.line-lg.pull-in
+//
+//      .h5.font-bold.m-t-xs.m-b-xs Working Days
+//      .h5.clearfix {{JobView.data.days_per_week}} Days a Week ({{JobView.data.start_work_time}} to {{JobView.data.end_work_time}})
+//      .line.line-dashed.b-b.line-lg.pull-in
+//
+//    //- Job Information
+//    .col-sm-12.no-padder.m-t-xs
+//      .panel.panel-primary.no-border.m-n
+//        .panel-heading Information
+//        .panel-body
+//          .h4.text-info-dker Sourcing
+//          .wrapper-xs
+//            .h5 Vacancy :
+//              span.text-muted  &nbsp; {{JobView.data.vacancy}}
+//            .clearfix.m-t-xs
+//              span.h5.pull-left Target Educational Institutions: &nbsp;
+//              span.h6.pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='institute in JobView.data.institutes' style='padding: 2px;' ng-if='JobView.showAllInstitute || $index < 6')  {{institute}}
+//            .clearfix.m-t-xs
+//              span.h5.pull-left Target Industries: &nbsp;
+//              span.h6.pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='industry in JobView.data.industries' style='padding: 2px;' ng-if='JobView.showAllIndustry || $index < 6')  {{industry}}
+//            .clearfix.m-t-xs
+//              span.h5.pull-left Target Companies: &nbsp;
+//              span.h6.pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='employer in JobView.data.employers' style='padding: 2px;' ng-if='JobView.showAllEmployer || $index < 6')  {{employer}}
+//
+//          .h4.text-info-dker Interview Address
+//          .h5.text-muted(ng-bind-html="JobView.interview_addr")
+//
+//  .col-md-3.nav-comment.no-padder.m-t-xs(ng-controller='JobCommentsController as Comments')
+//    .col-xs-12(style='position: relative; height: 100%; width: 104%; top: 0; bottom: 50px; overflow-x: hidden; overflow-y: scroll; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
+//      .col
+//        .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_at"')
+//          .col.text-center.thumb-sm
+//            .fa-stack.fa-2x.text-primary
+//              i.fa.fa-circle.fa-stack-2x
+//              span.fa.fa-stack-1x.h3.fa-inverse {{comment.user.name[0].toUpperCase()}}
+//          .col.clearfix
+//            .col-xs-12
+//              .text-info-dker {{comment.user.name}}
+//              p {{comment.body}}
+//              .text-muted.pull-right(title='{{comment.created_at | date: "medium"}}') {{comment.created_at | date: 'd MMM, h:mm a'}}
+//        .hbox(style='height: 40px;')
+//    form.form.form-validation.col-xs-12.wrapper-xs.bg-white(style='position: relative; height: 50px; width: 100%; bottom: 40px; background-color: #fff;' ng-submit='Comments.insert()' name='commentForm')
+//      .input-group
+//        input.form-control(type='text' name='comment' placeholder='enter to comment' required ng-model='Comments.post.comment')
+//        span.input-group-btn
+//          button.btn.btn-default(type='sumbit' ng-disabled='commentForm.$invalid')
+//            i.fa.fa-paper-plane
+//
