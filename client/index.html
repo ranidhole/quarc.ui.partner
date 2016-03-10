@@ -98,13 +98,19 @@
       <script src="bower_components/restangular/dist/restangular.js"></script>
       <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
       <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+      <script src="bower_components/stackframe/stackframe.js"></script>
+      <script src="bower_components/error-stack-parser/error-stack-parser.js"></script>
+      <script src="bower_components/stack-generator/stack-generator.js"></script>
+      <script src="bower_components/source-map/source-map.js"></script>
+      <script src="bower_components/stacktrace-gps/dist/stacktrace-gps.js"></script>
+      <script src="bower_components/stacktrace-js/stacktrace.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
       <script src="components/util/util.module.js"></script>
-      <script src="app/routes/applicants/view/view.controller.js"></script>
+      <script src="app/routes/applicants/comment/comment.controller.js"></script>
       <script src="app/core/qui.components/before.bottom.js"></script>
       <script src="app/core/qui.components/scroll.to.bottom.js"></script>
       <script src="app/core/qui.core/constants/auth-events.js"></script>
@@ -123,21 +129,21 @@
       <script src="app/event.js"></script>
       <script src="app/factories/QuarcService/QuarcService.service.js"></script>
       <script src="app/factories/applicantsFactory/applicantsFactory.service.js"></script>
+      <script src="app/factories/stacktraceService/stacktraceService.service.js"></script>
       <script src="app/filters/common/common.fitler.js"></script>
       <script src="app/routes/access/access.controller.js"></script>
       <script src="app/routes/access/access.js"></script>
       <script src="app/routes/access/oauth/oauth.controller.js"></script>
       <script src="app/routes/applicants/applicants.controller.js"></script>
       <script src="app/routes/applicants/applicants.js"></script>
-      <script src="app/routes/applicants/comment/comment.controller.js"></script>
       <script src="app/app.controller.js"></script>
+      <script src="app/routes/applicants/view/view.controller.js"></script>
       <script src="app/routes/calendar/calendar.controller.js"></script>
       <script src="app/routes/calendar/calendar.js"></script>
       <script src="app/routes/dashboard/dashboard.controller.js"></script>
       <script src="app/routes/dashboard/dashboard.js"></script>
       <script src="app/routes/jobs/applicants/new/new.controller.js"></script>
       <script src="app/routes/jobs/comment/comment.controller.js"></script>
-      <script src="app/routes/jobs/jobs.controller.js"></script>
       <script src="app/routes/jobs/jobs.js"></script>
       <script src="app/routes/jobs/list/list.controller.js"></script>
       <script src="app/routes/jobs/manage-jd/manage-jd.controller.js"></script>

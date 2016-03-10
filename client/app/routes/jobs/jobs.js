@@ -31,7 +31,7 @@ angular.module('uiGenApp')
         authenticate: true
       })
       .state('jobs-manage-jd', {
-        url: '/jobs/manage-jd',
+        url: '/jobs/manage-jd?status',
         templateUrl: 'app/routes/jobs/manage-jd/manage-jd.html',
         controller:'ManageJdController',
         controllerAs: 'ManageJd',

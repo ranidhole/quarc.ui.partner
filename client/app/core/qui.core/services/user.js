@@ -1,11 +1,8 @@
 angular.module('qui.core')
-  .factory('User', [
-    'Session',
-    function Auth(Session) {
-      const userService = {
-        userinfo: Session.read('userinfo'),
-        states: Session.read('states'),
-      };
-      return userService;
-    },
-  ]);
+  .factory('User', function Auth(Session) {
+    const UserFactory = {
+      userinfo: Session.read('userinfo'),
+      states: Session.read('states'),
+    };
+    return UserFactory;
+  });

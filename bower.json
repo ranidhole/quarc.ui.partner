@@ -22,6 +22,7 @@
     "restangular": "~1.5.1",
     "bootstrap-sass": "3.3.6",
     "ng-file-upload": "^12.0.1",
-    "angular-loading-bar": "^0.8.0"
+    "angular-loading-bar": "^0.8.0",
+    "stacktrace-js": "^1.0.4"
   }
 }
