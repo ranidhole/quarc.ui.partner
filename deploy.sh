@@ -9,7 +9,6 @@ bower install
 echo "Starting build"
 grunt build -f
 
-
 echo "Changing Directory to ./dist"
 cd dist
 
@@ -21,19 +20,16 @@ echo "Git Init"
 git init
 
 echo "Adding remote"
-git remote add dokku dokku@cloud.quezx.com:partner
-
-echo "Pulling from dokku"
-git pull origin master
+git remote add origin https://github.com/manjeshpv/circleci-test.dist
 
 echo "Adding files to git"
 git add *
 
 echo "Commiting..."
-git commit -m "new"
+git commit -m "Todo: comming Message"
 
 echo "Started deploying"
-git push dokku master --force
+git push origin master --force
 
-echo "Deployed Successfully!"
+echo "Pushed to git successfully Successfully!"
 exit 0
