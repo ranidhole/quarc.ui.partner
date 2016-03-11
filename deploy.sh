@@ -20,7 +20,7 @@ echo "Git Init"
 git init
 
 echo "Adding remote"
-git remote add origin https://github.com/manjeshpv/circleci-test.dist
+git remote add origin https://github.com/quezx/quarcdist
 
 echo "Adding files to git"
 git add *
