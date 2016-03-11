@@ -4,6 +4,7 @@
 
 mkdir dist
 touch dist/index.html
+echo date >> index.html
 echo "Changing Directory to ./dist"
 cd dist
 
@@ -24,7 +25,7 @@ echo "Commiting..."
 git commit -m "new"
 
 echo "Started deploying"
-git push origin staging --force
+git push -u origin staging --force
 
 echo "Deployed Successfully!"
 exit 0
