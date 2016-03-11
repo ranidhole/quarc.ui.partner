@@ -82,7 +82,7 @@ angular.module('uiGenApp')
           vm.userinfo = userinfo;
           localStorage.userinfo = JSON.stringify(userinfo)
         }).catch(err => {
-          alert("Error while getting user states")
+          console.log("Error while getting user states")
       })
     }
 
@@ -97,12 +97,12 @@ angular.module('uiGenApp')
           vm.states = states
           localStorage.states = JSON.stringify(states)
         }).catch(err => {
-        alert("Error while getting user states")
+        console.log("Error while getting user states")
       })
     }
 
     vm.showNavJobs = function showNavJobs() {
-      return $state.is('applicants') || $state.is('jobs-view') || $state.is('jobs-manage') || $state.is('jobs-applicants-new');
+      return $state.is('applicants') || $state.is('jobs-view') || $state.is('jobs-manage') || $state.is('jobs-applicants-new') || $state.is('jobs-references');
     };
 
     vm.downloadApplicant = function downloadApplicant(ids) {
@@ -166,4 +166,24 @@ angular.module('uiGenApp')
         applicant.state_name = vm.states[data.state_id].name;
       });
     };
+
+    vm.shareLink = function shareLink(job) {
+      // ApplicantIds is array contatining applicant id to download cvs
+      const modalInstance = $uibModal.open({
+        templateUrl: 'app/directives/social-share/social-share.html',
+        controller: 'SocialShareController',
+        controllerAs: 'SocialShare',
+        size: 'md',
+        resolve: {
+          currentJob: function FollowerData() {
+            return job;
+          },
+        },
+      });
+
+      modalInstance.result.then(function success() {
+        // console.log(type);
+      });
+    };
+
   });

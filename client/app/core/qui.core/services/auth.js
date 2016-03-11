@@ -6,8 +6,9 @@ angular.module('qui.core')
       let refreshingToken = false;
 
       authService.login = function login(credentials) {
+        const url = URLS.PARTNER_OAUTH_API + '/login'
         return $http
-          .post('/api/login', credentials, { ignoreAuthModule: true })
+          .post(url, credentials, { ignoreAuthModule: true })
           .then(
             function signinSuccess(response) {
               return Session.create('oauth', response.data);
@@ -26,8 +27,9 @@ angular.module('qui.core')
         if (refreshingToken) return $q.reject({ error: 'Multiple refresh request' });
         refreshingToken = true; // Set refresh_token reuqest tracker flag
         return $http
+          const url = URLS.PARTNER_OAUTH_API + '/refresh'
           .post(
-            '/api/refresh',
+            url,
             { refresh_token: Session.read('oauth').refresh_token },
             { ignoreAuthModule: true }
           )
@@ -44,7 +46,7 @@ angular.module('qui.core')
       };
 
       authService.logout = function logout() {
-        const url = '/api/logout';
+        const url = URLS.PARTNER_OAUTH_API + '/logout';
         return $http
           .post(url, { access_token: Session.getAccessToken() })
           .then(
@@ -62,7 +64,7 @@ angular.module('qui.core')
       };
 
       authService.forgotpass = function forgotpass(username) {
-        const url = '/api/forgotpass';
+        const url = URLS.PARTNER_OAUTH_API +'/forgotpass';
         return $http
           .post(url, { username: username }, { ignoreAuthModule: true })
           .then(

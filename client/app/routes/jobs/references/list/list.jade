@@ -1,0 +1,56 @@
+.hobx(before-bottom='ReferencesList.loadApplicants()')
+  .wrapper-xs.bg-light.b-b(style='position: fixed;width: 100%;background: #fff; z-index: 2;')
+    ul.nav.nav-pills.nav-sm
+      li: label.i-checks.m-t-xs.m-b-none.m-l-lg
+        input(type='checkbox' ng-click='ReferencesList.setChecked(ReferencesList.checkAll)' ng-model='ReferencesList.checkAll')
+        i.m-r-none(ng-if='ReferencesList.applicants.length > 0')
+      li(ng-repeat='bucket in ReferencesList.buckets' ui-sref-active="active")
+        a(ui-sref='jobs-manage({bucket: bucket})') {{bucket}}
+  .wrapper-xs.bg-light.b-b(style='position: fixed; right: 0;background: #fff; z-index: 3;')
+    ul.nav.nav-pills.nav-sm
+      li
+        button.btn.btn-primary.btn-sm(ng-if='ReferencesList.getApplicants({checked: true}, "id").length>0' ng-click='App.downloadApplicant(ReferencesList.getApplicants({checked: true}, "id"))') Download CV(s)
+      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ng-click="App.shareLink(ReferencesList.job)") Share Link
+      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='jobs-applicants-new({jobId:ReferencesList.job.id})') Upload CV
+      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='jobs-view({jobId:ReferencesList.job.id})') View JD
+  .wrapper-md
+    .m-b-xs.hbox.m-t-xl(ng-if='ReferencesList.applicants.length === 0')
+      .col: h1.text-center.text-muted(ng-if='!ReferencesList.ui.loading') No Applicants
+    .m-t-lg
+    .m-b-md.hbox(ng-repeat='applicant in ReferencesList.applicants')
+      .col.bg-white
+        .col-xs-12.col-md-12.no-padder
+          .tl-content.m-none.padder.w-full.w-auto-xs
+            .m-b-sm
+              label.i-checks.m-b-none
+                input(type='checkbox' ng-model='applicant.checked')
+                i
+              a(ui-sref='jobs-references-view({jobId: ReferencesList.job.id,referenceId: applicant.id})')
+                strong.text-primary-lt  {{applicant.name}}
+              .text-danger.pull-right.m-t-n-xs(ng-bind="applicant.approval_status")
+            .panel-body.pull-in.b-t.wrapper-xs
+              .col-xs-4.text-ellipsis
+                i.fa.fa-bookmark(style='margin:0 2px;')
+                | {{applicant.designation}}
+              .col-xs-4.text-ellipsis
+                i.fa.fa-graduation-cap
+                | {{applicant.degree_id}}
+              .col-xs-4.text-ellipsis
+                i.fa.fa-inr
+                |  {{applicant.expected_salary}}&nbsp;Lakhs
+              .col-xs-4.text-ellipsis
+                i.fa.fa-briefcase
+                |  {{applicant.employer}}
+              .col-xs-4.text-ellipsis
+                i.fa.fa-line-chart
+                |  {{applicant.total_exp}}&nbsp;Years
+              .col-xs-4.text-ellipsis
+                i.fa.fa-map-marker
+                |  {{applicant.location}}
+    .col-xs-2.col-xs-offset-5
+      button.pull-left.btn.active.m-t-xs(ng-if="ReferencesList.ui.loading")
+        i.fa.fa-circle-o-notch.fa-spin
+        strong &nbsp;Loading
+      button.pull-left.btn.btn-primary.m-t-xs(ng-if="ReferencesList.ui.lazyLoad" ng-click="ReferencesList.loadApplicants()")
+        i.fa.fa-plus-circle
+        strong &nbsp;Load More

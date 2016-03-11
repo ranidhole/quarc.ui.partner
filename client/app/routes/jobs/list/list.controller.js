@@ -32,17 +32,4 @@ angular.module('uiGenApp')
 
     vm.loadJobs();
 
-
-    vm.updateResponse = function(jobId, allocationId, responseId) {
-      var req = {
-        url:  'Consultants/saveResponse',
-        method: 'post',
-        data: {
-          'data[JobAllocation][id]': allocationId,
-          'data[ConsultantResponse][response_id]': responseId,
-          'data[ConsultantResponse][job_id]': jobId
-        }
-      };
-      alert()
-    }
   });

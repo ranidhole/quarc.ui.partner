@@ -1,5 +1,5 @@
 angular.module('uiGenApp')
-  .controller('ApplicantViewController', function ApplicantViewCtrl(QuarcService, Restangular, $stateParams, URLS, $sce, Page, Session) {
+  .controller('JobReferenceViewController', function ApplicantViewCtrl(QuarcService, Restangular, $stateParams, URLS, $sce, Page, Session) {
       //Page = QuarcService.Page;
       //Session = QuarcService.Session;
 

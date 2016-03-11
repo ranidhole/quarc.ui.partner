@@ -10,6 +10,8 @@
     ul.nav.nav-pills.nav-sm
       li
         button.btn.btn-primary.btn-sm(ng-if='JobsManage.getApplicants({checked: true}, "id").length>0' ng-click='App.downloadApplicant(JobsManage.getApplicants({checked: true}, "id"))') Download CV(s)
+      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='jobs-cvReceived({jobId:JobsManage.job.id})') References
+      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ng-click="App.shareLink(JobsManage.job)") Share Link
       li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='jobs-applicants-new({jobId:JobsManage.job.id})') Upload CV
       li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='jobs-view({jobId:JobsManage.job.id})') View JD
   .wrapper-md

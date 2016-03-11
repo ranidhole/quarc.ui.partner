@@ -19,12 +19,33 @@ angular.module('uiGenApp')
             console.log("manage resolve jobId",$stateParams.jobId)
             return Restangular
               .one('jobs',$stateParams.jobId)
-              .get({fl: 'id,role'})
+              .get()
               .then(function(job){
                 return job;
               })
               .catch(function(){
-                return alert("Error while get job details")
+                return console.log("Error while get job details")
+              })
+          }
+        },
+        authenticate: true
+      })
+      // Todo: rename cv-received to references
+      .state('jobs-references', {
+        url: '/jobs/:jobId/references?bucket',
+        templateUrl: 'app/routes/jobs/references/list/list.html',
+        controller: 'ReferencesListController',
+        controllerAs: 'ReferencesList',
+        resolve:{
+          currentJob: function(Restangular,$stateParams){
+            return Restangular
+              .one('jobs',$stateParams.jobId)
+              .get()
+              .then(function(job){
+                return job;
+              })
+              .catch(function(){
+                return console.log("Error while get job details")
               })
           }
         },
@@ -44,7 +65,7 @@ angular.module('uiGenApp')
         controllerAs: 'JobView'
       })
       .state('jobs-applicants-new', {
-        url: '/:jobId/applicants/new',
+        url: '/jobs/:jobId/applicants/new',
         templateUrl: 'app/routes/jobs/applicants/new/new.html',
         controller: 'ApplicantNewController',
         controllerAs: 'ApplicantNew',
@@ -57,7 +78,26 @@ angular.module('uiGenApp')
                 return job;
               })
               .catch(function(){
-                return alert("Error while get job details")
+                return console.log("Error while get job details")
+              })
+          }
+        }
+      })
+      .state('jobs-references-view', {
+        url: '/jobs/:jobId/references/:referenceId',
+        templateUrl: 'app/routes/jobs/references/view/view.html',
+        controller: 'JobReferenceViewController',
+        controllerAs: 'JobReferenceView',
+        resolve:{
+          currentJob: function(Restangular,$stateParams){
+            return Restangular
+              .one('jobs',$stateParams.jobId)
+              .get()
+              .then(function(job){
+                return job;
+              })
+              .catch(function(){
+                return console.log("Error while get job details")
               })
           }
         }

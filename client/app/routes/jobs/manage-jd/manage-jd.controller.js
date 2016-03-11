@@ -92,7 +92,7 @@ angular.module('uiGenApp')
             }
           })
           .catch(function(err){
-            alert("Server Error")
+            console.log("Server Error while updating consultant response")
           })
 
       }

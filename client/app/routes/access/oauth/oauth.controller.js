@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('uiGenApp')
-  .controller('oAuthCtrl', function (Auth, $location, $window, $state) {
+  .controller('oAuthCtrl', function (Auth, $location, $window, $state,URLS) {
     const vm = this;
     const query = $location.search();
     if (query.error) {
@@ -21,6 +21,10 @@ angular.module('uiGenApp')
               'app.applicants', { bucket: 'All' }, { absolute: true }
             );
         });
+      }).catch((err) =>{
+          // Todo: If Code expired Redirecting to OAuth Server Login Back.  It Might create a redirect loop
+          console.log("Code Expired");
+          $window.location.href = URLS.OAUTH;
       });
 
       return;

@@ -65,7 +65,7 @@ angular.module('uiGenApp')
             if(err.status === 409){
               vm.Degrees.select(err.data);
             } else {
-              alert("Error while creating degree")
+              console.log("Error while creating degree")
             }
           })
       },
@@ -108,7 +108,7 @@ angular.module('uiGenApp')
             if(err.status === 409){
               vm.Employers.select(err.data);
             } else {
-              alert("Error while creating employer")
+              console.log("Error while creating employer")
             }
           })
       },
@@ -151,7 +151,7 @@ angular.module('uiGenApp')
             if(err.status === 409){
               vm.Designations.select(err.data);
             } else {
-              alert("Error while creating designation")
+              console.log("Error while creating designation")
             }
         })
       },
@@ -182,7 +182,7 @@ angular.module('uiGenApp')
         return $state.go('applicants-view', { applicantId: response.data.id });
       },
       function errorCB(err){
-        return alert("Error while uploading...")
+        return console.log("Error while uploading...")
       })
     };
 

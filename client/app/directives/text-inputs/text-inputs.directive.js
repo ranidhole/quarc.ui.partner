@@ -160,7 +160,7 @@ angular.module('uiGenApp')
                     ctrl.$setValidity('unique', true);
                 })
                 .catch(function (err) {
-                  alert("Error while checking email & phone")
+                  console.log("Error while checking email & phone")
                 })
             }
 
