@@ -16,7 +16,6 @@ angular.module('uiGenApp')
         controllerAs: 'JobsManage',
         resolve:{
           currentJob: function(Restangular,$stateParams){
-            console.log("manage resolve jobId",$stateParams.jobId)
             return Restangular
               .one('jobs',$stateParams.jobId)
               .get()

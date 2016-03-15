@@ -71,35 +71,8 @@ angular.module('uiGenApp')
       },
     };
 
-    // Todo : Temporary fix | Fallaback
-    if(localStorage.userinfo)
-      vm.userinfo = User.userinfo;
-    else {
-      Restangular
-        .one('users','me')
-        .get()
-        .then(userinfo => {
-          vm.userinfo = userinfo;
-          localStorage.userinfo = JSON.stringify(userinfo)
-        }).catch(err => {
-          console.log("Error while getting user states")
-      })
-    }
-
-    // Todo : Temporary fix | Fallaback
-    if(localStorage.states){
-      vm.states = User.states;
-    } else {
-      Restangular
-        .one('users','states')
-        .get()
-        .then(states => {
-          vm.states = states
-          localStorage.states = JSON.stringify(states)
-        }).catch(err => {
-        console.log("Error while getting user states")
-      })
-    }
+    vm.userinfo = User.userinfo;
+    vm.states = User.states;
 
     vm.showNavJobs = function showNavJobs() {
       return $state.is('applicants') || $state.is('jobs-view') || $state.is('jobs-manage') || $state.is('jobs-applicants-new') || $state.is('jobs-references');
