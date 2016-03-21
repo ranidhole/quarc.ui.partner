@@ -1,15 +1,10 @@
 div
-  .wrapper-xs.bg-light.b-b(style='position: fixed;width: 100%;background: #fff; z-index: 3;height: 42px;')
-    ul.nav.nav-pills.nav-sm
-      li: label.i-checks.m-t-xs.m-b-none.m-l-lg
-        i.m-r-none(ng-if='Applicant.applicants.length > 0')
-      li(ng-repeat='bucket in JobView.buckets' ui-sref-active="active")
-        a(ui-sref='jobs-manage({bucket: bucket, jobId: JobView.data.id })') {{bucket}}
-
-  .wrapper-xs.bg-light.b-b(style='position: fixed; right: 0;background: #fff; z-index: 3;')
-    ul.nav.nav-pills.nav-sm: li(ui-sref-active="active")
-      a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='jobs-manage({jobId: JobView.data.id})') View Applicants
-
+  directive-header(viewdata="JobView" buttons="{share:true,list:true}" App="App")
+  .wrapper-md
+    .m-t-lg
+    .panel.panel-primary.no-border
+      .panel-heading.font-thin.h4
+        | Job Details
   .hbox.hbox-auto-sm.hbox-auto-xs
     .col.col-.clearfix.wrapper-xs
 

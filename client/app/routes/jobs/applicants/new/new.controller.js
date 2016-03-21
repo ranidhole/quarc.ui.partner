@@ -1,11 +1,11 @@
 angular.module('uiGenApp')
-  .controller('ApplicantNewController', function NewJobCtrl(QuarcService, Restangular, $state, moment,Upload, URLS,$stateParams,currentJob,$filter) {
+  .controller('ApplicantNewController', function NewJobCtrl(QuarcService, Restangular, $state, moment,Upload, URLS,$stateParams,currentJob,$filter,QCONFIG) {
 
     const Page = QuarcService.Page;
 
     Page.setTitle('Upload CV');
     const vm = this;
-
+    vm.buckets = QCONFIG.APPLICANT_STATES;
     vm.job = currentJob;
     vm.data = {};
 
@@ -179,7 +179,9 @@ angular.module('uiGenApp')
 
     vm.create = function createJob() {
       vm.uploadFile($stateParams.jobId, vm.data.file, vm.data,function jobCreated(response) {
-        return $state.go('applicants-view', { applicantId: response.data.id });
+        return setTimeout(function(){
+          $state.go('applicants-view', { applicantId: response.data.id })
+        },1000);
       },
       function errorCB(err){
         return console.log("Error while uploading...")

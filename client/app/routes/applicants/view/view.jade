@@ -41,9 +41,6 @@ div
             .text-info-dker Qualification
             .font-thin {{Applicant.data.edu_degree}}
           .h4.m-l-xs.m-t-sm
-            .text-info-dker Designation
-            .font-thin {{Applicant.data.exp_designation}}
-          .h4.m-l-xs.m-t-sm
             .text-info-dker Location
             .font-thin {{Applicant.data.exp_location}}
           .h4.m-l-xs.m-t-sm
@@ -72,7 +69,7 @@ div
             |  &nbsp; {{Applicant.data.email}}
 
       //- Applicant Skills
-      .panel.panel-default.no-border
+      .panel.panel-default.no-border(ng-if="Applicant.data.skills.length>0")
         .panel-heading.bg-dark.lter.h4
           .h4.text-white Skills
         .panel-body

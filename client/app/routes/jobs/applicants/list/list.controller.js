@@ -1,25 +1,39 @@
 angular.module('uiGenApp')
-  .controller('ReferencesListController', function ReferencesListController(QCONFIG, QuarcService, Restangular, $stateParams, $filter, moment,currentJob ) {
+  .controller('JobsApplicantsListController', function JobsManageCtrl(QCONFIG, QuarcService, Restangular, $stateParams, $filter, moment,currentJob,$state ) {
     const Page = QuarcService.Page;
 
     const vm = this;
-    vm.job = currentJob;
     vm.buckets = QCONFIG.APPLICANT_STATES;
+
+    vm.job = currentJob;
     Page.setTitle(`${vm.job.role} - ${$stateParams.status} Applicants`); // set page title
 
+    // Set default status to ALL
+    if (!~vm.buckets.indexOf($stateParams.status)) return $state.go('jobs-applicants',{status:'All'});
     vm.applicants = []; // collection of applicants
     vm.ui = {lazyLoad: true, loading: false}; // ui states
     vm.params = {
       offset: 0, limit: 15,
+      fl: 'applicant_score,created_on,edu_degree,exp_designation,exp_employer,exp_location,exp_salary,id,name,state_id,state_name,total_exp',
     }; // GET query params
-
     vm.loadApplicants = function loadApplicants() {
       if (!vm.ui.lazyLoad) return; // if no more jobs to get
       vm.ui = {lazyLoad: false, loading: true};
 
+      if ($stateParams.status === 'Interview') {
+        // Customization for Interview tab
+        vm.params.interview_time = [
+          moment().startOf('day').toISOString(),
+          moment().startOf('day').add(1, 'months').toISOString(),
+        ].join(',');
+        vm.params.fl += ',interview_time,interview_type';
+      } else {
+        vm.params.state_id = $stateParams.status.replace(' ', '_').toUpperCase();
+      }
+
       Restangular
         .one('jobs', $stateParams.jobId)
-        .all('references')
+        .all('applicants')
         .getList()
         .then(function applicantsList(result) {
           angular.forEach(result, function iterateApplicants(applicant) {

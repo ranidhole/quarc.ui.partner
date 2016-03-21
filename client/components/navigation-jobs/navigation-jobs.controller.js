@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('uiGenApp')
-  .controller('NavigationJobsController', function(Restangular){
+  .controller('NavigationJobsController', function(Restangular,$state){
+
     const vm = this;
+
+    vm.targetStateName =  $state.is('jobs-references') ? 'references' :($state.is('jobs-interviews') ? 'interviews' :'applicants');
+  console.log("ts",vm.targetStateName)
     vm.jobs = []; // collection of jobs
     vm.ui = { lazyLoad: true, loading: false }; // ui states
     vm.params = { offset: 0, limit: 15 }; // GET query params

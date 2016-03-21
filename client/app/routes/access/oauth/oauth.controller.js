@@ -18,7 +18,7 @@ angular.module('uiGenApp')
         Auth.setSessionData().then(() => {
           $window.location.href = $state
             .href(
-              'app.applicants', { bucket: 'All' }, { absolute: true }
+              'app.applicants', { status: 'All' }, { absolute: true }
             );
         });
       }).catch((err) =>{

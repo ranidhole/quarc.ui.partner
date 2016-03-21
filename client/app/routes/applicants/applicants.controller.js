@@ -7,12 +7,12 @@ angular.module('uiGenApp')
     const vm = this;
     vm.buckets =  QCONFIG.APPLICANT_STATES;
 
-    $stateParams.bucket = $stateParams.bucket || $location.search().bucket
+    $stateParams.status = $stateParams.status || $location.search().status
 
-    // Set default bucket to ALL
-    if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';
+    // Set default status to ALL
+    if (!~vm.buckets.indexOf($stateParams.status)) $stateParams.status = 'All';
 
-    Page.setTitle(`${$stateParams.bucket} Applicants`);
+    Page.setTitle(`${$stateParams.status} Applicants`);
 
     vm.applicants = []; // collection of applicants
     vm.ui = { lazyLoad: true, loading: false }; // ui states
@@ -22,14 +22,14 @@ angular.module('uiGenApp')
       if (!vm.ui.lazyLoad) return; // if no more applicants to get
       vm.ui = { lazyLoad: false, loading: true };
 
-      if ($stateParams.bucket === 'Interview') {
+      if ($stateParams.status === 'Interview') {
         vm.params.interview_time = [
           moment().startOf('day').toISOString(),
           moment().startOf('day').add(1, 'months').toISOString(),
         ].join(',');
         vm.params.fl += ',interview_time,interview_type';
       } else {
-        vm.params.state_id = $stateParams.bucket.replace(' ', '_').toUpperCase();
+        vm.params.state_id = $stateParams.status.replace(' ', '_').toUpperCase();
       }
 
       Restangular.all('applicants').getList(vm.params).then(function(applicants){

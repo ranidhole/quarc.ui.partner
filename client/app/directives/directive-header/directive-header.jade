@@ -1,0 +1,21 @@
+// Changing this directive will impact: jobs-applicants jobs-applicants-new jobs-references
+div
+  .wrapper-xs.bg-light.b-b(style='position: fixed;width: 100%;background: #fff; z-index: 2;')
+    ul.nav.nav-pills.nav-sm
+      li: label.i-checks.m-t-xs.m-b-none.m-l-lg
+        input(type='checkbox' ng-click='viewdata.setChecked(viewdata.checkAll)' ng-model='viewdata.checkAll')
+        i.m-r-none(ng-if='viewdata.applicants.length > 0')
+      li(ng-repeat='status in viewdata.buckets' ui-sref-active="active" )
+        a(ui-sref='jobs-applicants({jobId:viewdata.job.id,status: status})' ng-bind="status")
+      li(ui-sref-active="active")
+        a(ui-sref='jobs-references({jobId:viewdata.job.id})') CV(s) Received
+      li(ui-sref-active="active")
+        a(ui-sref='jobs-interviews({jobId:viewdata.job.id})') Interviews
+  .wrapper-xs.bg-light.b-b(style='position: fixed; right: 0;background: #fff; z-index: 3;')
+    ul.nav.nav-pills.nav-sm
+      li
+        // Todo: Directive isolation App
+        button.btn.btn-primary.btn-sm(ng-if='viewdata.getApplicants({checked: true}, "id").length>0' ng-click='App.downloadApplicant(viewdata.getApplicants({checked: true}, "id"))') Download CV(s)
+      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ng-show="buttons.share" ng-click="App.shareLink(viewdata.job)") Share Link
+      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ng-show="buttons.upload"  ui-sref='jobs-applicants-new({jobId:viewdata.job.id})') Upload CV
+      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ng-show="buttons.view"  ui-sref='jobs-view({jobId:viewdata.job.id})') View JD

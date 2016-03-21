@@ -9,19 +9,21 @@ angular.module('uiGenApp')
         return $sce.trustAsResourceUrl(src);
       };
 
-      vm.resumeSrc = `${URLS.QUARC_API}/applicants/${$stateParams.applicantId}/getResume?access_token=${Session.getAccessToken()}`;
+      vm.resumeSrc = `${URLS.QUARC_API}/jobs/${$stateParams.jobId}/references/${$stateParams.referenceId}/getResume?access_token=${Session.getAccessToken()}`;
       vm.loadApplicant = function loadApplicant() {
         vm.ui = { loading: true };
         Restangular
-          .one('applicants',$stateParams.applicantId)
+          .one('jobs',$stateParams.jobId)
+          .one('references',$stateParams.referenceId)
           .get()
           .then(function gotApplicant(result) {
             vm.data = result;
+
             Page.setTitle(vm.data.name);
 
             // Loading Followers
             //Restangular
-            //  .one('applicants',$stateParams.applicantId)
+            //  .one('applicants',$stateParams.referenceId)
             //  .all('followers')
             //  .getList()
             //  .then(function gotFollower(fresult) {
@@ -34,4 +36,10 @@ angular.module('uiGenApp')
       };
 
       vm.loadApplicant();
+
+      vm.changeState = function(data){
+        if(data.accept){
+
+        }
+      }
     });

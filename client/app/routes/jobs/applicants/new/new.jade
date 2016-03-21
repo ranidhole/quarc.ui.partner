@@ -1,5 +1,7 @@
 .hbox
-  .wrapper-xs.bg-light.b-b(style='position: fixed;background: #fff; z-index: 2;')
+  directive-header(viewdata="ApplicantNew" buttons="{share:true,view:true}" App="App")
+  .wrapper-md
+    .m-t-lg
     form.form-horizontal.wrapper-md( name="uploadCVForm")
       .panel.panel-primary.no-border
         .panel-heading.font-thin.h4
@@ -174,7 +176,7 @@
                     span(ng-show="ApplicantNew.job.min_sal && ApplicantNew.job.max_sal") &nbsp;to&nbsp;
                     span(ng-bind="ApplicantNew.job.min_sal?(ApplicantNew.job.max_sal?( ApplicantNew.job.max_sal + ' Lakh'):''):(ApplicantNew.job.max_sal?( 'Max ' +ApplicantNew.job.max_sal + ' Lakh'):'')")
                 li(ng-show="ApplicantNew.job.min_exp || ApplicantNew.job.max_exp")
-                  span.preview-head Experiance Range :
+                  span.preview-head Experience Range :
                   span(ng-class="uploadCVForm.total_exp_y.$valid ? 'q-touched':''")
                     span(ng-bind="ApplicantNew.job.max_exp? (ApplicantNew.job.min_exp? ApplicantNew.job.min_exp :''): (ApplicantNew.job.min_exp? ('Min '+ApplicantNew.job.min_exp+ ' Years'):'')")
                     span(ng-show="ApplicantNew.job.min_exp && ApplicantNew.job.max_exp") &nbsp;to&nbsp;

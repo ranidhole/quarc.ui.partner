@@ -1,24 +1,10 @@
-.hobx(before-bottom='JobsManage.loadApplicants()')
-  .wrapper-xs.bg-light.b-b(style='position: fixed;width: 100%;background: #fff; z-index: 2;')
-    ul.nav.nav-pills.nav-sm
-      li: label.i-checks.m-t-xs.m-b-none.m-l-lg
-        input(type='checkbox' ng-click='JobsManage.setChecked(JobsManage.checkAll)' ng-model='JobsManage.checkAll')
-        i.m-r-none(ng-if='JobsManage.applicants.length > 0')
-      li(ng-repeat='bucket in JobsManage.buckets' ui-sref-active="active")
-        a(ui-sref='jobs-manage({bucket: bucket})') {{bucket}}
-  .wrapper-xs.bg-light.b-b(style='position: fixed; right: 0;background: #fff; z-index: 3;')
-    ul.nav.nav-pills.nav-sm
-      li
-        button.btn.btn-primary.btn-sm(ng-if='JobsManage.getApplicants({checked: true}, "id").length>0' ng-click='App.downloadApplicant(JobsManage.getApplicants({checked: true}, "id"))') Download CV(s)
-      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='jobs-cvReceived({jobId:JobsManage.job.id})') References
-      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ng-click="App.shareLink(JobsManage.job)") Share Link
-      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='jobs-applicants-new({jobId:JobsManage.job.id})') Upload CV
-      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='jobs-view({jobId:JobsManage.job.id})') View JD
+.hobx(before-bottom='JobsApplicantsList.loadApplicants()')
+  directive-header(viewdata="JobsApplicantsList" buttons="{share:true,upload:true,view:true}" App="App")
   .wrapper-md
-    .m-b-xs.hbox.m-t-xl(ng-if='JobsManage.applicants.length === 0')
-      .col: h1.text-center.text-muted(ng-if='!JobsManage.ui.loading') No Applicants
+    .m-b-xs.hbox.m-t-xl(ng-if='JobsApplicantsList.applicants.length === 0')
+      .col: h1.text-center.text-muted(ng-if='!JobsApplicantsList.ui.loading') No Applicants
     .m-t-lg
-    .m-b-md.hbox(ng-repeat='applicant in JobsManage.applicants')
+    .m-b-md.hbox(ng-repeat='applicant in JobsApplicantsList.applicants')
       .col.bg-white
         .col-xs-12.col-md-10.no-padder
           .tl-content.m-none.padder.w-full.w-auto-xs
@@ -68,9 +54,9 @@
                 i.btn.pull-right.text-success-dker.m-t-xs.fa.fa-lg.fa-download(ng-click='App.downloadApplicant([applicant.id])')
                 .item.text-info.h1.pull-right.padder.b-l.b-r.b-light.font-thin(title='System generated alogrithmic Score')  {{applicant.applicant_score}}
     .col-xs-2.col-xs-offset-5
-      button.pull-left.btn.active.m-t-xs(ng-if="JobsManage.ui.loading")
+      button.pull-left.btn.active.m-t-xs(ng-if="JobsApplicantsList.ui.loading")
         i.fa.fa-circle-o-notch.fa-spin
         strong &nbsp;Loading
-      button.pull-left.btn.btn-primary.m-t-xs(ng-if="JobsManage.ui.lazyLoad" ng-click="JobsManage.loadApplicants()")
+      button.pull-left.btn.btn-primary.m-t-xs(ng-if="JobsApplicantsList.ui.lazyLoad" ng-click="JobsApplicantsList.loadApplicants()")
         i.fa.fa-plus-circle
         strong &nbsp;Load More

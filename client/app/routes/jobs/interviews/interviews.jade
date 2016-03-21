@@ -1,10 +1,10 @@
-.hobx(before-bottom='ReferencesList.loadApplicants()')
-  directive-header(viewdata="ReferencesList" buttons="{share:true,upload:true,view:true}" App="App")
+.hobx(before-bottom='Interviews.loadApplicants()')
+  directive-header(viewdata="Interviews" buttons="{share:true,upload:true,view:true}" App="App")
   .wrapper-md
-    .m-b-xs.hbox.m-t-xl(ng-if='ReferencesList.applicants.length === 0')
-      .col: h1.text-center.text-muted(ng-if='!ReferencesList.ui.loading') No Applicants
+    .m-b-xs.hbox.m-t-xl(ng-if='Interviews.applicants.length === 0')
+      .col: h1.text-center.text-muted(ng-if='!Interviews.ui.loading') No Applicants
     .m-t-lg
-    .m-b-md.hbox(ng-repeat='applicant in ReferencesList.applicants')
+    .m-b-md.hbox(ng-repeat='applicant in Interviews.applicants')
       .col.bg-white
         .col-xs-12.col-md-12.no-padder
           .tl-content.m-none.padder.w-full.w-auto-xs
@@ -12,12 +12,9 @@
               label.i-checks.m-b-none
                 input(type='checkbox' ng-model='applicant.checked')
                 i
-              a(ui-sref='jobs-references-view({jobId: ReferencesList.job.id,referenceId: applicant.id})')
-                strong.text-primary-lt  {{applicant.name}}
-              .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Action Required"') Action Required
-              .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Approved"') Approved
-              .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Duplicate"') Duplicate
-              .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Reject"') Rejected
+              a(ui-sref='jobs-references-view({jobId: Interviews.job.id,referenceId: applicant.id})')
+                strong.text-primary-lt  TODO: {{applicant.name}}
+              .text-danger.pull-right.m-t-n-xs(ng-bind="applicant.approval_status")
             .panel-body.pull-in.b-t.wrapper-xs
               .col-xs-4.text-ellipsis
                 i.fa.fa-bookmark(style='margin:0 2px;')
@@ -38,9 +35,9 @@
                 i.fa.fa-map-marker
                 |  {{applicant.location}}
     .col-xs-2.col-xs-offset-5
-      button.pull-left.btn.active.m-t-xs(ng-if="ReferencesList.ui.loading")
+      button.pull-left.btn.active.m-t-xs(ng-if="Interviews.ui.loading")
         i.fa.fa-circle-o-notch.fa-spin
         strong &nbsp;Loading
-      button.pull-left.btn.btn-primary.m-t-xs(ng-if="ReferencesList.ui.lazyLoad" ng-click="ReferencesList.loadApplicants()")
+      button.pull-left.btn.btn-primary.m-t-xs(ng-if="Interviews.ui.lazyLoad" ng-click="Interviews.loadApplicants()")
         i.fa.fa-plus-circle
         strong &nbsp;Load More

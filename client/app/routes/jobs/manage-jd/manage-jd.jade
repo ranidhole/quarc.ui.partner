@@ -45,7 +45,7 @@
             td.wrapper-md(ng-repeat="value in (ManageJd.pageStatus == 'Accepted'? [2,3]:(ManageJd.pageStatus == 'Hidden'?[1,3]:ManageJd.pageStatus == 'Rejected'?[1,2]:[1,2,3]))" )
               input.with-font(type="radio" id="radio_{{job.allocation_id}}_{{value}}" name="radio_{{job.allocation_id}}" ng-model="job.response_id"  ng-value="value" ng-change="ManageJd.updateResponse(job)")
               label(for="radio_{{job.allocation_id}}_{{value}}")
-            td.wrapper-md: a(ui-sref='jobs-manage({jobId: job.id, bucket: "Pending Feedback" })' ng-bind="job.owner_company")
+            td.wrapper-md: a(ui-sref='jobs-references({jobId: job.id, status: "Pending Feedback" })' ng-bind="job.owner_company")
             td.wrapper-md(ng-bind="job.role")
             td.wrapper-md(ng-bind="job.region")
             td.wrapper-md(ng-bind="job.min_sal + ' - ' + job.max_sal")

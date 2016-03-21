@@ -75,7 +75,8 @@ angular.module('uiGenApp')
     vm.states = User.states;
 
     vm.showNavJobs = function showNavJobs() {
-      return $state.is('applicants') || $state.is('jobs-view') || $state.is('jobs-manage') || $state.is('jobs-applicants-new') || $state.is('jobs-references');
+      return $state.is('applicants') || $state.is('jobs-view') || $state.is('jobs-applicants')
+        || $state.is('jobs-applicants-new') || $state.is('jobs-references') || $state.is('jobs-interviews') ;
     };
 
     vm.downloadApplicant = function downloadApplicant(ids) {

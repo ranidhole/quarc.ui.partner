@@ -5,16 +5,17 @@ ul.nav
   li.hide(ui-sref-active='active'): a(ui-sref='dashboard')
     i.fa.fa-dashboard.icon.text-primary-dker
     span.font-bold Dashboard
-  //li(ui-sref-active='active'): a(ui-sref='jobs.list')
-  //  b.hide.badge.bg-info.pull-right 20
-  //  i.fa.fa-list-alt.icon.text-info-dker
-  //  span.font-bold Positions
-  li(ui-sref-active='active'): a(ui-sref='applicants({bucket: "All"})')
+  li(ui-sref-active='active'): a(ui-sref='jobs-manage-jd')
+    b.hide.badge.bg-info.pull-right 20
+    i.fa.fa-list-alt.icon.text-info-dker
+    span.font-bold Positions
+  li(ui-sref-active='active'): a(ui-sref='applicants({status: "All"})' ui-sref-opts="{reload: true}")
     i.fa.fa-users.icon.text-info-dker
     span.font-bold Candidates
-  li.hide(ui-sref-active='active'): a(ui-sref='interviews')
-    i.fa.fa-comments.icon.text-default-dker
-    span.font-bold Interviews
+
+  li.hide(ui-sref-active='active'): a(ui-sref='calendar')
+    i.fa.fa-calendar.icon.text-default-dker
+    span.font-bold Calendar
   li.hide(ui-sref-active='active'): a(ui-sref='payment')
     i.fa.fa-bar-chart.icon.text-danger-lter
     span.font-bold Statistics
