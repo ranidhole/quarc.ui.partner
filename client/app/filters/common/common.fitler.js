@@ -127,4 +127,23 @@ angular.module('uiGenApp').filter('ucf', function () {
       return term;
     }
   })
-;
+  .filter('filterAlt', function () {
+    return function (items,search) {
+      if (!search) {
+        return items;
+      }
+
+      if(typeof search[key] === 'string'){
+        new Error("Try filter instead of filter-alt")
+      }
+
+      var key = Object.keys(search)[0]
+      if(search[key] instanceof Array){
+        return _.filter(items,function(item){
+          return search[key].indexOf(item[key]) !== -1
+        });
+      }
+
+      return items;
+    }
+  });

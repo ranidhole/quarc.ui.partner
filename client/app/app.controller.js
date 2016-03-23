@@ -34,6 +34,7 @@ angular.module('uiGenApp')
       vm.app.settings.mobileHeader = false;
     });
 
+
     vm.Page = Page; // Set Page title
 
     // Applicant search related Functions

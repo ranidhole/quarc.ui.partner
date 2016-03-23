@@ -1,12 +1,29 @@
 'use strict';
 
 angular.module('uiGenApp')
-  .controller('NavigationJobsController', function(Restangular,$state){
+  .controller('NavigationJobsController', function(Restangular,$state,$rootScope){
+
+    $rootScope.targetStateName = '/applicants';
+    $rootScope.$on('$stateChangeSuccess', function handleStateChange() {
+
+      switch($state.current.name){
+        case 'jobs-references':
+          $rootScope.targetStateName = '/references'
+          break;
+        case 'jobs-interviews':
+          $rootScope.targetStateName = '/interviews'
+          break;
+        case 'jobs-view':
+          $rootScope.targetStateName = ''
+          break;
+        default:
+          $rootScope.targetStateName = '/applicants';
+          break;
+      }
+    });
 
     const vm = this;
 
-    vm.targetStateName =  $state.is('jobs-references') ? 'references' :($state.is('jobs-interviews') ? 'interviews' :'applicants');
-  console.log("ts",vm.targetStateName)
     vm.jobs = []; // collection of jobs
     vm.ui = { lazyLoad: true, loading: false }; // ui states
     vm.params = { offset: 0, limit: 15 }; // GET query params

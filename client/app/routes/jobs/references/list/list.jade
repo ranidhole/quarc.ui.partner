@@ -1,5 +1,5 @@
 .hobx(before-bottom='ReferencesList.loadApplicants()')
-  directive-header(viewdata="ReferencesList" buttons="{share:true,upload:true,view:true}" App="App")
+  directive-header(viewdata="ReferencesList" buttons="{buckets:true,interviews:true,references:true,share:true,upload:true,view:true,highlight:'upload'}" App="App")
   .wrapper-md
     .m-b-xs.hbox.m-t-xl(ng-if='ReferencesList.applicants.length === 0')
       .col: h1.text-center.text-muted(ng-if='!ReferencesList.ui.loading') No Applicants

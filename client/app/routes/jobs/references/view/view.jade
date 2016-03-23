@@ -94,8 +94,8 @@ div#jobs-references-view
           li: a.h5.b-a.b-default.b-2x.text-danger.font-bold(ng-if='JobsReferenceView.data.approval_status == "Duplicate"' ng-bind="JobsReferenceView.data.approval_status")
           li: a.h5.b-a.b-default.b-2x.text-danger.font-bold(ng-if='JobsReferenceView.data.approval_status == "Reject"') Rejected
         ul.nav.nav-pills.nav-sm(ng-if='JobsReferenceView.data.approval_status == "Action Required"')
-          li: a.h5.b-a.b-default.b-2x.text-muted.font-bold(ng-click="changeState({accept:false})") Reject
-          li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ng-click="changeState({accept:false})") Accept
+          li: a.h5.b-a.b-default.b-2x.text-muted.font-bold(ng-click="JobsReferenceView.changeState({accept:false})") Reject
+          li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ng-click="JobsReferenceView.changeState({accept:false})") Accept
     div(style='position: relative; height: 100%; width: 100%; top: 50px; overflow: hidden;')
       iframe.h-full.b-a.b-light.w-full(ng-src='{{JobsReferenceView.trustSrc(JobsReferenceView.resumeSrc)}}')
 

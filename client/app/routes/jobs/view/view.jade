@@ -1,11 +1,6 @@
 div
-  directive-header(viewdata="JobView" buttons="{share:true,list:true}" App="App")
-  .wrapper-md
-    .m-t-lg
-    .panel.panel-primary.no-border
-      .panel-heading.font-thin.h4
-        | Job Details
-  .hbox.hbox-auto-sm.hbox-auto-xs
+  directive-header(viewdata="JobView" buttons="{interviews:true,references:true,buckets:true,share:true,list:true,viewApplicants:true}" App="App")
+  .hbox.hbox-auto-xs.hbox-auto-sm
     .col.col-.clearfix.wrapper-xs
 
       //- Job top cover container
@@ -42,36 +37,36 @@ div
           .col: span {{JobView.data.degrees.join(', ')}}
 
       //- Job Responsibility
-      .col-sm-12.no-padder.m-t-xs(ng-if='JobView.data.responsibility')
+      .m-t-xs(ng-if='JobView.data.responsibility')
         .panel.no-border.m-n
           .w-full.wrapper-xs.bg-primary.lt: strong.m-l-xs Duties and Responsibility
           .panel-body.bg-light.dk(ng-bind-html="JobView.responsibility" style='word-break: break-all;')
 
       //- Job Details
-      .col-sm-12.bg-white-only.m-t-xs.wrapper-md
-        div
-          .h5.text-black-dker.font-bold.m-t-xs About Us
-          .h4.text-info-dker.m-t-xs
-            | {{JobView.data.client_name}}
-            i.text-muted(ng-if='JobView.data._root_.min_emp && JobView.data._root_.max_emp')
-              | &nbsp; ({{JobView.data._root_.min_emp}} - {{JobView.data._root_.max_emp}} Employee)
-          .m-t-xs
-          p.text-muted {{JobView.data._root_.description}}
-          p.text-muted(ng-if='JobView.data._root_.website') Website: {{JobView.data._root_.website}}
-          p.text-muted
-            a(ng-href='{{JobView.data._root_.apple_store_link}}'): i.fa-lg.fa.fa-apple.wrapper-xs
-            a(ng-href='{{JobView.data._root_.playstore_link}}'): i.fa-lg.fa.fa-android.wrapper-xs
-            a(ng-href='{{JobView.data._root_.windiows_store_link}}'): i.fa-lg.fa.fa-windows.wrapper-xs
+      .bg-white-only.m-t-xs.wrapper-md
+        .h5.text-black-dker.font-bold.m-t-xs About Us
+        .h4.text-info-dker.m-t-xs
+          | {{JobView.data.client_name}}
+          i.text-muted(ng-if='JobView.data._root_.min_emp && JobView.data._root_.max_emp')
+            | &nbsp; ({{JobView.data._root_.min_emp}} - {{JobView.data._root_.max_emp}} Employee)
+        .m-t-xs
+        p.text-muted {{JobView.data._root_.description}}
+        p.text-muted(ng-if='JobView.data._root_.website') Website: {{JobView.data._root_.website}}
+        p.text-muted
+          a(ng-href='{{JobView.data._root_.apple_store_link}}' ng-if='JobView.data._root_.apple_store_link'): i.fa-lg.fa.fa-apple.wrapper-xs
+          a(ng-href='{{JobView.data._root_.playstore_link}}' ng-if='JobView.data._root_.playstore_link'): i.fa-lg.fa.fa-android.wrapper-xs
+          a(ng-href='{{JobView.data._root_.windiows_store_link}}' ng-if='JobView.data._root_.windiows_store_link'): i.fa-lg.fa.fa-windows.wrapper-xs
 
-        .h4.m-t-xs.m-b-xs(ng-if='JobView.data.skills') Skills
-        .h6.clearfix
-          .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='skill in JobView.data.skills' style='padding: 2px;' ng-if='JobView.showAllSkill || $index < 6') {{skill}}
-          a.pull-left(ng-if='JobView.data.skills.length>6' ng-click='JobView.showAllSkill = !JobView.showAllSkill')
-            span.font-bold.text-info-dker(ng-if='JobView.showAllSkill') – Less
-            span.font-bold.text-info-dker(ng-if='!JobView.showAllSkill') + More
+        .h4.m-t-xs.m-b-xs(ng-if='JobView.data.required_skills || JobView.data.optional_skills') Skills
+        .h5.clearfix(ng-if='JobView.data.required_skills')
+          div: strong.m-t-xs.text-muted Must have
+          .pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(ng-repeat='skill in JobView.data.required_skills') &nbsp;{{skill}}&nbsp;
+        .h5.m-t-sm.clearfix(ng-if='JobView.data.optional_skills')
+          div: strong.text-muted Optional
+          .pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(ng-repeat='skill in JobView.data.optional_skills') &nbsp;{{skill}}&nbsp;
 
 
-        .h4.m-t-xs.m-b-xs Working Days
+        .h4.m-t-sm.m-b-xs Working Days
         .h5.text-muted.clearfix {{JobView.data.days_per_week}} Days a Week ({{JobView.data.start_work_time}} to {{JobView.data.end_work_time}})
         .m-b-xs
 
@@ -82,15 +77,10 @@ div
           .h4 Sourcing
           .wrapper-xs
             .h5 Vacancy :
-              span.text-muted  &nbsp; {{JobView.data.vacancy}}
+              span.text-muted &nbsp; {{JobView.data.vacancy}}
             ul.padder
               li(ng-if='JobView.data.institutes')
                 span.h5 Target Educational Institutions: &nbsp;
-                span.h5.text-muted {{JobView.data.institutes.join(', ')}}
-                span.h5.text-muted {{JobView.data.institutes.join(', ')}}
-                span.h5.text-muted {{JobView.data.institutes.join(', ')}}
-                span.h5.text-muted {{JobView.data.institutes.join(', ')}}
-                span.h5.text-muted {{JobView.data.institutes.join(', ')}}
                 span.h5.text-muted {{JobView.data.institutes.join(', ')}}
               li(ng-if='JobView.data.industries')
                 span.h5 Target Industries: &nbsp;
@@ -107,13 +97,13 @@ div
             .h4.m-b-xs Interview Place Direction
             .h5.text-muted(ng-bind-html="JobView.interview_place_direction")
 
-    .col.w-lg: .w-lg.nav-comment.m-t-xl(ng-controller='JobCommentsController as Comments')
-      div(style='position: relative; height: 100%; width: 102%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
+    .col.w-lg: .w-lg.w-auto-xs.w-auto-sm.nav-comment.m-t-xl(ng-controller='JobCommentsController as Comments')
+      div(style='position: relative; height: 100%; width: 100%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
         ul.list-group.no-bg.pull-in
           li.list-group-item(ng-repeat='comment in Comments.data | orderBy: "created_at"')
             a.pull-left.thumb-sm.m-r-md(href=''): .fa-stack.fa-2x.text-primary
               i.fa.fa-circle.fa-stack-2x
-              span.fa.fa-stack-1x.h3.fa-inverse {{comment.user.name[0].toUpperCase()}}
+              span.fa.fa-stack-1x.h3.fa-inverse(style="color: white;top: 15px;") {{comment.user.name[0].toUpperCase()}}
 
             .clear
               .text-info-dker {{comment.user.name}}
@@ -126,3 +116,4 @@ div
           span.input-group-btn
             button.btn.btn-default(type='sumbit' ng-disabled='commentForm.$invalid')
               i.fa.fa-paper-plane
+

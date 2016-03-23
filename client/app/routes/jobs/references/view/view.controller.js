@@ -38,8 +38,21 @@ angular.module('uiGenApp')
       vm.loadApplicant();
 
       vm.changeState = function(data){
-        if(data.accept){
+        Restangular
+          .one("jobs",$stateParams.jobId)
+          .one('references',$stateParams.referenceId)
+          .all('accept')
+          .post(data)
+          .then(response => {
+            vm.data.approval_status = response.approval_status
+            if(response.id){
+              return setTimeout(function(){
+                $state.go('applicants-view', { applicantId: response.id })
+              },1000);
+            }
+          }).catch(err => {
+           console.log("Error while making reference accept/reject")
+        })
 
-        }
       }
     });

@@ -1,5 +1,5 @@
 angular.module('uiGenApp')
-  .controller('JobsApplicantsListController', function JobsManageCtrl(QCONFIG, QuarcService, Restangular, $stateParams, $filter, moment,currentJob,$state ) {
+  .controller('JobsApplicantsListController', function JobsApplicantsListController(QCONFIG, QuarcService, Restangular, $stateParams, $filter, moment,currentJob,$state ) {
     const Page = QuarcService.Page;
 
     const vm = this;

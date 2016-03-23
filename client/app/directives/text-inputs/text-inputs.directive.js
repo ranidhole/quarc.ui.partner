@@ -125,6 +125,7 @@ angular.module('uiGenApp')
     }
   })
 
+
   /***
    *  Check same applicant uploading to current job again using email or phone number
    *

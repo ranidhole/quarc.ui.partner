@@ -7,45 +7,41 @@ div( style='position: relative;')
           i.text-white.fa.fa-upload
         input.form-control.wrapper-xs(type='text' placeholder='Search Position' ng-model='navigationJobs.searchText.role')
   .w.m-t-xl.nav-job
-    .bg-dark.lt.w.m-t-xs(style='position: relative;  overflow-y: scroll; overflow-x: hidden; height: 100%; width: 208px;')
+    .bg-dark.lt.w.m-t-xs(style='position: relative;  overflow-y: scroll; overflow-x: hidden; height: 100%; width: 208px;' ng-init="navigationJobs.toggle={open:true,hold:false,closed:false}")
       .m-t-sm
-      .m-l-xs.h5.text-success-dker.font-bold(ng-if='navigationJobs.job_high')
-        i.fa.fa-square
-        |  High Priority
+      .m-l-xs.h5.text-info-lt.font-bold(ng-if='navigationJobs.job_open || navigationJobs.job_high'  ng-click="navigationJobs.toggle.open= !navigationJobs.toggle.open")
+        span.text-info-dker.font-bold.h4(uib-tooltip="{{navigationJobs.toggle.open?'Collapse':'Expand' }}" tooltip-placement="right")
+          i.fa(ng-class="navigationJobs.toggle.open?'fa-minus-square':'fa-plus-square'")
+          |  Open&nbsp;
+          b.badge-bracket(ng-bind="JOpen.length")
       ul.m-t-xs.nav
-        li(ng-repeat='job in navigationJobs.jobs | filter: navigationJobs.searchText | filter: {job_status: "High Priority"}' ng-init='$first ? (navigationJobs.job_high = true): null' ui-sref-active='active')
-          a.text-ellipsis.m-l-md(ng-href="/jobs/{{job.id}}/{{navigationJobs.targetStateName}}" uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true')
-            strong(ng-bind='job.owner_name')
-            b.badge.pull-right(ng-bind="job.consultant_score" ng-class="job.consultant_score > 8?'bg-danger':'bg-info'")
-            br
-            span(ng-bind="job.role")
-      .m-l-xs.h5.text-info-lt.font-bold(ng-if='navigationJobs.job_open')
-        i.fa.fa-square
-        |  Open
-      ul.m-t-xs.nav
-        li(ng-repeat='job in navigationJobs.jobs | filter: navigationJobs.searchText | filter: {job_status: "Open"}' ng-init='$first ? (navigationJobs.job_open = true): null' ui-sref-active='active')
-          a.text-ellipsis.m-l-md(ng-href="/jobs/{{job.id}}/{{navigationJobs.targetStateName}}" uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true')
-            strong(ng-bind='job.owner_name')
-            b.badge.pull-right(ng-bind="job.consultant_score" ng-class="job.consultant_score > 8?'bg-danger':'bg-info'")
+        li(ng-show="navigationJobs.toggle.open" ng-repeat='job in JOpen = (navigationJobs.jobs | filter: navigationJobs.searchText | filterAlt: {job_status: ["Open","High Priority"] })' ng-init='$first ? (navigationJobs.job_high = navigationJobs.job_open = true): null' ui-sref-active='active')
+          a.text-ellipsis.m-l-md(ng-href="/jobs/{{job.id}}{{targetStateName}}" uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true')
+            strong(ng-bind='job.owner_name' )
+            b.badge.pull-right(ng-bind="job.consultant_score" ng-class="job.consultant_score > 8 ?'bg-danger':'bg-info'")
             br
             span(ng-bind="job.role")
 
-      .m-l-xs.h5.text-warning-dker.font-bold(ng-if='navigationJobs.job_hold')
-        i.fa.fa-square
-        |  Hold
+      .m-l-xs.h5(ng-if='navigationJobs.job_hold' ng-click="navigationJobs.toggle.hold= !navigationJobs.toggle.hold")
+        span.text-warning-dker.font-bold.h4(uib-tooltip="{{navigationJobs.toggle.hold?'Collapse':'Expand' }}" tooltip-placement="right")
+          i.fa(ng-class="navigationJobs.toggle.hold?'fa-minus-square':'fa-plus-square'")
+          |  Hold&nbsp;
+          b.badge-bracket(ng-bind="JHold.length")
       ul.m-t-xs.nav
-        li(ng-repeat='job in navigationJobs.jobs | filter: navigationJobs.searchText | filter: {job_status: "Hold"}' ng-init='$first ? (navigationJobs.job_hold = true): null' ui-sref-active='active')
-          a.text-ellipsis.m-l-md(ng-href="/jobs/{{job.id}}/{{navigationJobs.targetStateName}}" uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true')
+        li(ng-show="navigationJobs.toggle.hold"  ng-repeat='job in JHold = (navigationJobs.jobs | filter: navigationJobs.searchText | filter: {job_status: "Hold"})' ng-init='$first ? (navigationJobs.job_hold = true): null' ui-sref-active='active')
+          a.text-ellipsis.m-l-md(ng-href="/jobs/{{job.id}}{{targetStateName}}" uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true')
             strong(ng-bind='job.owner_name')
             b.badge.pull-right(ng-bind="job.consultant_score" ng-class="job.consultant_score > 8?'bg-danger':'bg-info'")
             br
             span(ng-bind="job.role")
-      .m-l-xs.h5.text-danger.font-bold(ng-if='navigationJobs.job_closed')
-        i.fa.fa-square
-        |  Closed
+      .m-l-xs.h5(ng-if='navigationJobs.job_closed' ng-click="navigationJobs.toggle.open= !navigationJobs.toggle.closed" )
+        span.text-danger-dker.font-bold.h4(uib-tooltip="{{navigationJobs.toggle.closed?'Collapse':'Expand' }}" tooltip-placement="right")
+          i.fa(ng-class="navigationJobs.toggle.closed?'fa-minus-square':'fa-plus-square'")
+          |  Closed&nbsp;
+          b.badge-bracket(ng-bind="JClosed.length")
       ul.m-t-xs.nav
-        li(ng-repeat='job in navigationJobs.jobs | filter: navigationJobs.searchText | filter: {job_status: "Closed"}' ng-init='$first ? (navigationJobs.job_closed = true): null' ui-sref-active='active')
-          a.text-ellipsis.m-l-md(ng-href="/jobs/{{job.id}}/{{navigationJobs.targetStateName}}" uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true')
+        li(ng-show="navigationJobs.toggle.closed"  ng-repeat='job in JClosed = (navigationJobs.jobs | filter: navigationJobs.searchText | filter: {job_status: "Closed"})' ng-init='$first ? (navigationJobs.job_closed = true): null' ui-sref-active='active')
+          a.text-ellipsis.m-l-md(ng-href="/jobs/{{job.id}}{{targetStateName}}" uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true')
             strong(ng-bind='job.owner_name')
             b.badge.pull-right(ng-bind="job.consultant_score" ng-class="job.consultant_score > 8?'bg-danger':'bg-info'")
             br

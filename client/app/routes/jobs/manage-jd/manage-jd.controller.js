@@ -7,7 +7,6 @@ angular.module('uiGenApp')
       vm.allStatus =  QCONFIG.MANAGE_JD_STATES;
       $stateParams.status = $stateParams.status || $location.search().status
 
-      console.log(!~vm.allStatus.indexOf($stateParams.status))
       // Set default status to ALL
       if (!~vm.allStatus.indexOf($stateParams.status)) return $state.go('jobs-manage-jd',{status:QCONFIG.MANAGE_JD_STATES[0]});
 

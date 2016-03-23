@@ -5,6 +5,7 @@ angular.module('uiGenApp')
       const Page = QuarcService.Page;
 
       const vm = this;
+      vm.job = currentJob;
       vm.buckets = QCONFIG.APPLICANT_STATES;
       vm.data = {};
       vm.loadJob = function loadJob() {

@@ -41,10 +41,12 @@ angular.module('uiGenApp')
         }
       },
       blur: function checkDegree(){
-        if(vm.Degrees.previousValue != vm.Degrees.model){
-          var degree = {name:vm.Degrees.model};
-          vm.Degrees.create(degree);
-        }
+        setTimeout(function() {
+          if(vm.Degrees.previousValue != vm.Degrees.model){
+            var degree = {name:vm.Degrees.model};
+            vm.Degrees.create(degree);
+          }
+        },1000);
       },
       get: function getDegree(search) {
         return Restangular
@@ -84,10 +86,13 @@ angular.module('uiGenApp')
         }
       },
       blur: function checkEmployer(){
-        if(vm.Employers.previousValue != vm.Employers.model){
-          var employer = {name:vm.Employers.model};
-          vm.Employers.create(employer);
-        }
+        setTimeout(function(){
+          if(vm.Employers.previousValue != vm.Employers.model){
+            var employer = {name:vm.Employers.model};
+            vm.Employers.create(employer);
+          }
+        },1000);
+
       },
       get: function getEmployer(search) {
         return Restangular
@@ -127,10 +132,12 @@ angular.module('uiGenApp')
         }
       },
       blur: function checkDesignation(){
-        if(vm.Designations.previousValue != vm.Designations.model){
-          var designation = {name:vm.Designations.model};
-          vm.Designations.create(designation);
-        }
+        setTimeout(function() {
+          if (vm.Designations.previousValue != vm.Designations.model) {
+            var designation = {name: vm.Designations.model};
+            vm.Designations.create(designation);
+          }
+        },1000);
       },
       get: function getDesignation(search) {
         return Restangular

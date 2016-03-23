@@ -20,16 +20,16 @@ echo "Git Init"
 git init
 
 echo "Adding remote"
-git remote add origin https://github.com/quezx/quarcdist
+git remote add dist https://github.com/manjeshpv/quarc.ui.partner.dist
 
 echo "Adding files to git"
 git add *
 
 echo "Commiting..."
-git commit -m "Todo: comming Message"
+git commit -m "Todo: commint Message"
 
 echo "Started deploying"
-git push origin master --force
+git push dist master --force
 
 echo "Pushed to git successfully Successfully!"
 exit 0

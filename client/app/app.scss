@@ -32,3 +32,24 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '../components/modal/modal.scss';
 @import '../components/navigation-jobs/navigation-jobs.scss';
 // endinjector
+
+
+// Override: TODO: Seems some differences with bootstrap-sass of hire and this(partner).
+.btn-success:hover {
+  color: $brand-success;
+}
+.badge-bracket:empty{
+  display: none;
+}
+.badge-bracket:before {
+  content: "(";
+}
+
+.badge-bracket:after {
+  content: ")";
+}
+
+.no-drop {
+  cursor: no-drop;
+  cursor: not-allowed !important;
+}

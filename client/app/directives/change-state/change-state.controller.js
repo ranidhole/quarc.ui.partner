@@ -24,7 +24,6 @@ angular.module('uiGenApp')
         Restangular.one('applicants',applicant.id).all('changeState').post(vm.data).then()
         //ChangeState.set(applicant.id, vm.data)
           .then(function handleChangeState(res) {
-            console.log(res)
             $uibModalInstance.close(vm.data);
           })
           .catch(function handleFailure(response) {
