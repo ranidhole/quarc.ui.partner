@@ -1,4 +1,4 @@
-$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+$icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 //@import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
 $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '../bower_components/font-awesome/scss/font-awesome';
@@ -28,6 +28,7 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 @import 'routes/jobs/jobs.scss';
 @import 'routes/jobs/manage-jd/manage-jd.scss';
 @import 'routes/jobs/references/view/view.scss';
+@import 'routes/search-results/search-results.scss';
 @import '../components/footer/footer.scss';
 @import '../components/modal/modal.scss';
 @import '../components/navigation-jobs/navigation-jobs.scss';
@@ -37,6 +38,11 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 // Override: TODO: Seems some differences with bootstrap-sass of hire and this(partner).
 .btn-success:hover {
   color: $brand-success;
+}
+
+.badge-bracket {
+  font-size: 12px;
+  color:#ddd;
 }
 .badge-bracket:empty{
   display: none;
@@ -52,4 +58,22 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 .no-drop {
   cursor: no-drop;
   cursor: not-allowed !important;
+}
+
+//.hbox {
+//  max-width: 1380px;
+//  margin: auto;
+//}
+
+.card-applicant {
+  box-shadow: 1px 1px 1px;
+}
+
+.app-aside-folded .navbar-collapse {
+  margin-left:140px ;
+}
+
+.thead {
+  background-color: #1C8B9F;
+  color: #fff;
 }

@@ -1,10 +1,12 @@
 .hobx(before-bottom='ReferencesList.loadApplicants()')
   directive-header(viewdata="ReferencesList" buttons="{buckets:true,interviews:true,references:true,share:true,upload:true,view:true,highlight:'upload'}" App="App")
-  .wrapper-md
+  div
     .m-b-xs.hbox.m-t-xl(ng-if='ReferencesList.applicants.length === 0')
       .col: h1.text-center.text-muted(ng-if='!ReferencesList.ui.loading') No Applicants
-    .m-t-lg
-    .m-b-md.hbox(ng-repeat='applicant in ReferencesList.applicants')
+    .m-t-md
+    .clearfix
+    .m-t-md
+    .m-b-md.hbox.card-applicant(ng-repeat='applicant in ReferencesList.applicants')
       .col.bg-white
         .col-xs-12.col-md-12.no-padder
           .tl-content.m-none.padder.w-full.w-auto-xs
@@ -12,13 +14,13 @@
               label.i-checks.m-b-none
                 input(type='checkbox' ng-model='applicant.checked')
                 i
-              a(ui-sref='jobs-references-view({jobId: ReferencesList.job.id,referenceId: applicant.id})')
-                strong.text-primary-lt  {{applicant.name}}
+              a(ui-sref='job.reference.view({jobId: ReferencesList.job.id,referenceId: applicant.id})')
+                strong.text-dark  {{applicant.name}}
               .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Action Required"') Action Required
               .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Approved"') Approved
               .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Duplicate"') Duplicate
               .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Reject"') Rejected
-            .panel-body.pull-in.b-t.wrapper-xs
+            .panel-body.pull-in.b-t.wrapper-xs.text-black
               .col-xs-4.text-ellipsis
                 i.fa.fa-bookmark(style='margin:0 2px;')
                 | {{applicant.designation}}

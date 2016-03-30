@@ -23,6 +23,18 @@
     "bootstrap-sass": "3.3.6",
     "ng-file-upload": "^12.0.1",
     "angular-loading-bar": "^0.8.0",
-    "bootstrap-ui-datetime-picker": "^2.2.3"
+    "bootstrap-ui-datetime-picker": "^2.2.3",
+    "jquery.easy-pie-chart": "^2.1.6",
+    "angular-scrollable-table": "*"
+  },
+  "overrides": {
+    "jquery.easy-pie-chart": {
+      "dependencies": {
+        "jquery": ">=1.9.0"
+      },
+      "main": [
+        "dist/angular.easypiechart.min.js"
+      ]
+    }
   }
 }

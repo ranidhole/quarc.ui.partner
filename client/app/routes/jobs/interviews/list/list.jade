@@ -1,11 +1,13 @@
 .container.no-margin.no-padder
-  .hbox(before-bottom='Interviews.loadApplicants()')
-    directive-header(viewdata="Interviews" buttons="{buckets:true,interviews:true,references:true,share:true,upload:true,view:true}" App="App")
-    .wrapper-md
-      .m-b-xs.hbox.m-t-xl(ng-if='Interviews.applicants.length === 0')
-        .col: h1.text-center.text-muted(ng-if='!Interviews.ui.loading') No Applicants
-      .m-t-lg
-      .m-b-md.hbox(ng-repeat='applicant in Interviews.applicants')
+  .hbox(before-bottom='InterviewsList.loadApplicants()' style="position:relative")
+    directive-header(viewdata="InterviewsList" buttons="{buckets:true,interviews:true,references:true,share:true,upload:true,view:true,highlight:'upload'}" App="App")
+    div
+      .m-b-xs.hbox.m-t-xl(ng-if='InterviewsList.applicants.length === 0')
+        .col: h1.text-center.text-muted(ng-if='!InterviewsList.ui.loading') No Applicants
+      .m-t-md
+      .clearfix
+      .m-t-md
+      .m-b-md.hbox.card-applicant(ng-repeat='applicant in InterviewsList.applicants')
         .col.bg-white
           .col-xs-12.col-md-12.no-padder
             .tl-content.m-none.padder.w-full.w-auto-xs
@@ -13,7 +15,7 @@
                 label.i-checks.m-b-none
                   input(type='checkbox' ng-model='applicant.checked')
                   i
-                a(ui-sref='job.references-view({jobId: Interviews.job.id,referenceId: applicant.id})')
+                a(ui-sref='job.references-view({jobId: InterviewsList.job.id,referenceId: applicant.id})')
                   strong.text-primary-lt  TODO: {{applicant.name}}
                 .text-danger.pull-right.m-t-n-xs(ng-bind="applicant.approval_status")
               .panel-body.pull-in.b-t.wrapper-xs
@@ -36,9 +38,9 @@
                   i.fa.fa-map-marker
                   |  {{applicant.location}}
       .col-xs-2.col-xs-offset-5
-        button.pull-left.btn.active.m-t-xs(ng-if="Interviews.ui.loading")
+        button.pull-left.btn.active.m-t-xs(ng-if="InterviewsList.ui.loading")
           i.fa.fa-circle-o-notch.fa-spin
           strong &nbsp;Loading
-        button.pull-left.btn.btn-primary.m-t-xs(ng-if="Interviews.ui.lazyLoad" ng-click="Interviews.loadApplicants()")
+        button.pull-left.btn.btn-primary.m-t-xs(ng-if="InterviewsList.ui.lazyLoad" ng-click="InterviewsList.loadApplicants()")
           i.fa.fa-plus-circle
           strong &nbsp;Load More

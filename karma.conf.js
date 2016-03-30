@@ -32,6 +32,9 @@ module.exports = function(config) {
       'client/bower_components/restangular/dist/restangular.js',
       'client/bower_components/ng-file-upload/ng-file-upload.js',
       'client/bower_components/angular-loading-bar/build/loading-bar.js',
+      'client/bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js',
+      'client/bower_components/jquery.easy-pie-chart/dist/angular.easypiechart.min.js',
+      'client/bower_components/angular-scrollable-table/angular-scrollable-table.js',
       'client/bower_components/ui-select/dist/select.js',
       'client/bower_components/angular-sanitize/angular-sanitize.js',
       // endbower

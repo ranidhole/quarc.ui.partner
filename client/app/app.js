@@ -23,7 +23,9 @@ angular.module('uiGenApp', [
   'chart.js',
   'restangular',
   'ngFileUpload',
-  'angular-loading-bar'
+  'angular-loading-bar',
+  'easypiechart',
+  'scrollable-table'
 ])
 
   .config(function($urlRouterProvider, $locationProvider,RestangularProvider,URLS) {

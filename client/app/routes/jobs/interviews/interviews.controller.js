@@ -1,5 +1,5 @@
 angular.module('uiGenApp')
-  .controller('InterviewsController', function ReferencesListController(QCONFIG, QuarcService, Restangular, $stateParams, $filter, moment,currentJob ) {
+  .controller('InterviewsController', function InterviewsController(QCONFIG, QuarcService, Restangular, $stateParams, $filter, moment,currentJob ) {
     const Page = QuarcService.Page;
 
     const vm = this;

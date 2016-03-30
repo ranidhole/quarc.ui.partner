@@ -1,30 +1,41 @@
 'use strict';
 
 angular.module('uiGenApp')
-  .controller('DashboardController', function(QuarcService, Restangular, moment) {
+  .controller('DashboardController', function(QuarcService, Restangular, moment,$scope) {
     const Page = QuarcService.Page;
 
     const vm = this;
+
     Page.setTitle('Dashboard');
+
+    vm.summary= {};
+    vm.summary.EPCScreening = {size:60, animate:{duration:0,enabled:false},barColor:'#3950a0',scaleColor:false,lineWidth:5,lineCap:'butt'};
+    vm.summary.EPCShortlist = {size:60, animate:{duration:0,enabled:false},barColor:'#187889',scaleColor:false,lineWidth:5,lineCap:'butt'};
+
+
     vm.getSummary = function getSummary() {
       Restangular
-      .one('summary/dashboard')
-      .get({ state_id: '1,5,8,9,17' })
+      .one('clients/dashboard')
+      .get()
+      //.get({ state_id: '1,5,8,9,17' })
       .then(function gotSummary(response) {
-        vm.summary = {
-            cv: response[1] || 0,
-            interview: response[9] || 0,
-            await_interview: [
-              response[5] || 0,
-              response[8] || 0,
-              response[17] || 0,
-            ].reduce((a, b) => a + b),
-          };
+        vm.summary = response
 
-          vm.chart = {
-            labels: ['Awaiting Interviews', 'AF on CV', 'AF on Interview'],
-            data: [vm.summary.await_interview, vm.summary.cv, vm.summary.interview],
-          };
+
+        //vm.summary = {
+        //    cv: response[1] || 0,
+        //    interview: response[9] || 0,
+        //    await_interview: [
+        //      response[5] || 0,
+        //      response[8] || 0,
+        //      response[17] || 0,
+        //    ].reduce((a, b) => a + b),
+        //  };
+        //
+        //  vm.chart = {
+        //    labels: ['Awaiting Interviews', 'AF on CV', 'AF on Interview'],
+        //    data: [vm.summary.await_interview, vm.summary.cv, vm.summary.interview],
+        //  };
         });
     };
 

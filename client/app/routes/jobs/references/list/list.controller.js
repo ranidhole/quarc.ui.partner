@@ -5,7 +5,7 @@ angular.module('uiGenApp')
     const vm = this;
     vm.job = currentJob;
     vm.buckets = QCONFIG.APPLICANT_STATES;
-    Page.setTitle(`${vm.job.role} - ${$stateParams.status} Applicants`); // set page title
+    Page.setTitle(`${vm.job.role?vm.job.role+ " - ":''}${$stateParams.status?$stateParams.status:''} References`); // set page title
 
     vm.applicants = []; // collection of applicants
     vm.ui = {lazyLoad: true, loading: false}; // ui states

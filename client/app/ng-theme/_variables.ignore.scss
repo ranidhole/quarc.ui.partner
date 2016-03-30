@@ -1,14 +1,14 @@
-$brand-primary:         #7266ba;
-$brand-info:            #23b7e5;
-$brand-success:         #27c24c;
-$brand-warning:         #fad733;
-$brand-danger:          #f05050;
-$brand-light:           #edf1f2;
-$brand-dark:            #3a3f51;
+$brand-primary:         #4059B3;
+$brand-info:            #1C8B9F;
+$brand-success:         #58883E;
+$brand-warning:         #E28633;
+$brand-danger:          #0C4055;
+$brand-light:           #E9EAED;
+$brand-dark:            #0c4055;
 $brand-black:           #1c2b36;
-
+//$color:#1B9998;linear-gradient(to bottom, #24647D 10%, #0c4055 100%)
 $body-bg:               lighten($brand-light, 1%);
-$text-color:            #58666e;
+$text-color:            #24647D;
 $text-muted:            lighten($text-color, 25%);
 
 $font-family-sans-serif:  "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;

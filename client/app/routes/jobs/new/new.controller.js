@@ -232,7 +232,7 @@ angular.module('uiGenApp')
           .all('jobs')
           .post(vm.data)
           .then(function jobCreated(result) {
-            $state.go('jobs-view', { jobId: result.id });
+            $state.go('job.view', { jobId: result.id });
           });
       };
     });

@@ -8,7 +8,7 @@ angular.module('uiGenApp')
       $stateParams.status = $stateParams.status || $location.search().status
 
       // Set default status to ALL
-      if (!~vm.allStatus.indexOf($stateParams.status)) return $state.go('jobs-manage-jd',{status:QCONFIG.MANAGE_JD_STATES[0]});
+      if (!~vm.allStatus.indexOf($stateParams.status)) return $state.go('jobs.list',{status:QCONFIG.MANAGE_JD_STATES[0]});
 
       vm.pageStatus = $stateParams.status;
       Page.setTitle(`${$stateParams.status} - Allocated Jobs`);

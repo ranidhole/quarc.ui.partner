@@ -16,7 +16,7 @@ angular.module('uiGenApp')
         themeID: 1,
         navbarHeaderColor: 'bg-white',
         navbarCollapseColor: 'bg-white-only',
-        asideColor: 'bg-black',
+        asideColor: 'bg-dark',
         headerFixed: true,
         asideFixed: true,
         asideFolded: true,
@@ -36,6 +36,7 @@ angular.module('uiGenApp')
 
 
     vm.Page = Page; // Set Page title
+    vm.$state = $state;
 
     // Applicant search related Functions
     vm.Applicants = {
@@ -76,8 +77,8 @@ angular.module('uiGenApp')
     vm.states = User.states;
 
     vm.showNavJobs = function showNavJobs() {
-      return $state.is('applicants') || $state.is('jobs-view') || $state.is('jobs-applicants')
-        || $state.is('jobs-applicants-new') || $state.is('jobs-references') || $state.is('jobs-interviews') ;
+      return $state.is('applicants') || $state.is('job.view') || $state.is('job.applicants.list')
+        || $state.is('job.applicants.new') || $state.is('job.references.list') || $state.is('job.interviews.list') ;
     };
 
     vm.downloadApplicant = function downloadApplicant(ids) {

@@ -3,30 +3,20 @@
 angular.module('uiGenApp')
   .controller('NavigationJobsController', function(Restangular,$state,$rootScope){
 
-    $rootScope.targetStateName = '/applicants';
-    $rootScope.$on('$stateChangeSuccess', function handleStateChange() {
-
-      switch($state.current.name){
-        case 'jobs-references':
-          $rootScope.targetStateName = '/references'
-          break;
-        case 'jobs-interviews':
-          $rootScope.targetStateName = '/interviews'
-          break;
-        case 'jobs-view':
-          $rootScope.targetStateName = ''
-          break;
-        default:
-          $rootScope.targetStateName = '/applicants';
-          break;
-      }
-    });
-
     const vm = this;
+
+    vm.jobHref = function jobHref(jobId) {
+      const states = ['job.applicants','job.applicants.new','job.references.list','job.interviews.list', 'job.view'];
+      const name = ~states.indexOf($state.current.name) ? $state.current.name : states[0];
+      // Todo: Temporary Hack
+      var queryParams = $state.params.status ? '?status='+$state.params.status:"";
+      return $state.href(name, {jobId},{absolute: true}) + queryParams;
+    };
+
 
     vm.jobs = []; // collection of jobs
     vm.ui = { lazyLoad: true, loading: false }; // ui states
-    vm.params = { offset: 0, limit: 15 }; // GET query params
+    vm.params = { offset: 0, limit: 150, fl: 'id,role,job_status,owner_id' }; // GET query params
     vm.loadJobs = function loadJobs() {
       if (!vm.ui.lazyLoad) return; // if no more jobs to get
       vm.ui = { lazyLoad: false, loading: true };

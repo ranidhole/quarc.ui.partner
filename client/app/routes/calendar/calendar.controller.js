@@ -12,7 +12,7 @@ angular.module('uiGenApp')
 
     // GET query params
     vm.params = {
-      start: 0, rows: 30,
+      offset: 0, limit: 30,
       fl: 'id,name,state_id,state_name,interview_time,interview_type,_root_',
     };
 
@@ -25,7 +25,7 @@ angular.module('uiGenApp')
       // Reset controller variables to default
       vm.applicants = [];
       vm.ui = { lazyLoad: true, loading: false };
-      vm.params.start = 0; // Reset result offset
+      vm.params.offset = 0; // Reset result offset
       vm.loadApplicants();
     }, true);
 
@@ -47,13 +47,14 @@ angular.module('uiGenApp')
         angular.forEach(result, function iterateApplicants(applicant) {
           vm.applicants.push({
             title: `
-                <a href="${$state.href('jobs-applicants-view', { jobId: applicant._root_.id }) }" target="_blank">
+                <a href="${$state.href('job.view', { jobId: applicant._root_.id }) }" target="_blank">
                   <span class="text-${vm.colors[applicant.interview_type]}-lter">${applicant._root_.role}</span>
                 </a> –
                 <a href="${$state.href('applicants-view', { applicantId: applicant.id })}" target="_blank">
                   <span class="text-${vm.colors[applicant.interview_type]}-lter">${applicant.name}</span>
-                </a>
-                <div class="label label-${vm.colors[applicant.interview_type]}">${applicant.state_name}</div>
+                </a> &nbsp;
+                <span class="h6 b-a b-${vm.colors[applicant.interview_type]}">&nbsp; ${applicant.state_name} &nbsp;
+                </span> &nbsp;
               `,
             type: vm.colors[applicant.interview_type],
             startsAt: moment(applicant.interview_time).toDate(),
@@ -65,10 +66,10 @@ angular.module('uiGenApp')
         vm.ui.loading = false;
 
         // check for returned results count and set lazy loadLoad false if less
-        vm.ui.lazyLoad = angular.equals(result.length, vm.params.rows) ? true : false;
+        vm.ui.lazyLoad = angular.equals(result.length, vm.params.limit) ? true : false;
 
         // increment offset for next loading of results
-        vm.params.start = vm.params.start + vm.params.rows;
+        vm.params.offset = vm.params.offset + vm.params.limit;
         vm.loadApplicants();
       });
     };
