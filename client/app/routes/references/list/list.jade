@@ -1,12 +1,12 @@
-.hobx(before-bottom='JobsReferencesList.loadApplicants()')
-  directive-header(viewdata="JobsReferencesList" buttons="{buckets:true,interviews:false,references:true,share:true,upload:true,view:true,highlight:'upload'}" App="App")
+.hbox(before-bottom='ReferencesList.loadApplicants()')
+  directive-header(viewdata="ReferencesList" buttons="{buckets:true,interviews:false,references:true}" App="App")
   div
-    .m-b-xs.hbox.m-t-xl(ng-if='JobsReferencesList.applicants.length === 0')
-      .col: h1.text-center.text-muted(ng-if='!JobsReferencesList.ui.loading') No Applicants
+    .m-b-xs.hbox.m-t-xl(ng-if='ReferencesList.applicants.length === 0')
+      .col: h1.text-center.text-muted(ng-if='!ReferencesList.ui.loading') No Applicants
     .m-t-md
     .clearfix
     .m-t-md
-    .m-b-md.hbox.card-applicant(ng-repeat='applicant in JobsReferencesList.applicants')
+    .m-t-xs.hbox.card-applicant(ng-repeat='applicant in ReferencesList.applicants')
       .col.bg-white
         .col-xs-12.col-md-12.no-padder
           .tl-content.m-none.padder.w-full.w-auto-xs
@@ -14,7 +14,7 @@
               label.i-checks.m-b-none
                 input(type='checkbox' ng-model='applicant.checked')
                 i
-              a(ui-sref='job.reference.view({jobId: JobsReferencesList.job.id,referenceId: applicant.id})')
+              a(ui-sref='job.reference.view({jobId: ReferencesList.job.id,referenceId: applicant.id})')
                 strong.text-dark  {{applicant.name}}
               .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Action Required"') Action Required
               .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Approved"') Approved
@@ -40,9 +40,9 @@
                 i.fa.fa-map-marker
                 |  {{applicant.location}}
     .col-xs-2.col-xs-offset-5
-      button.pull-left.btn.active.m-t-xs(ng-if="JobsReferencesList.ui.loading")
+      button.pull-left.btn.active.m-t-xs(ng-if="ReferencesList.ui.loading")
         i.fa.fa-circle-o-notch.fa-spin
         strong &nbsp;Loading
-      button.pull-left.btn.btn-primary.m-t-xs(ng-if="JobsReferencesList.ui.lazyLoad" ng-click="JobsReferencesList.loadApplicants()")
+      button.pull-left.btn.btn-primary.m-t-xs(ng-if="ReferencesList.ui.lazyLoad" ng-click="ReferencesList.loadApplicants()")
         i.fa.fa-plus-circle
         strong &nbsp;Load More

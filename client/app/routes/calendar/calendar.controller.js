@@ -50,7 +50,7 @@ angular.module('uiGenApp')
                 <a href="${$state.href('job.view', { jobId: applicant._root_.id }) }" target="_blank">
                   <span class="text-${vm.colors[applicant.interview_type]}-lter">${applicant._root_.role}</span>
                 </a> –
-                <a href="${$state.href('applicants-view', { applicantId: applicant.id })}" target="_blank">
+                <a href="${$state.href('applicant.view', { applicantId: applicant.id })}" target="_blank">
                   <span class="text-${vm.colors[applicant.interview_type]}-lter">${applicant.name}</span>
                 </a> &nbsp;
                 <span class="h6 b-a b-${vm.colors[applicant.interview_type]}">&nbsp; ${applicant.state_name} &nbsp;

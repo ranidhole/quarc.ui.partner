@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('uiGenApp')
-  .controller('ApplicantsCtrl', function (QCONFIG,$scope, QuarcService, Restangular, $stateParams, $location) {
+  .controller('ApplicantsListCtrl', function (QCONFIG,$scope, QuarcService, Restangular, $stateParams, $location) {
     const Page  = QuarcService.Page;
 
     const vm = this;

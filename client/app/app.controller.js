@@ -7,7 +7,7 @@ angular.module('uiGenApp')
     const User = QuarcService.User;
 
     const vm = this;
-
+    vm.Math = Math;
     // config
     vm.app = {
       name: 'QUEZX',
@@ -42,7 +42,7 @@ angular.module('uiGenApp')
     vm.Applicants = {
       select: function gotoApplicant($item) {
         vm.Applicants.searchText = '';
-        $state.go('applicants-view', { applicantId: $item.id });
+        $state.go('applicant.view', { applicantId: $item.id });
       },
 
       get: function searchApplicants(searchText) {
@@ -77,8 +77,10 @@ angular.module('uiGenApp')
     vm.states = User.states;
 
     vm.showNavJobs = function showNavJobs() {
-      return $state.is('applicants') || $state.is('job.view') || $state.is('job.applicants.list')
-        || $state.is('job.applicants.new') || $state.is('job.references.list') || $state.is('job.interviews.list') ;
+      return ~['references.list','applicants.list','job.view','job.applicants.list','job.references.list',
+        'job.interviews.list', 'job.applicants.new'
+      ].indexOf($state.current.name);
+
     };
 
     vm.downloadApplicant = function downloadApplicant(ids) {

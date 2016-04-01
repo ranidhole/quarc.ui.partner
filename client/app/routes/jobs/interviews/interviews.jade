@@ -1,6 +1,6 @@
-.container.no-margin.no-padder
+div
   .hbox(before-bottom='Interviews.loadApplicants()')
-    directive-header(viewdata="Interviews" buttons="{buckets:true,interviews:true,references:true,share:true,upload:true,view:true}" App="App")
+    directive-header(viewdata="Interviews" buttons="{buckets:true,interviews:false,references:true,share:true,upload:true,view:true}" App="App")
     .wrapper-md
       .m-b-xs.hbox.m-t-xl(ng-if='Interviews.applicants.length === 0')
         .col: h1.text-center.text-muted(ng-if='!Interviews.ui.loading') No Applicants

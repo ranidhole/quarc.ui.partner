@@ -6,7 +6,7 @@ angular.module('uiGenApp')
     vm.buckets = QCONFIG.APPLICANT_STATES;
 
     vm.job = currentJob || {};
-    Page.setTitle(`${vm.job.role} - ${$stateParams.status} Applicants`); // set page title
+    Page.setTitle(`${vm.job.role?vm.job.role+' - ':""} ${$stateParams.status?$stateParams.status:""} Applicants`); // set page title
 
     // Set default status to ALL
     if (!~vm.buckets.indexOf($stateParams.status)) return $state.go('job.applicants.list',{status:'All'});
@@ -34,7 +34,7 @@ angular.module('uiGenApp')
       Restangular
         .one('jobs', $stateParams.jobId)
         .all('applicants')
-        .getList()
+        .getList(vm.params)
         .then(function applicantsList(result) {
           angular.forEach(result, function iterateApplicants(applicant) {
             vm.applicants.push(applicant);

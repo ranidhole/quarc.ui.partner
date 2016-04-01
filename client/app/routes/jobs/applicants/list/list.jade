@@ -1,6 +1,6 @@
-.container.no-margin.no-padder
+div
   .hbox(before-bottom='JobsApplicantsList.loadApplicants()' style="position:relative")
-    directive-header(viewdata="JobsApplicantsList" buttons="{buckets:true,interviews:true,references:true,share:true,upload:true,view:true,highlight:'upload'}" App="App")
+    directive-header(viewdata="JobsApplicantsList" buttons="{buckets:true,interviews:false,references:true,share:true,upload:true,view:true,highlight:'upload'}" App="App")
     div.m-t-md
       .m-b-xs.hbox.m-t-xl(ng-if='JobsApplicantsList.applicants.length === 0')
         .col: h1.text-center.text-muted(ng-if='!JobsApplicantsList.ui.loading') No Applicants
@@ -15,8 +15,8 @@
                 label.i-checks.m-b-none
                   input(type='checkbox' ng-model='applicant.checked')
                   i
-                a(ui-sref='applicants-view({applicantId: applicant.id})')
-                  strong.text-primary-lt  {{applicant.name}}
+                a(ui-sref='applicant.view({applicantId: applicant.id})')
+                  strong.text-dark-lt  {{applicant.name}}
 
                 .btn-group.pull-right.m-t-n-xs(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
                   button.w-full.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[applicant.state_id].Actions.length===0' style='padding: 4px 8px;')

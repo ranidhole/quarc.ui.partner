@@ -7,7 +7,7 @@ angular.module('uiGenApp')
     const vm = this;
 
     Page.setTitle('Dashboard');
-
+    vm.Math = Math;
     vm.summary= {};
     vm.summary.EPCScreening = {size:60, animate:{duration:0,enabled:false},barColor:'#3950a0',scaleColor:false,lineWidth:5,lineCap:'butt'};
     vm.summary.EPCShortlist = {size:60, animate:{duration:0,enabled:false},barColor:'#187889',scaleColor:false,lineWidth:5,lineCap:'butt'};

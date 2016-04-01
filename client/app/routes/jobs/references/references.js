@@ -14,8 +14,8 @@ angular.module('uiGenApp')
       .state('job.references.list', {
         url: '?status',
         templateUrl: 'app/routes/jobs/references/list/list.html',
-        controller: 'ReferencesListController',
-        controllerAs: 'ReferencesList',
+        controller: 'JobsReferencesListController',
+        controllerAs: 'JobsReferencesList',
         resolve:{
           currentJob: function(QResolve,$stateParams){ return QResolve.currentJob($stateParams.jobId,{ fl: 'id' }) }
         }

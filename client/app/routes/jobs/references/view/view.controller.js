@@ -47,7 +47,7 @@ angular.module('uiGenApp')
             vm.data.approval_status = response.approval_status
             if(response.id){
               return setTimeout(function(){
-                $state.go('applicants-view', { applicantId: response.id })
+                $state.go('applicant.view', { applicantId: response.id })
               },1000);
             }
           }).catch(err => {

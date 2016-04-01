@@ -1,6 +1,6 @@
 angular.module('uiGenApp')
-  .controller('ManageJdController',
-    function ManageJdController(QuarcService, Restangular, $stateParams, QCONFIG, $location,$state,$scope) {
+  .controller('JobsListController',
+    function JobsListController(QuarcService, Restangular, $stateParams, QCONFIG, $location,$state,$scope) {
       const Page = QuarcService.Page;
       const vm = this;
 

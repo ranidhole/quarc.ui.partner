@@ -8,15 +8,12 @@ angular.module('uiGenApp')
         abstract: true,
         url: '/jobs',
         template: '<div ui-view></div>',
-        controller: function($state){
-          return $state.go('jobs.list')
-        }
       })
       .state('jobs.list', {
         url: '?status',
-        templateUrl: 'app/routes/jobs/manage-jd/manage-jd.html',
-        controller:'ManageJdController',
-        controllerAs: 'ManageJd',
+        templateUrl: 'app/routes/jobs/list/list.html',
+        controller:'JobsListController',
+        controllerAs: 'JobsList',
       })
       // One Job Routes
       .state('job', {

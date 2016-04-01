@@ -1,5 +1,5 @@
 div
-  directive-header(viewdata="JobView" buttons="{interviews:true,references:true,buckets:true,share:true,list:true,upload:true,viewApplicants:true,highlight:'upload'}" App="App")
+  directive-header(viewdata="JobView" buttons="{interviews:false,references:true,buckets:true,share:true,list:true,upload:true,viewApplicants:true,highlight:'upload'}" App="App")
   .hbox.hbox-auto-xs.hbox-auto-sm
     .col.col-.clearfix.wrapper-xs
 
@@ -39,7 +39,7 @@ div
       //- Job Responsibility
       .m-t-xs(ng-if='JobView.data.responsibility')
         .panel.no-border.m-n
-          .w-full.wrapper-xs.bg-primary.lt: strong.m-l-xs Duties and Responsibility
+          .w-full.wrapper-xs.panel-heading-info.lt: strong.m-l-xs Duties and Responsibility
           .panel-body.bg-light.dk(ng-bind-html="JobView.responsibility" style='word-break: break-all;')
 
       //- Job Details
@@ -72,7 +72,7 @@ div
 
       //- Job Information
       .m-t-xs: .panel.no-border.m-n
-        .w-full.wrapper-xs.bg-primary.lt: strong.m-l-xs Information
+        .w-full.wrapper-xs.lt.panel-heading-info: strong.m-l-xs Information
         .panel-body
           .h4 Sourcing
           .wrapper-xs

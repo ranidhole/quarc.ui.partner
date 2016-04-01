@@ -1,6 +1,6 @@
-.container.no-margin.no-padder
+div
   .hbox(before-bottom='InterviewsList.loadApplicants()' style="position:relative")
-    directive-header(viewdata="InterviewsList" buttons="{buckets:true,interviews:true,references:true,share:true,upload:true,view:true,highlight:'upload'}" App="App")
+    directive-header(viewdata="InterviewsList" buttons="{buckets:true,interviews:false,references:true,share:true,upload:true,view:true,highlight:'upload'}" App="App")
     div
       .m-b-xs.hbox.m-t-xl(ng-if='InterviewsList.applicants.length === 0')
         .col: h1.text-center.text-muted(ng-if='!InterviewsList.ui.loading') No Applicants

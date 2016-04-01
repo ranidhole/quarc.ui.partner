@@ -26,9 +26,9 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 @import 'routes/dashboard/dashboard.scss';
 @import 'routes/jobs/applicants/new/new.scss';
 @import 'routes/jobs/jobs.scss';
-@import 'routes/jobs/manage-jd/manage-jd.scss';
+@import 'routes/jobs/list/list.scss';
 @import 'routes/jobs/references/view/view.scss';
-@import 'routes/search-results/search-results.scss';
+@import 'routes/references/references.scss';
 @import '../components/footer/footer.scss';
 @import '../components/modal/modal.scss';
 @import '../components/navigation-jobs/navigation-jobs.scss';
@@ -66,14 +66,20 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
 //}
 
 .card-applicant {
-  box-shadow: 1px 1px 1px;
+  box-shadow: 1px 1px 10px;
 }
 
 .app-aside-folded .navbar-collapse {
-  margin-left:140px ;
+  margin-left:145px ;
 }
 
 .thead {
   background-color: #1C8B9F;
   color: #fff;
+}
+
+@media (max-width:992px) {
+  .col-divider > div {
+    border-left: 2px solid transparent;
+  }
 }

@@ -1,11 +1,11 @@
 angular.module('uiGenApp')
-  .controller('JobsReferencesListController', function ReferencesListController(QCONFIG, QuarcService, Restangular, $stateParams, $filter, moment,currentJob ) {
+  .controller('ReferencesListController', function ReferencesListController(QCONFIG, QuarcService, Restangular, $stateParams, $filter ) {
     const Page = QuarcService.Page;
 
     const vm = this;
-    vm.job = currentJob;
+
     vm.buckets = QCONFIG.APPLICANT_STATES;
-    Page.setTitle(`${vm.job.role?vm.job.role+ " - ":''}${$stateParams.status?$stateParams.status:''} References`); // set page title
+    Page.setTitle(`All References`); // set page title
 
     vm.applicants = []; // collection of applicants
     vm.ui = {lazyLoad: true, loading: false}; // ui states
@@ -18,7 +18,6 @@ angular.module('uiGenApp')
       vm.ui = {lazyLoad: false, loading: true};
 
       Restangular
-        .one('jobs', $stateParams.jobId)
         .all('references')
         .getList()
         .then(function applicantsList(result) {

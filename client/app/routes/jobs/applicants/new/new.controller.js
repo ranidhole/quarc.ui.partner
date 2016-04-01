@@ -187,7 +187,7 @@ angular.module('uiGenApp')
     vm.create = function createJob() {
       vm.uploadFile($stateParams.jobId, vm.data.file, vm.data,function jobCreated(response) {
         return setTimeout(function(){
-          $state.go('applicants-view', { applicantId: response.data.id })
+          $state.go('applicant.view', { applicantId: response.data.id })
         },1000);
       },
       function errorCB(err){

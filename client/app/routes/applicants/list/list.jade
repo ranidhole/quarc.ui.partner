@@ -1,18 +1,26 @@
-.container.no-padder.no-margin
+div
   .hbox
-    directive-header(viewdata="Applicant" App="App")
-    table.table.m-b-none.m-t-xl(before-bottom='Applicant.loadApplicants()')
+    div
+      .bg-light.b-b.padder(style='position: absolute;width: 100%;background: #fff; z-index: 2;height: 42px;')
+        ul.nav.nav-pills.nav-sm.m-t-xs
+          li(ng-repeat='status in ApplicantsList.buckets' ui-sref-active="active")
+            a(ui-sref='applicants.list({jobId:ApplicantsList.job.id,status: status})' ng-bind="status")
+          li.hide(ui-sref-active="active")
+            a(ui-sref='interviews.list()') Interviews
+          li(ui-sref-active="active")
+            a(ui-sref='references.list()') CV(s) Received
+    table.table.m-b-none.m-t-xl(before-bottom='ApplicantsList.loadApplicants()')
       thead
         tr
           th Candidate Name
           th Client Name
           th Position
-          th(ng-if='Applicant.applicants[0].interview_type && Applicant.applicants[0].interview_time') Interview Detail
+          th(ng-if='ApplicantsList.applicants[0].interview_type && ApplicantsList.applicants[0].interview_time') Interview Detail
           th(style='width:20%;') Status
       tbody
-        tr.bg-white(ng-repeat='applicant in Applicant.applicants')
+        tr.bg-white(ng-repeat='applicant in ApplicantsList.applicants')
           td
-            a(ui-sref='applicants-view({applicantId: applicant.id })') {{applicant.name}}
+            a(ui-sref='applicant.view({applicantId: applicant.id })') {{applicant.name}}
           td
             a(ng-bind="applicant.client_name")
           td
@@ -24,7 +32,9 @@
             |  {{App.states[applicant.interview_type].name}},
             |  {{applicant.interview_time | date : 'd MMM, h:mm a'}}
           td: .w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
-            button.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' style='text-align:left;padding: 2px 8px;' ng-disabled='App.states[applicant.state_id].Actions.length===0')
+            button.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle=''
+            style='text-align:left;padding: 2px 8px;width:auto'
+            ng-disabled='App.states[applicant.state_id].Actions.length===0')
               | {{applicant.state_name}}&nbsp;
               span(ng-if='App.states[applicant.state_id].Actions.length>0').caret
             ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
@@ -34,10 +44,10 @@
         tr
           td
           td
-            button.pull-left.btn.active.m-t-xs(ng-if="Applicant.ui.loading")
+            button.pull-left.btn.active.m-t-xs(ng-if="ApplicantsList.ui.loading")
               i.fa.fa-circle-o-notch.fa-spin
               strong &nbsp;Loading
-            button.pull-left.btn.btn-primary.m-t-xs(ng-if="Applicant.ui.lazyLoad" ng-click="Applicant.loadApplicants()")
+            button.pull-left.btn.btn-primary.m-t-xs(ng-if="ApplicantsList.ui.lazyLoad" ng-click="ApplicantsList.loadApplicants()")
               i.fa.fa-plus-circle
               strong &nbsp;Load More
           td

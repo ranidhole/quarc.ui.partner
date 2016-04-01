@@ -1,13 +1,8 @@
-div.container
-  .wrapper-md.bg-light.b-b.hide
-    button.btn.btn-default.btn-addon.pull-right.m-t-n-xs(type='button', ui-toggle-class='show', target='#aside')
-      i.fa.fa-bars
-      |  List
+div
+  .wrapper-md.bg-white.b-b
     h1.m-n.font-thin.h3 Calendar
-  .hbox.hbox-auto-xs.hbox-auto-sm.m-t-md.m-b-md
-
+  .hbox.hbox-auto-xs.hbox-auto-sm(style="padding:0 20px 0 20px")
     .clearfix.m-b-xs
-      .pull-left.h1.font-thin.h3 Calendar
       .pull-right
         button.btn.btn-sm.btn-default(mwl-date-modifier='', date='Calendar.calendarDay', set-to-today='') Today
         .btn-group.m-l-xs

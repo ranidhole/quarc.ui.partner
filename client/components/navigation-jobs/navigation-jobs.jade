@@ -2,7 +2,7 @@
 #navigationJobs( style='position: relative;')
   .w.nav-job
     .wrapper-xs
-      a.btn.btn-red.form-control.text-u-c.font-bold(uib-tooltip='Manage Jobs' tooltip-placement='right' ui-sref='jobs.list' href="#/jobs") Manage Jobs
+      a.btn.btn-red.form-control.font-bold(uib-tooltip='Manage JD(s)' tooltip-placement='right' ui-sref='jobs.list' href="#/jobs") MANAGE JD(s)
     .bg-dark.lt.w(style='position: relative;  overflow-y: scroll; overflow-x: hidden; height: 100%; width: 212px;' ng-init="navigationJobs.toggle={open:true,hold:false,closed:false}")
       .input-group
         input.form-control.wrapper-xs(type='text' placeholder='Search Position' ng-model='navigationJobs.searchText.$')
@@ -22,7 +22,7 @@
         ng-init='$first ? (navigationJobs.job_high = navigationJobs.job_open = true): null'
         ng-class="{active: job.id == App.$state.params.jobId}"
         ui-sref-active='active')
-          a.text-ellipsis.m-l-md(ng-href="{{navigationJobs.jobHref(job.id)}}" uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true')
+          a.text-ellipsis.m-l-md(ng-href="{{navigationJobs.jobHref(job.id)}}" uib-tooltip="{{job.role}} / {{job.owner_name}}" tooltip-placement='right' tooltip-append-to-body='true')
             span.text-white(ng-bind='job.owner_name')
             b.badge.pull-right.text-white(ng-bind="job.consultant_score" ng-class="job.consultant_score > 8 ?'bg-danger':'bg-info'")
             br
@@ -39,7 +39,7 @@
         li(ng-show="navigationJobs.toggle.hold"  ng-repeat='job in JHold = (navigationJobs.jobs | filter: navigationJobs.searchText | filter: {job_status: "Hold"})' ng-init='$first ? (navigationJobs.job_hold = true): null' ui-sref-active='active')
           a.text-ellipsis.m-l-md(ng-href="/jobs/{{job.id}}{{targetStateName}}" uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true')
             span.text-white(ng-bind='job.owner_name')
-            b.badge.pull-right(ng-bind="job.consultant_score" ng-class="job.consultant_score > 8?'bg-danger':'bg-info'")
+            b.badge.pull-right.text-white(ng-bind="job.consultant_score" ng-class="job.consultant_score > 8?'bg-danger':'bg-info'")
             br
             span(ng-bind="job.role")
       .m-t-sm
