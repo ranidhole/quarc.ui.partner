@@ -1,5 +1,13 @@
 .hbox(before-bottom='ReferencesList.loadApplicants()')
-  directive-header(viewdata="ReferencesList" buttons="{buckets:true,interviews:false,references:true}" App="App")
+  div
+    .bg-light.b-b.padder(style='position: fixed;width: 100%;background: #fff; z-index: 2;height: 42px;')
+      ul.nav.nav-pills.nav-sm.m-t-xs
+        li(ng-repeat='status in ReferencesList.buckets' ui-sref-active="active")
+          a(ui-sref='applicants.list({jobId:ReferencesList.job.id,status: status})' ng-bind="status")
+        li.hide(ui-sref-active="active")
+          a(ui-sref='interviews.list()') Interviews
+        li(ui-sref-active="active")
+          a(ui-sref='references.list()') CV(s) Received
   div
     .m-b-xs.hbox.m-t-xl(ng-if='ReferencesList.applicants.length === 0')
       .col: h1.text-center.text-muted(ng-if='!ReferencesList.ui.loading') No Applicants
@@ -16,10 +24,10 @@
                 i
               a(ui-sref='job.reference.view({jobId: ReferencesList.job.id,referenceId: applicant.id})')
                 strong.text-dark  {{applicant.name}}
-              .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Action Required"') Action Required
-              .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Approved"') Approved
-              .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Duplicate"') Duplicate
-              .text-danger.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Reject"') Rejected
+              .text-info.font-bold.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Action Required"') Action Required
+              .text-success.font-bold.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Approved"') Approved
+              .text-warning.font-bold.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Duplicate"') Duplicate
+              .text-danger.font-bold.pull-right.m-t-n-xs(ng-if='applicant.approval_status == "Reject"') Rejected
             .panel-body.pull-in.b-t.wrapper-xs.text-black
               .col-xs-4.text-ellipsis
                 i.fa.fa-bookmark(style='margin:0 2px;')

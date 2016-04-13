@@ -3,12 +3,13 @@
   .w.nav-job
     .wrapper-xs
       a.btn.btn-red.form-control.font-bold(uib-tooltip='Manage JD(s)' tooltip-placement='right' ui-sref='jobs.list' href="#/jobs") MANAGE JD(s)
-    .bg-dark.lt.w(style='position: relative;  overflow-y: scroll; overflow-x: hidden; height: 100%; width: 212px;' ng-init="navigationJobs.toggle={open:true,hold:false,closed:false}")
+      .m-t-xs
       .input-group
         input.form-control.wrapper-xs(type='text' placeholder='Search Position' ng-model='navigationJobs.searchText.$')
         a.input-group-addon(uib-tooltip='Enter Job Details to Search' tooltip-placement='right')
           //.bg-danger
           i.text-dark.fa.fa-search
+    .bg-dark.lt.w(style='position: relative;  overflow-y: scroll; overflow-x: hidden; height: 100%; width: 212px;' ng-init="navigationJobs.toggle={open:true,hold:false,closed:false}")
       .m-t-sm
       .m-l-xs.h5.text-info-lt.font-bold(ng-if='navigationJobs.job_open || navigationJobs.job_high'  ng-click="navigationJobs.toggle.open= !navigationJobs.toggle.open")
         span.text-white.font-bold.h5(uib-tooltip="{{navigationJobs.toggle.open?'Collapse':'Expand' }}" tooltip-placement="right")

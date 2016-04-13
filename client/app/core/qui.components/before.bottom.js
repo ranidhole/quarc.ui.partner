@@ -19,4 +19,29 @@ angular.module('qui.components')
         });
       };
     },
+  ])
+  .directive('beforeBottomFixed', [
+    '$window',
+    '$document',
+    function beforeBottom($window, $document) {
+      return function link(scope, elm, attr) {
+        console.log($document)
+        angular.element('.scrollableContainer').bind('scroll', function scroll() {
+          console.log($document)
+          const windowHeight = 'innerHeight' in $window ? $window.innerHeight : $document.documentElement.offsetHeight;
+          const body = $document[0].body;
+          const html = $document[0].documentElement;
+          const docHeight = Math.max(
+            body.scrollHeight, body.offsetHeight,
+            html.clientHeight, html.scrollHeight, html.offsetHeight
+          );
+          const windowBottom = windowHeight + $window.pageYOffset;
+          if (windowBottom + 150 >= docHeight) {
+            scope.$apply(attr.beforeBottomFixed);
+          }
+        });
+      };
+    },
   ]);
+
+;

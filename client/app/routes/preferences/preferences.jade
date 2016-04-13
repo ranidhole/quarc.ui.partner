@@ -1,0 +1,109 @@
+.hbox
+  .col.w.bg-black
+    ul.nav
+      li.padder.m-t.m-b-sm.text-muted.text-xs
+        span Navigation
+      li
+        a.auto(href='')
+          span.pull-right.text-muted
+            i.fa.fa-fw.fa-angle-right.text
+            i.fa.fa-fw.fa-angle-down.text-active
+          i.glyphicon.glyphicon-stats.icon.text-primary-dker
+          span.font-bold(translate='aside.nav.DASHBOARD') Preferences
+
+      li(ui-sref-active='active')
+        a(ui-sref='settings')
+          i.glyphicon.glyphicon-calendar.icon.text-info-dker
+          span.font-bold Notifications
+
+
+
+
+  div.hbox
+    .wrapper-xs.bg-light.b-b(style='position: fixed;width: 100%;background: #fff; z-index: 2;')
+      .h2
+      ul.nav.nav-pills.nav-sm
+        li.m-r-xs.ng-scope
+          a.ng-binding(ui-sref='applicants({bucket: bucket})', href='/applicants?bucket=Tasks') Tasks
+        li.m-r-xs.ng-scope
+          a.ng-binding(ui-sref='applicants({bucket: bucket})', href='/applicants?bucket=Shortlisted') Shortlisted
+        li.m-r-xs.ng-scope
+          a.ng-binding(ui-sref='applicants({bucket: bucket})', href='/applicants?bucket=Feedback') Feedback
+
+  div.m-t-xl
+    div
+      hr
+      h1 CTC
+      h2 What is the CTC Range you would like to work on?
+      .row(ng-init="ctcRange={}")
+        .col-md-3
+          ul
+            li
+              input(type="checkbox" ng-model="ctcRange.junior" ng-change="Preferences.data.ctcRange[0].selected = Preferences.data.ctcRange[1].selected = ctcRange.junior;")
+              .hide(ng-bind="ctcRange.junior  = Preferences.data.ctcRange[0].selected&& Preferences.data.ctcRange[1].selected ")
+              | Junior
+        .col-md-3
+          ul
+            li
+              input(type="checkbox" ng-model="ctcRange.mid" ng-change="Preferences.data.ctcRange[2].selected =  Preferences.data.ctcRange[3].selected = ctcRange.mid;")
+              .hide(ng-bind="ctcRange.mid  = Preferences.data.ctcRange[2].selected  && Preferences.data.ctcRange[3].selected ")
+              | Mid
+        .col-md-3
+          ul
+            li
+              input(type="checkbox" ng-model="ctcRange.senior" ng-change="Preferences.data.ctcRange[4].selected = Preferences.data.ctcRange[5].selected = Preferences.data.ctcRange[6].selected = ctcRange.senior;")
+              .hide(ng-bind="ctcRange.senior  = Preferences.data.ctcRange[4].selected  && Preferences.data.ctcRange[5].selected  && Preferences.data.ctcRange[6].selected")
+              | Senior
+        .col-md-3
+          ul
+            li
+              input(type="checkbox" ng-model="ctcRange.all" ng-change="Preferences.toggleSelect(Preferences.data.ctcRange,ctcRange.all)")
+              .hide(ng-bind="ctcRange.all  = ctcRange.junior&& ctcRange.mid  && ctcRange.senior  ")
+              | All
+      .line.line-solid.line-lg.pull-in.b-b
+      .row
+        .col-md-3
+          ul
+            li
+              input(type="checkbox" ng-model="Preferences.data.ctcRange[0].selected")
+              | {{ Preferences.data.ctcRange[0].min }} - {{ Preferences.data.ctcRange[0].max }}
+            li
+              input(type="checkbox" ng-model="Preferences.data.ctcRange[1].selected")
+              | {{ Preferences.data.ctcRange[1].min }} - {{ Preferences.data.ctcRange[1].max }}
+        .col-md-3
+          ul.nav.nav-pills.nav-sm.m-t-xs
+            li: label.i-checks
+              input(type="checkbox" ng-model="Preferences.data.ctcRange[2].selected")
+              i.m-r-none
+              | {{ Preferences.data.ctcRange[2].min }} - {{ Preferences.data.ctcRange[2].max }}
+            li: label.i-checks
+              input(type="checkbox" ng-model="Preferences.data.ctcRange[3].selected")
+              i.m-r-none
+              | {{ Preferences.data.ctcRange[3].min }} - {{ Preferences.data.ctcRange[3].max }}
+
+        .col-md-3
+          ul
+            li
+              input(type="checkbox" ng-model="Preferences.data.ctcRange[4].selected")
+              | {{ Preferences.data.ctcRange[4].min }} - {{ Preferences.data.ctcRange[4].max }}
+            li
+              input(type="checkbox" ng-model="Preferences.data.ctcRange[5].selected")
+              | {{ Preferences.data.ctcRange[5].min }} - {{ Preferences.data.ctcRange[5].max }}
+            li
+              input(type="checkbox" ng-model="Preferences.data.ctcRange[6].selected")
+              | {{ Preferences.data.ctcRange[6].min }} - {{ Preferences.data.ctcRange[6].max }}
+      hr
+      h1 Functions
+      hr
+      .row
+
+        span.btn.m-xs(ng-repeat="function in Preferences.data.functionList" ng-class="function.selected ? 'btn-info':'btn-default'" ng-click="function.selected =!function.selected")
+          | {{function.name}}&nbsp;&nbsp;
+          span.fa(ng-class="function.selected ? 'fa-close text-white':'fa-plus text-info'")
+      hr
+      h1 Industry
+      hr
+      .row
+        span.btn.m-xs(ng-repeat="function in Preferences.data.industryList" ng-class="function.selected ? 'btn-info':'btn-default'" ng-click="function.selected =!function.selected")
+          | {{function.name}}&nbsp;&nbsp;
+          span.fa(ng-class="function.selected ? 'fa-close text-white':'fa-plus text-info'")

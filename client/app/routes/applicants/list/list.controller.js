@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('uiGenApp')
-  .controller('ApplicantsListCtrl', function (QCONFIG,$scope, QuarcService, Restangular, $stateParams, $location) {
+  .controller('ApplicantsListCtrl', function (QCONFIG,$scope, QuarcService, Restangular, $stateParams, $location, $state) {
     const Page  = QuarcService.Page;
 
     const vm = this;
@@ -10,7 +10,7 @@ angular.module('uiGenApp')
     $stateParams.status = $stateParams.status || $location.search().status
 
     // Set default status to ALL
-    if (!~vm.buckets.indexOf($stateParams.status)) $stateParams.status = 'All';
+    if (!~vm.buckets.indexOf($stateParams.status))  return $state.go('applicants.list',{status:'All'});
 
     Page.setTitle(`${$stateParams.status} Applicants`);
 

@@ -283,4 +283,13 @@ angular.module('uiGenApp')
         capitalize($parse(attrs.ngModel)(scope)); // capitalize initial value
       }
     };
+  })
+  // Todo: v1 Refactor : take reading from element
+  .directive('tableOffset', function ($parse, $filter) {
+    return {
+      link: function (scope, element, attrs, modelCtrl) {
+        $('.scrollableContainer').height($(window).height() - ($('.scrollableContainer').position().top+85))
+
+      }
+    };
   });

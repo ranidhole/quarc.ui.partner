@@ -1,6 +1,8 @@
 angular.module('uiGenApp')
   .controller('JobsListController',
-    function JobsListController(QuarcService, Restangular, $stateParams, QCONFIG, $location,$state,$scope) {
+    function JobsListController(QuarcService, Restangular, $stateParams, QCONFIG, $location, $state, $scope, $timeout, $window) {
+      var initializing = true;
+      var timeout = $timeout(function(){});
       const Page = QuarcService.Page;
       const vm = this;
 
@@ -15,18 +17,57 @@ angular.module('uiGenApp')
 
       vm.jobs = []; // collection of jobs
       vm.ui = { lazyLoad: true, loading: false }; // ui states
+      vm.xquery = "";
       // Scale: Angular search implemented, Need to Implement server side search when list grows bigger than 100
-      vm.params = { offset: 0, limit: 100 }; // GET query params
-      vm.loadJobs = function loadJobs() {
+      vm.params = { offset: 0, limit: 100,  q:vm.xquery||''}; // GET query params orderBy, orderByReverse
+
+
+      // Search
+      $scope.$watch(function() {
+        return vm.xquery;
+      },function asyncLoadMore() {
+        if (initializing) {
+          $timeout(function() { initializing = false; }); // First time watcher not calling
+        } else {
+          $timeout.cancel(timeout); //cancel the last timeout
+          // to avoid calling loadMore() on loading of page
+
+          timeout = $timeout(function(){
+            vm.loadJobs(true)
+          }, 800);
+        }
+
+      } ,true);
+
+      vm.loadJobs = function loadJobs(refresh) {
+        if (refresh) {
+          vm.params.offset = 0;
+          vm.ui.lazyLoad = true;
+          vm.jobs = [];
+
+          // Move to top if fresh request required
+          $window.scrollTo(0,0);
+        }
+
         if (!vm.ui.lazyLoad) return; // if no more jobs to get
         vm.ui = { lazyLoad: false, loading: true };
+        vm.params.q = vm.xquery || '';
+
 
         vm.params.state_id = $stateParams.status.replace(' ', '_').toUpperCase();
         var firstPage = vm.params.offset === 0 ? true : false
+
         Restangular
           .all('jobs')
           .customGET("allocationStatusNew", vm.params)
           .then(function jobList(response) {
+            // Handle error for php error
+            if (typeof response === 'undefined') {
+              !refresh ? null : (vm.jobs = []);
+              vm.ui.lazyLoad = false;
+              return;
+            }
+
             if(firstPage){
               vm.meta = response.meta;
             }
@@ -43,10 +84,19 @@ angular.module('uiGenApp')
 
             // increment offset for next loading of results
             vm.params.offset = vm.params.offset + vm.params.limit;
-          });
+          }).catch(function(err){
+          console.log('There was problem loading data. Please contact QuezX team');
+          !refresh ? null : (vm.jobs.applicants = []);
+          vm.lazyLoad = false;
+          return;
+        });
       };
 
       vm.loadJobs();
+
+
+
+
 
 
       vm.order = "-score"

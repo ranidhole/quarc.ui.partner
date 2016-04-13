@@ -1,3 +1,31 @@
+.nav-pills.pills-bottom-offset > li.active > a:after {
+  content: "";
+  background: #1C899C;
+  width: 100%;
+  height: 11px;
+  position: absolute;
+  top: 98%;
+  left: 0;
+
+}
+
+.nav-pills.pills-bottom-offset > li.active > a:hover:after,
+.nav-pills.pills-bottom-offset > li.active > a:active:after {
+  background-color: #187889;
+}
+
+.q-section-header {
+  position:fixed;
+  width:100%;
+  background-color: #fff;
+  height:42px;
+}
+
+.q-section-header:after {
+  content: " ";
+  clear:both;
+}
+
 .animate-enter,
 .animate-leave
 {

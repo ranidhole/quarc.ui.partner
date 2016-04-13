@@ -17,7 +17,11 @@ angular.module('uiGenApp')
         return Restangular
           .one('jobs',jobId).get(params)
           .then(function(job){ return job; })
-          .catch(function(){ return console.log("Error while get job details"); })
+          .catch(function(){
+            console.log("Error while get job details");
+            // On error return
+            return Restangular
+              .one('jobs',jobId) })
       }
     };
   });

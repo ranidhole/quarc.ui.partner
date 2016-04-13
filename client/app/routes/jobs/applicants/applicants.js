@@ -18,9 +18,6 @@ angular.module('uiGenApp')
         abstract: true,
         url: '/applicants',
         template: '<div ui-view></div>',
-        resolve:{
-          currentJob: function(QResolve,$stateParams){ return QResolve.currentJob($stateParams.jobId,{ fl: 'id,job_code' }); }
-        }
       })
       .state('job.applicants.list', {
         url: '?status',
@@ -28,7 +25,7 @@ angular.module('uiGenApp')
         controller: 'JobsApplicantsListController',
         controllerAs: 'JobsApplicantsList',
         resolve:{
-          currentJob: function(QResolve,$stateParams){ return QResolve.currentJob($stateParams.jobId,{ fl: 'id,job_code' }); }
+          currentJob: function(QResolve,$stateParams){ return QResolve.currentJob($stateParams.jobId); }
         }
       })
 

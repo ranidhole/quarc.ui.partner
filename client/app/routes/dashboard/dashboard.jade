@@ -31,9 +31,10 @@ div
                   tbody
                     tr(ng-class="$last ?'':'b-b'" ng-repeat='applicant in Dashboard.summary.applicantData' )
                       td: a.text-ellipsis(ui-sref="applicant.view({applicantId: applicant.id})" ng-bind="applicant.name")
-                      td: a(ui-sref="job.view({jobId: applicant._root_})")
-                        div(ng-bind="applicant.exp_designation")
+                      td: a(ui-sref="job.view({jobId: applicant._root_.id})")
+                        div(ng-bind="applicant._root_.role")
                         //span.text-muted.text-company.text-ellipsis(ng-bind="applicant.exp_employer")
+                      td(ng-bind="applicant._root_.client_name")
                       td(ng-bind="applicant.state_name")
           .col-md-12.col-sm-12.col-xs-12.no-padder-left.panel.panel-success(ng-show="Dashboard.summary.newProfileData.length > 0")
             .panel-heading.font-bold.h4.text-ellipsis.bg-light.panel-heading-info

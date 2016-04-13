@@ -11,9 +11,10 @@ angular.module('uiGenApp')
     };
 
     var object = JSON.parse(localStorage.getItem("Poller"));
+    var now = new Date().getTime().toString();
     if (object) {
-      var dateString = object.timestamp,
-        now = new Date().getTime().toString();
+      var dateString = object.timestamp;
+      console.log('object found',now,(dateString * 1000 * 60 * 0.1))
       if ((dateString * 1000 * 60 * 0.1) >= now ) {
         //time out, send an ajax call
         poller()
@@ -21,14 +22,19 @@ angular.module('uiGenApp')
       }
       return object.response;
     } else {
-      if ((dateString * 1000 * 60 * 1) >= now ) {
-        //time out, send an ajax call
-        poller()
-        return false;
-      }
+      poller()
+      console.log("poller calling ")
+      //if ((dateString * 1000 * 60 * 1) >= now ) {
+      //  //time out, send an ajax call
+      //  console.log("poller calling ")
+      //
+      //  return false;
+      //}
     }
 
     return {
-      getData: localStorage.Poller
+      getCount(){
+        return JSON.parse(localStorage.Poller)
+      }
     }
   });
