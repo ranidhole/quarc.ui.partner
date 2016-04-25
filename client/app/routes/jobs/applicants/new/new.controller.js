@@ -191,7 +191,8 @@ angular.module('uiGenApp')
         },1000);
       },
       function errorCB(err){
-        return console.log("Error while uploading...")
+        vm.errorMessage = err
+        return console.log("Error while uploading...",err)
       })
     };
 

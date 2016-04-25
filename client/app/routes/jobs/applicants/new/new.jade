@@ -34,7 +34,7 @@
                   label.col-xs-12.input-group
                     | Mobile Number
                     span.text-danger *
-                    input.form.form-control(type='text' name="number" placeholder='eg. Mobile Number' ng-model='ApplicantNew.data.number' q-applicant-job-unique='number~{{ApplicantNew.job.id}}' q-maxlength="14" ng-max="99999999999999" ng-pattern="/^[0-9]{10,14}$/" q-pattern="[^0-9]*" required)
+                    input.form.form-control(type='text' name="number" placeholder='eg. 10 Digit Mobile Number' ng-model='ApplicantNew.data.number' q-applicant-job-unique='number~{{ApplicantNew.job.id}}' q-maxlength="10" ng-max="99999999999999" ng-pattern="/^[0-9]{10,14}$/" q-pattern="[^0-9]*" required)
                     .text-danger(ng-show='uploadCVForm.number.$dirty && uploadCVForm.number.$invalid')
                       span(ng-show='uploadCVForm.number.$error.unique') with this number, Someone already applied.
               .line.line-dashed.b-b.line-lg.pull-in
@@ -190,7 +190,8 @@
                 li(ng-show="ApplicantNew.job.skills && ApplicantNew.job.skills.length")
                   span.preview-head Skills :
                   span(ng-bind="ApplicantNew.job.skills.join(', ')")
-    .col-md-8
+    .col-md-8.text-danger.font-bold(ng-bind="ApplicantNew.errorMessage.data.message")
+
     .col-md-4.col-xs-12
       button.btn.btn-success.pull-right.fa.fa-upload(type='submit' ng-click='ApplicantNew.create()' ng-disabled='uploadCVForm.$invalid') &nbsp;&nbsp;Upload Candidate
       h4.pull-right.text-success.right-margin-20(ng-hide='uploadCVForm.$invalid') Ready to Submit

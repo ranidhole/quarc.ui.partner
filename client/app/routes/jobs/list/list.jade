@@ -6,7 +6,7 @@ div
     .pos-fix.q-section-header
       .row
         .col-md-6
-          ul.nav.nav-pills.nav-sm.pills-bottom-offset
+          ul.nav.nav-pills.nav-sm.pills-bottom-offset.fixed-badge
             li.m-r-xs(ng-repeat="state in JobsList.allStatus" ui-sref-active="active")
               a(ui-sref="jobs.list({status:state})")
                 span(ng-bind="state")
@@ -43,7 +43,7 @@ div
 
         tbody
           tr.animate-repeat.bg-white(ng-repeat='job in JobsList.jobs| orderBy:JobsList.order |  filter:query' ng-animate="'animate'" ng-init="job.oldResponseId=job.response_id" ng-class="job.oldResponseId!=job.response_id ? 'removing':''" )
-            td(ui-sref='job.view({jobId: job.id})'): a(ui-sref='job.view({jobId: job.id})' ng-bind="job.owner_company")
+            td.p-l-md(ui-sref='job.view({jobId: job.id})'): a(ui-sref='job.view({jobId: job.id})' ng-bind="job.owner_company")
             td(ui-sref='job.view({jobId: job.id})'): a(ui-sref='job.view({jobId: job.id})' ng-bind="job.role")
             td(ui-sref='job.view({jobId: job.id})'): a(ui-sref='job.view({jobId: job.id})' ng-bind="' ' + job.region")
             td(ng-bind="job.min_sal + ' - ' + job.max_sal")

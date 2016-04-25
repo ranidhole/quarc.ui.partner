@@ -18,7 +18,7 @@ angular.module('uiGenApp')
         Auth.setSessionData().then(() => {
           $window.location.href = $state
             .href(
-              'app.applicants', { status: 'All' }, { absolute: true }
+              'applicants', { status: 'All' }, { absolute: true }
             );
         });
       }).catch((err) =>{
@@ -30,5 +30,5 @@ angular.module('uiGenApp')
       return;
     }
 
-    $state.go('app.applicants');
+    $state.go('applicants');
   });

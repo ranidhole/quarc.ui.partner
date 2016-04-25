@@ -11,7 +11,6 @@ angular.module('uiGenApp')
       },
       restrict: 'EA',
       link: function (scope, element, attrs) {
-        console.log(scope)
         scope.App = scope.app
       }
     };

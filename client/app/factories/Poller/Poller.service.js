@@ -18,9 +18,8 @@ angular.module('uiGenApp')
       if ((dateString * 1000 * 60 * 0.1) >= now ) {
         //time out, send an ajax call
         poller()
-        return false;
       }
-      return object.response;
+
     } else {
       poller()
       console.log("poller calling ")
@@ -31,10 +30,15 @@ angular.module('uiGenApp')
       //  return false;
       //}
     }
-
-    return {
-      getCount(){
-        return JSON.parse(localStorage.Poller)
+    var dataFactory = {
+      newJobCount:function(){
+        if(localStorage.Poller){
+          var localData = JSON.parse(localStorage.Poller)
+          if(localData) return localData.count
+        }
+        return
       }
-    }
+    };
+
+    return dataFactory;
   });

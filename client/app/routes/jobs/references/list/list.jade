@@ -1,11 +1,10 @@
 .hobx(before-bottom='JobsReferencesList.loadApplicants()')
   directive-header(viewdata="JobsReferencesList" buttons="{buckets:true,interviews:false,references:true,share:true,upload:true,view:true,highlight:'upload'}" App="App")
   div
+    directive-job-header(job="JobsReferencesList.job")
     .m-b-xs.hbox.m-t-xl(ng-if='JobsReferencesList.applicants.length === 0')
       .col: h1.text-center.text-muted(ng-if='!JobsReferencesList.ui.loading') No Applicants
-    .m-t-md
-    .clearfix
-    .m-t-md
+
     .m-b-md.hbox.card-applicant(ng-repeat='applicant in JobsReferencesList.applicants')
       .col.bg-white
         .col-xs-12.col-md-12.no-padder

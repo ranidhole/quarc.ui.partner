@@ -9,6 +9,10 @@
 
 }
 
+.fixed-badge.nav-pills > li > a > .badge {
+  min-width: 30px;
+}
+
 .nav-pills.pills-bottom-offset > li.active > a:hover:after,
 .nav-pills.pills-bottom-offset > li.active > a:active:after {
   background-color: #187889;

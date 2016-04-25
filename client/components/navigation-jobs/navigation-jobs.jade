@@ -5,19 +5,19 @@
       a.btn.btn-red.form-control.font-bold(uib-tooltip='Manage JD(s)' tooltip-placement='right' ui-sref='jobs.list' href="#/jobs") MANAGE JD(s)
       .m-t-xs
       .input-group
-        input.form-control.wrapper-xs(type='text' placeholder='Search Position' ng-model='navigationJobs.searchText.$')
+        input.form-control.wrapper-xs(type='text' placeholder='Search Position' ng-model='navigationJobs.xquery' ng-model-options="{debounce:200}")
         a.input-group-addon(uib-tooltip='Enter Job Details to Search' tooltip-placement='right')
           //.bg-danger
           i.text-dark.fa.fa-search
-    .bg-dark.lt.w(style='position: relative;  overflow-y: scroll; overflow-x: hidden; height: 100%; width: 212px;' ng-init="navigationJobs.toggle={open:true,hold:false,closed:false}")
+    .bg-dark.lt.w(style='position: relative;  overflow-y: scroll; overflow-x: hidden; height: 100%; width: 212px;padding-bottom: 100px;' when-scrolled="navigationJobs.loadJobs()" )
       .m-t-sm
-      .m-l-xs.h5.text-info-lt.font-bold(ng-if='navigationJobs.job_open || navigationJobs.job_high'  ng-click="navigationJobs.toggle.open= !navigationJobs.toggle.open")
+      .m-l-xs.h5.text-info-lt.font-bold(ng-click="navigationJobs.toggle.open= !navigationJobs.toggle.open")
         span.text-white.font-bold.h5(uib-tooltip="{{navigationJobs.toggle.open?'Collapse':'Expand' }}" tooltip-placement="right")
           i.fa(ng-class="navigationJobs.toggle.open?'fa-angle-down':'fa-angle-right'")
           |  &nbsp;&nbsp;
           i.fa.fa-folder-open-o.text-success
           |  &nbsp;&nbsp;OPEN&nbsp;
-          b.badge-bracket(ng-bind="JOpen.length")
+          b.badge-bracket(ng-bind="navigationJobs.meta.jobsCount['Open'] + navigationJobs.meta.jobsCount['High Priority']")
       ul.m-t-xs.nav
         li.b-b-dark(ng-show="navigationJobs.toggle.open" ng-repeat='job in JOpen = (navigationJobs.jobs | filter: navigationJobs.searchText | filterAlt: {job_status: ["Open","High Priority"] })'
         ng-init='$first ? (navigationJobs.job_high = navigationJobs.job_open = true): null'
@@ -25,17 +25,17 @@
         ui-sref-active='active')
           a.text-ellipsis.m-l-md(ng-href="{{navigationJobs.jobHref(job.id)}}" uib-tooltip="{{job.role}} / {{job.owner_name}}" tooltip-placement='right' tooltip-append-to-body='true')
             span.text-white(ng-bind='job.owner_name')
-            b.badge.pull-right.text-white(ng-bind="job.consultant_score" ng-class="job.consultant_score > 8 ?'bg-danger':'bg-info'")
+            b.badge.pull-right.text-white.pos-abt( style="right:5px" ng-bind="job.consultant_score" ng-class="job.consultant_score > 8 ?'bg-danger':'bg-info'")
             br
             span(ng-bind="job.role")
       .m-t-sm
-      .m-l-xs.h5(ng-if='navigationJobs.job_hold' ng-click="navigationJobs.toggle.hold= !navigationJobs.toggle.hold")
+      .m-l-xs.h5(ng-click="navigationJobs.toggle.hold= !navigationJobs.toggle.hold")
         span.text-white.font-bold.h5(uib-tooltip="{{navigationJobs.toggle.hold?'Collapse':'Expand' }}" tooltip-placement="right")
           i.fa(ng-class="navigationJobs.toggle.hold?'fa-angle-down':'fa-angle-right'")
           |  &nbsp;&nbsp;
           i.fa.fa-folder-open(style="color:#E28633")
           |  &nbsp;&nbsp;HOLD&nbsp;
-          b.badge-bracket(ng-bind="JHold.length")
+          b.badge-bracket(ng-bind="navigationJobs.meta.jobsCount['Hold'] ")
       ul.m-t-xs.nav
         li(ng-show="navigationJobs.toggle.hold"  ng-repeat='job in JHold = (navigationJobs.jobs | filter: navigationJobs.searchText | filter: {job_status: "Hold"})' ng-init='$first ? (navigationJobs.job_hold = true): null' ui-sref-active='active')
           a.text-ellipsis.m-l-md(ng-href="/jobs/{{job.id}}{{targetStateName}}" uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true')
@@ -44,13 +44,13 @@
             br
             span(ng-bind="job.role")
       .m-t-sm
-      .m-l-xs.h5(ng-if='navigationJobs.job_closed' ng-click="navigationJobs.toggle.closed= !navigationJobs.toggle.closed" )
+      .m-l-xs.h5(ng-click="navigationJobs.toggle.closed= !navigationJobs.toggle.closed" )
         span.text-white.font-bold.h5(uib-tooltip="{{navigationJobs.toggle.closed?'Collapse':'Expand' }}" tooltip-placement="right")
           i.fa(ng-class="navigationJobs.toggle.closed?'fa-angle-down':'fa-angle-right'")
           |  &nbsp;&nbsp;
           i.fa.fa-folder.text-danger
           |  &nbsp;&nbsp;CLOSED&nbsp;
-          b.badge-bracket(ng-bind="JClosed.length")
+          b.badge-bracket(ng-bind="navigationJobs.meta.jobsCount['Closed'] ")
       ul.m-t-xs.nav
         li(ng-show="navigationJobs.toggle.closed"  ng-repeat='job in JClosed = (navigationJobs.jobs | filter: navigationJobs.searchText | filter: {job_status: "Closed"})' ng-init='$first ? (navigationJobs.job_closed = true): null' ui-sref-active='active')
           a.text-ellipsis.m-l-md(ng-href="/jobs/{{job.id}}{{targetStateName}}" uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true')

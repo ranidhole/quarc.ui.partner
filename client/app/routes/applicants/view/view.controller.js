@@ -14,7 +14,7 @@ angular.module('uiGenApp')
       vm.ui = { loading: true };
       Restangular
         .one('applicants',$stateParams.applicantId)
-        .get()
+        .get({fl:'_root_,name,id,applicant_score,state_name,state_id,email,total_exp,skills,edu_degree,exp_salary,exp_designation,exp_employer,email,notice_period,mobile,exp_location,expected_ctc'})
         .then(function gotApplicant(result) {
           vm.data = result;
           Page.setTitle(vm.data.name);

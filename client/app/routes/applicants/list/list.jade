@@ -10,8 +10,8 @@ div
           li(ui-sref-active="active")
             a(ui-sref='references.list()') CV(s) Received
     .m-t-xl
-    scrollable-table(watch="ApplicantsList.applicants" table-offset="120")
-      table.table.m-b-none(before-bottom-fixed='ApplicantsList.loadApplicants()')
+    scrollable-table(watch="ApplicantsList.applicants" table-offset="120" table-scrolled when-scrolled='ApplicantsList.loadApplicants()')
+      table.table.m-b-none
         thead
           tr
             th Candidate Name
@@ -33,6 +33,7 @@ div
               i.fa(class='text-{{App.interviewUI[applicant.interview_type].color}}-dker fa-{{App.interviewUI[applicant.interview_type].icon}}')
               |  {{App.states[applicant.interview_type].name}},
               |  {{applicant.interview_time | date : 'd MMM, h:mm a'}}
+            // Todo: #1 ChangeState Button Directive Creation
             td: .w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
               button.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle=''
               style='text-align:left;padding: 2px 8px;width:auto'
@@ -40,7 +41,7 @@ div
                 | {{applicant.state_name}}&nbsp;
                 span(ng-if='App.states[applicant.state_id].Actions.length>0').caret
               ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
-                li(role='menuitem' ng-repeat='state in App.states[applicant.state_id].Actions')
+                li(role='menuitem' ng-repeat='state in App.states[applicant.state_id].Actions' ng-if="App.states[state.state_id].name")
                   a(href='' ng-click='App.changeState(applicant, state.state_id)') {{App.states[state.state_id].name}}
         tfoot
           tr

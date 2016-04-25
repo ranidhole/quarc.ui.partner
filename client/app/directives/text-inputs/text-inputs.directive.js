@@ -284,7 +284,41 @@ angular.module('uiGenApp')
       }
     };
   })
-  // Todo: v1 Refactor : take reading from element
+
+  .directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+      var raw = elm[0];
+      elm.bind('scroll', function() {
+        console.log('Scrolled: ' )//+ scope,raw.scrollTop,raw.offsetHeight,  raw.scrollHeight, scope.ui.lazyLoad,((raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) && scope.lazyLoad));
+        if ((raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) ) { //&& scope.lazyLoad
+          console.log("scroll")
+          scope.$apply(attr.whenScrolled);
+        }
+      });
+    };
+  })
+  .directive('tableScrolled', function ($parse, $filter) {
+    return {
+      link: function (scope, element, attrs, modelCtrl) {
+       console.log('table scrolled');
+        $('.scrollableContainer').attr('when-scrolled','ApplicantsList.loadApplicants()')
+        scope.safeApply = function(fn) {
+          var phase = this.$root.$$phase;
+          if(phase == '$apply' || phase == '$digest') {
+            if(fn && (typeof(fn) === 'function')) {
+              fn();
+            }
+          } else {
+            this.$apply(fn);
+          }
+        };
+        scope.safeApply()
+
+      }
+    };
+  })
+
+// Todo: v1 Refactor : take reading from element
   .directive('tableOffset', function ($parse, $filter) {
     return {
       link: function (scope, element, attrs, modelCtrl) {

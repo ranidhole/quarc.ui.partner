@@ -1,0 +1,30 @@
+.modal-header
+  .modal-title
+    .h4.text-info Coming soon...
+      //.h4.text-info Fixed Module - Standard
+      .close.text-dark(ng-click='JobPayment.cancel()') ×
+.modal-body
+  table.table.table-bordered.table-condensed
+    thead
+      tr(style='background-color: #4CAF50;color: white;')
+        th
+          | CTC Range
+        th
+          | Percent (%)
+        th
+          | Payment Days
+        th
+          | Replacement Months
+    tbody
+      tr
+        td coming soon
+        td coming soon
+        td coming soon
+        td coming soon
+      //tr
+        td INR 0 - 10 LPA
+        td 8.33
+        td 30
+        td 3
+.modal-footer
+  a.btn.btn-danger(ng-click='JobPayment.cancel()') Close

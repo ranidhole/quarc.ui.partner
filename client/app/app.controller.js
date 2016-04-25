@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('uiGenApp')
-  .controller('AppController', function (QuarcService, $window, $uibModal, $state, $rootScope, Restangular) {
+  .controller('AppController', function (QuarcService, $window, $uibModal, $state, $rootScope, Restangular,Poller) {
     const Page = QuarcService.Page;
     const Session = QuarcService.Session;
     const User = QuarcService.User;
@@ -73,6 +73,8 @@ angular.module('uiGenApp')
       },
     };
 
+    console.log(Poller.newJobCount())
+    vm.newJobCount = Poller.newJobCount()
     vm.userinfo = User.userinfo;
     vm.states = User.states;
 
@@ -127,6 +129,7 @@ angular.module('uiGenApp')
 
     vm.changeState = function changeState(applicant, stateId) {
       // ApplicantIds is array contatining applicant id to download cvs
+      console.log(applicant,stateId)
       const modalInstance = $uibModal.open({
         templateUrl: 'app/directives/change-state/change-state.html',
         controller: 'ChangeStateController',
@@ -151,6 +154,25 @@ angular.module('uiGenApp')
         templateUrl: 'app/directives/social-share/social-share.html',
         controller: 'SocialShareController',
         controllerAs: 'SocialShare',
+        size: 'md',
+        resolve: {
+          currentJob: function FollowerData() {
+            return job;
+          },
+        },
+      });
+
+      modalInstance.result.then(function success() {
+        // console.log(type);
+      });
+    };
+
+    vm.openPayment = function openPayment(job) {
+      // ApplicantIds is array contatining applicant id to download cvs
+      const modalInstance = $uibModal.open({
+        templateUrl: 'app/directives/job-payment/job-payment.html',
+        controller: 'JobPaymentController',
+        controllerAs: 'JobPayment',
         size: 'md',
         resolve: {
           currentJob: function FollowerData() {

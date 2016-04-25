@@ -17,7 +17,7 @@ angular.module('uiGenApp')
         controller: 'JobsReferencesListController',
         controllerAs: 'JobsReferencesList',
         resolve:{
-          currentJob: function(QResolve,$stateParams){ return QResolve.currentJob($stateParams.jobId,{ fl: 'id' }) }
+          currentJob: function(QResolve,$stateParams){ return QResolve.currentJob($stateParams.jobId) }
         }
       })
 
@@ -26,7 +26,7 @@ angular.module('uiGenApp')
         url: '/references/:referenceId',
         template: '<div ui-view></div>',
         resolve:{
-          currentJob: function(QResolve,$stateParams){ return QResolve.currentJob($stateParams.jobId,{ fl: 'id' }); }
+          currentJob: function(QResolve,$stateParams){ return QResolve.currentJob($stateParams.jobId); }
         }
       })
       .state('job.reference.view', {
@@ -35,7 +35,7 @@ angular.module('uiGenApp')
         controller: 'JobReferenceViewController',
         controllerAs: 'JobsReferenceView',
         resolve:{
-          currentJob: function(QResolve,$stateParams){ return QResolve.currentJob($stateParams.jobId,{ fl: 'id' }); }
+          currentJob: function(QResolve,$stateParams){ return QResolve.currentJob($stateParams.jobId); }
         }
       });
   });

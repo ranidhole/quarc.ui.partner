@@ -22,6 +22,7 @@ angular.module('uiGenApp')
       });
 
       $rootScope.$on(AUTH_EVENTS.loginRequired, function loginRequired() {
+        console.log("s",Auth)
         if (Session.isAuthenticated()) {
           // Refresh token autimatically if token expires
           Auth.refreshToken().then(
@@ -33,6 +34,13 @@ angular.module('uiGenApp')
             },
 
             function errRefreshToken(error) {
+              if (error.error_description === "Refresh token has expired") {
+                // remove any stale tokens
+                //$cookies.remove('token');
+                Session.destroy();
+                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+                $window.location.href = URLS.OAUTH;
+              }
               angular.noop(error);
             }
           );

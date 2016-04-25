@@ -26,8 +26,8 @@ angular.module('qui.core')
         // To Save Multiple Async RefreshToken Request
         if (refreshingToken) return $q.reject({ error: 'Multiple refresh request' });
         refreshingToken = true; // Set refresh_token reuqest tracker flag
+        const url = URLS.PARTNER_OAUTH_API + '/refresh'
         return $http
-          const url = URLS.PARTNER_OAUTH_API + '/refresh'
           .post(
             url,
             { refresh_token: Session.read('oauth').refresh_token },

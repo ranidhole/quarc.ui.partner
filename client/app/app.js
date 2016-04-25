@@ -31,7 +31,7 @@ angular.module('uiGenApp', [
   .config(function($urlRouterProvider, $locationProvider,RestangularProvider,URLS) {
     RestangularProvider.setBaseUrl(URLS.QUARC_API);
     $urlRouterProvider
-      .otherwise('/applicants');
+      .otherwise('/applicants?status=Tasks');
 
     $locationProvider.html5Mode(true);
   });

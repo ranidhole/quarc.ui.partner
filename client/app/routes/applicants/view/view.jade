@@ -10,40 +10,24 @@ div
               i.fa.fa-user.fa-stack-1x.m-t-xs(style='font-size: 1.5em;margin-top: 0.14em;color: #104465;')
           .col.v-middle
             .h4.text-ellipsis(title='{{ApplicantView.data.name}}') {{ApplicantView.data.name}}
+            div.text-ellipsis(style="color:#70AACF" ui-sref="job.view({jobId:ApplicantView.data._root_.id})"  uib-tooltip='{{ApplicantView.data._root_.client_name}}')
+              i.fa.fa-bookmark(style="color:#70AACF")
+              | &nbsp;&nbsp;{{ApplicantView.data._root_.client_name}}
+            div.text-ellipsis(style="color:#70AACF" ui-sref="job.view({jobId:ApplicantView.data._root_.id})" uib-tooltip='{{ApplicantView.data._root_.role}}')
+              i.fa.fa-briefcase(style="color:#70AACF")
+              | &nbsp;{{ApplicantView.data._root_.role}}
 
         .m-b-xs
           .hbox(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
+            // Todo: #1 ChangeState Button Directive Creation
             button.btn.rounded(class='btn-{{App.states[ApplicantView.data.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[ApplicantView.data.state_id].Actions.length===0')
               | {{ApplicantView.data.state_name}}&nbsp;
               span(ng-if='App.states[ApplicantView.data.state_id].Actions.length>0').caret
             a.col.v-middle(href='' style='width: 2em;'): i.b-a.b-2x.b-success.wrapper-xs.text-success.fa.fa-download(ng-click='App.downloadApplicant([ApplicantView.data.id])' title='Download CV')
             ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
-              li(role='menuitem' ng-repeat='state in App.states[ApplicantView.data.state_id].Actions')
+              li(role='menuitem' ng-repeat='state in App.states[ApplicantView.data.state_id].Actions' ng-if="App.states[state.state_id].name")
                 a(href='' ng-click='App.changeState(ApplicantView.data, state.state_id)') {{App.states[state.state_id].name}}
 
-      //.wrapper-xs.bg-info.dker
-      //  .hbox.m-t-xs
-      //    .col.thumb-lg
-      //      .fa-stack.fa-3x.text-info-dker
-      //        i.fa.fa-circle.fa-stack-2x.fa-inverse
-      //        i.fa.fa-user.fa-stack-1x.fa-2x.m-t-xs
-      //    .col.v-middle
-      //      .h4
-      //        | {{ApplicantView.data.name}}
-      //        i.btn.text-white.fa.fa-download(ng-click='App.downloadApplicant([ApplicantView.data.id])' title='Download CV')
-      //
-      //  .m-b-xs
-      //    .hbox
-      //      .col
-      //        .btn-group.w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
-      //          button.w-full.btn.rounded(class='btn-{{App.states[ApplicantView.data.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[ApplicantView.data.state_id].Actions.length===0')
-      //            | {{ApplicantView.data.state_name}}&nbsp;
-      //            span(ng-if='App.states[ApplicantView.data.state_id].Actions.length>0').caret
-      //          ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
-      //            li(role='menuitem' ng-repeat='state in App.states[ApplicantView.data.state_id].Actions')
-      //              a(href='' ng-click='App.changeState(ApplicantView.data, state.state_id)') {{App.states[state.state_id].name}}
-
-      //- Applicant Details
 
       //- Applicant Employee Information
       .panel.panel-default.no-border
@@ -132,7 +116,7 @@ div
               p {{comment.body}}
               .text-muted.pull-right(title='{{comment.created_on | date: "medium"}}') {{comment.created_at | date: 'd MMM, h:mm a'}}
         .hbox(style='height: 40px;')
-    form.form.form-validation.col-xs-12.wrapper-xs.bg-white.col-xs-12(style='position: relative; height: 50px; width: 100%; bottom: 40px; background-color: #fff;' ng-submit='Comments.insert()' name='commentForm')
+    form.form.form-validation.col-xs-12.wrapper-xs.bg-white.col-xs-12(style='position: relative; height: 50px; width: 100%; bottom: 82px; background-color: #fff;' ng-submit='Comments.insert()' name='commentForm')
       .input-group
         input.form-control(type='text' name='comment' placeholder='enter to comment' ng-model='Comments.post.comment' required)
         span.input-group-btn

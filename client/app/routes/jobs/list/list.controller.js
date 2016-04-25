@@ -54,7 +54,7 @@ angular.module('uiGenApp')
         vm.params.q = vm.xquery || '';
 
 
-        vm.params.state_id = $stateParams.status.replace(' ', '_').toUpperCase();
+        vm.params.status = $stateParams.status.replace(' ', '_').toUpperCase();
         var firstPage = vm.params.offset === 0 ? true : false
 
         Restangular
@@ -86,8 +86,8 @@ angular.module('uiGenApp')
             vm.params.offset = vm.params.offset + vm.params.limit;
           }).catch(function(err){
           console.log('There was problem loading data. Please contact QuezX team');
-          !refresh ? null : (vm.jobs.applicants = []);
-          vm.lazyLoad = false;
+          !refresh ? null : (vm.jobs = []);
+          vm.ui.lazyLoad = false;
           return;
         });
       };

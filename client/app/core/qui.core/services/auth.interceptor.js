@@ -12,16 +12,16 @@ angular.module('qui.core')
         // Todo: Improve security by enabling cookies
         // Todo: On access token expiry -> get refresh token
         // Intercept 401s and redirect you to login
-        responseError(response) {
-          if (response.status === 401) {
-            // remove any stale tokens
-            //$cookies.remove('token');
-            Session.destroy();
-            $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-            $window.location.href = `${URLS.ACCOUNTS}/logout`;
-          }
-          return $q.reject(response);
-        }
+        //responseError(response) {
+        //  if (response.status === 401) {
+        //    // remove any stale tokens
+        //    //$cookies.remove('token');
+        //    Session.destroy();
+        //    $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+        //    $window.location.href = `${URLS.ACCOUNTS}/logout`;
+        //  }
+        //  return $q.reject(response);
+        //}
       };
     })
   // this configs to initiated using provider

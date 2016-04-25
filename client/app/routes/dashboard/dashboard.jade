@@ -150,8 +150,8 @@ div
                   //(ng-if='Dash.pipeline.length>0')
                   tbody
                     tr(ng-class="$last ?'':'b-b'" ng-repeat='pipe in [{id:5,role:"Software Engineer",count:5},{id:5,role:"Software Engineer",count:5}] | orderBy:"-count"')
-                      td: a(ui-sref='app.jobs.manage({jobId: pipe.id, bucket:"Pending Feedback"})') {{pipe.role}}
-                      td: a(ui-sref='app.jobs.manage({jobId: pipe.id, bucket:"Pending Feedback"})')
+                      td: a(ui-sref='jobs.list({jobId: pipe.id, bucket:"Pending Feedback"})') {{pipe.role}}
+                      td: a(ui-sref='jobs.list({jobId: pipe.id, bucket:"Pending Feedback"})')
                         i.fa.fa-phone
                         | &nbsp;&nbsp;Manager
                       td Interview Scheduling Attempted

@@ -108,7 +108,7 @@
       <script src="app/app.js"></script>
       <!-- injector:js -->
       <script src="components/util/util.module.js"></script>
-      <script src="app/routes/dashboard/dashboard.controller.js"></script>
+      <script src="app/routes/calendar/calendar.js"></script>
       <script src="app/core/qui.components/before.bottom.js"></script>
       <script src="app/core/qui.components/scroll.to.bottom.js"></script>
       <script src="app/core/qui.core/constants/auth-events.js"></script>
@@ -122,7 +122,9 @@
       <script src="app/directives/add-follower/add-follower.controller.js"></script>
       <script src="app/directives/change-state/change-state.controller.js"></script>
       <script src="app/directives/directive-header/directive-header.directive.js"></script>
+      <script src="app/directives/directive-job-header/directive-job-header.directive.js"></script>
       <script src="app/directives/download-resume/download-resume.controller.js"></script>
+      <script src="app/directives/job-payment/job-payment.controller.js"></script>
       <script src="app/directives/logout/logout.controller.js"></script>
       <script src="app/directives/social-share/social-share.controller.js"></script>
       <script src="app/directives/text-inputs/text-inputs.directive.js"></script>
@@ -141,8 +143,8 @@
       <script src="app/routes/applicants/list/list.controller.js"></script>
       <script src="app/routes/applicants/view/view.controller.js"></script>
       <script src="app/routes/calendar/calendar.controller.js"></script>
-      <script src="app/routes/calendar/calendar.js"></script>
       <script src="app/app.controller.js"></script>
+      <script src="app/routes/dashboard/dashboard.controller.js"></script>
       <script src="app/routes/dashboard/dashboard.js"></script>
       <script src="app/routes/jobs/applicants/applicants.js"></script>
       <script src="app/routes/jobs/applicants/list/list.controller.js"></script>
@@ -181,14 +183,15 @@
     <!-- endbuild -->
 
     <script type="text/javascript">
-    if(localStorage.userinfo &&location.protocol == "https:"){
+    if(localStorage.userinfo ){
       var userinfo = JSON.parse(localStorage.userinfo)
-      var user_id = userinfo.id
+      var tawkToken = userinfo.tawk_token
+      console.log(userinfo)
       var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
       (function(){
         var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
         s1.async=true;
-        s1.src='https://embed.tawk.to/'+user_id+'/default';
+        s1.src='https://embed.tawk.to/'+tawkToken+'/default';
         s1.charset='UTF-8';
         s1.setAttribute('crossorigin','*');
         s0.parentNode.insertBefore(s1,s0);

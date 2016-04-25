@@ -28,7 +28,7 @@ angular.module('uiGenApp')
         ].join(',');
         vm.params.fl += ',interview_time,interview_type';
       } else {
-        vm.params.state_id = $stateParams.status.replace(' ', '_').toUpperCase();
+        vm.params.status = $stateParams.status.replace(' ', '_').toUpperCase();
       }
 
       Restangular
