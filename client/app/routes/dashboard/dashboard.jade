@@ -26,6 +26,7 @@ div
                     tr
                       th.font-bold Name
                       th.font-bold Positions
+                      th.font-bold Company Name
                       th.font-bold(style="width:25%") Status
                   //(ng-if='Dash.pipeline.length>0')
                   tbody
@@ -46,6 +47,7 @@ div
                 table.table.table-striped.m-b
                   thead
                     tr
+                      th.font-bold Comapany Name
                       th.font-bold Name
                       th.font-bold Location
                       th.font-bold Salary
@@ -55,6 +57,7 @@ div
                       td(colspan="3")
                         h4.text-center No New Profiles
                     tr(ng-class="$last ?'':'b-b'" ng-repeat='job in Dashboard.summary.newProfileData' ui-sref='job.view({jobId: job.id})')
+                      td: a(ui-sref='job.view({jobId: job.id})') {{job.client_name}}
                       td: a(ui-sref='job.view({jobId: job.id})') {{job.role}}
                       td
                         i.fa.fa-map-marker
