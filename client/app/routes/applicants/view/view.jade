@@ -24,6 +24,7 @@ div
               | {{ApplicantView.data.state_name}}&nbsp;
               span(ng-if='App.states[ApplicantView.data.state_id].Actions.length>0').caret
             a.col.v-middle(href='' style='width: 2em;'): i.b-a.b-2x.b-success.wrapper-xs.text-success.fa.fa-download(ng-click='App.downloadApplicant([ApplicantView.data.id])' title='Download CV')
+            a.col.v-middle(href='' style='width: 2em;'): i.b-a.b-2x.b-success.wrapper-xs.text-success.fa.fa-share(ng-click='App.AllotedToNew(ApplicantView.data.name,ApplicantView.data.id)' title='Allocate CV')
             ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
               li(role='menuitem' ng-repeat='state in App.states[ApplicantView.data.state_id].Actions' ng-if="App.states[state.state_id].name")
                 a(href='' ng-click='App.changeState(ApplicantView.data, state.state_id)') {{App.states[state.state_id].name}}

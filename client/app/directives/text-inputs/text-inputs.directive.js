@@ -326,4 +326,15 @@ angular.module('uiGenApp')
 
       }
     };
+  })
+
+  .directive('typeaheadFocus', function ($parse,$filter) {
+    return {
+      require: 'ngModel',
+      link: function (scope, element, attr, ctrl) {
+        element.bind('click', function () {
+          ctrl.$setViewValue(' ');
+        });
+      }
+    };
   });

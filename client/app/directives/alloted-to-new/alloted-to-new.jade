@@ -1,0 +1,24 @@
+.modal-header
+  .modal-title
+    .h4.text-info Upload "{{AllotedToNew.applicantName}}'s" CV for another Position
+      .close(ng-click='AllotedToNew.cancel()') ×
+.modal-body
+  p.alert-danger(style='text-align: center;padding: 14px;' ng-if="AllotedToNew.errorMessage" ng-bind="AllotedToNew.errorMessage")
+  form.form-horizontal(role='form')
+    .form-group
+      label.col-sm-2.control-label  Client Name
+      .col-sm-10
+        input.form-control(type='text'  placeholder='Client Name' ng-model='AllotedToNew.Clients.model'  uib-typeahead='industry.name for industry in AllotedToNew.Clients.get($viewValue)' typeahead-loading='AllotedToNew.Clients.loadingClients' typeahead-no-results='AllotedToNew.Clients.noResults' typeahead-on-select='AllotedToNew.Clients.select($item)')
+    .form-group
+
+      label.col-sm-2.control-label Position
+      .col-sm-10
+        input.form-control(type='text' placeholder='Job'
+        typeahead-focus
+        ng-model='AllotedToNew.Positions.model'
+        uib-typeahead='industry.name for industry in AllotedToNew.Positions.get($viewValue)'
+        typeahead-loading='AllotedToNew.Positions.loadingClients'
+        typeahead-no-results='AllotedToNew.Positions.noResults'
+        typeahead-on-select='AllotedToNew.Positions.select($item,$model,$label,$event)'
+        )
+  .btn.btn-primary(ng-click='AllotedToNew.submitform()') Submit

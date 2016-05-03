@@ -104,6 +104,29 @@ angular.module('uiGenApp')
       });
     };
 
+    vm.AllotedToNew = function AllotedToNew(applicantname,ids) {
+
+      // ApplicantIds is array contatining applicant id to download cvs
+      const modalInstance = $uibModal.open({
+        templateUrl: 'app/directives/alloted-to-new/alloted-to-new.html',
+        controller: 'AllotedToNewController',
+        controllerAs: 'AllotedToNew',
+        resolve: {
+          ApplicantName: function ApplicantName() {
+            return applicantname;
+          },
+          ids: function() {
+            return ids;
+          },
+        },
+      });
+
+      modalInstance.result.then(function success(data) {
+        console.log(data);
+        // console.log(type);
+      });
+    };
+
     vm.addFollower = function addFollower(follower, applicantId) {
       // ApplicantIds is array contatining applicant id to download cvs
       const modalInstance = $uibModal.open({
